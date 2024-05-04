@@ -18,8 +18,9 @@ function NavBar() {
             style={{ maxHeight: "100px" }}
             navbarScroll>
             <Nav.Link href="#action1">Find Talent</Nav.Link>
-            <Nav.Link href="#action2">Companies</Nav.Link>
-            <Nav.Link href="#action3">About us</Nav.Link>
+            <Nav.Link href="#action2">Find Work</Nav.Link>
+            <Nav.Link href="#action3">Companies</Nav.Link>
+            <Nav.Link href="#action4">About us</Nav.Link>
           </Nav>
           <Form className="d-flex">
             <Button variant="outline-success" className="mx-4">
