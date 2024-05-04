@@ -21,6 +21,8 @@ export default function SearchBar() {
               <button>Search</button>
                 </div>
 
+                <div className="card-container"></div>
+
     </div>
   )
 }

@@ -1,6 +1,6 @@
 .first-content{
-    margin:40px 70px;
-    width: 350px;
+    margin:40px 90px;
+    width: 400px;
     font-size: 1.5rem;
     font-family: "Poppins-Regular";
     color: var(--white-color);
@@ -27,12 +27,12 @@
     text-align: center;
 }
 .searchBox{
-     margin-left: 80px;
+     margin-left: 100px;
      display: flev;    
      width: 450px;
      height: 50px;
      border-radius: 20px;
-     background-color: rgba(255, 255, 255,0.5);
+     background-color: rgba(255, 255, 255,0.4);
 
 }
 .searchBox input{
