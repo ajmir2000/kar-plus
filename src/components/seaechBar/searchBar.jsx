@@ -1,5 +1,7 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './searchBar.css'
+import jobData from '../cards/jobCards/jobList'
+import JobCard from '../cards/jobCards/jobCard'
 
 export default function SearchBar() {
   return (
@@ -19,6 +21,12 @@ export default function SearchBar() {
            </div>
            
               <button>Search</button>
+                </div>
+                <div>
+                  {jobData.map(data=>(
+                     <JobCard/>
+                  ))}
+                
                 </div>
 
     </div>
