@@ -22,9 +22,9 @@ export default function SearchBar() {
            
               <button>Search</button>
                 </div>
-                <div>
+                <div className='card-container'>
                   {jobData.map(data=>(
-                     <JobCard/>
+                     <JobCard {...data} key={data.id}/>
                   ))}
                 
                 </div>
