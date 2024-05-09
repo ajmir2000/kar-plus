@@ -1,38 +1,56 @@
-import React, { useState } from "react";
+import React from "react";
 import "./searchBar.css";
-import jobData from "../cards/jobCards/jobList";
-import JobCard from "../cards/jobCards/jobCard";
-import { Container, Row, Col } from "react-bootstrap";
+import {
+  Container,
+  Row,
+  Col,
+  InputGroup,
+  FormControl,
+  Button,
+  Dropdown,
+} from "react-bootstrap";
 
 export default function SearchBar() {
   return (
-    <div>
-      <p className="first-content">
-        Find your dream job, Build your network or Hire the best talents!
-      </p>
-      <div className="box-container">
-        <div className="searchBox">
-          <input type="text" placeholder="search..." />
-          <span>
-            |
-            <select name="select">
-              <option value="talent">talent</option>
-              <option value="job">job</option>
-            </select>
-          </span>
-        </div>
+    <>
+      <div>
+        <div className="box-container">
+          <div className="searchBox">
+            <input type="text" placeholder="search..." />
+            <span>
+              |
+              <select name="select">
+                <option value="talent">talent</option>
+                <option value="job">job</option>
+              </select>
+            </span>
+          </div>
 
-        <button>Search</button>
+          <button>Search</button>
+        </div>
       </div>
-      <Container>
+      {/* this need for updateing  */}
+      {/* <Container>
         <Row>
-          {jobData.map((data) => (
-            <Col className="col-4">
-              <JobCard {...data} key={data.id} />
-            </Col>
-          ))}
+          <Col>
+            <InputGroup className="d-flex">
+              <FormControl type="text" placeholder="search..." />
+              <InputGroup >
+                <InputGroup.Text>|</InputGroup.Text>
+                <Dropdown >
+                  <select name="select">
+                    <option value="talent">talent</option>
+                    <option value="job">job</option>
+                  </select>
+                </Dropdown>
+              </InputGroup>
+            </InputGroup>
+          </Col>
+          <Col>
+            <Button variant="primary">Search</Button>
+          </Col>
         </Row>
-      </Container>
-    </div>
+      </Container> */}
+    </>
   );
 }
