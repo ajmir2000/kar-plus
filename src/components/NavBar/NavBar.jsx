@@ -4,41 +4,28 @@ import Form from "react-bootstrap/Form";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import { Link } from "react-router-dom";
-import NavDropdown from "react-bootstrap/NavDropdown";
 import "./NavBar.css";
-import { Margin } from "@mui/icons-material";
 
 function NavBar() {
   return (
     <Navbar expand="lg" className="proBackground">
       <Container>
-        <Navbar.Brand href="#" className="kar">
+        <Link to="/" className="navbar-brand  text-white ">
           Kar+
-        </Navbar.Brand>
+        </Link>
         <Navbar.Toggle aria-controls="navbarScroll" />
         <Navbar.Collapse id="navbarScroll">
-          <Nav
-            className="me-auto my-2 my-lg-0 nav-container"
-            style={{ maxHeight: "100px" }}
-            navbarScroll>
-            <Link
-              to="/find-talent"
-              style={{ textDecoration: "none", margin: "0 1px" }}>
+          <Nav className="me-auto my-2 my-lg-0 nav-container" navbarScroll>
+            <Link to="/find-talent" className="nav-link text-light">
               Find Talent
             </Link>
-            <Link
-              to="/find-work"
-              style={{ textDecoration: "none", margin: "0 10px" }}>
+            <Link to="/find-work" className="nav-link text-light">
               Find Work
             </Link>
-            <Link
-              to="/companies"
-              style={{ textDecoration: "none", margin: "0 10px" }}>
+            <Link to="/companies" className="nav-link text-light">
               Companies
             </Link>
-            <Link
-              to="/about-us"
-              style={{ textDecoration: "none", margin: "0 10px" }}>
+            <Link to="/about-us" className="nav-link text-light">
               About us
             </Link>
           </Nav>
