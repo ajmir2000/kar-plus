@@ -1,55 +1,52 @@
-.first-content{
-    margin:40px 90px;
-    width: 400px;
-    font-size: 1.5rem;
-    font-family: "Poppins-Regular";
-    color: var(--white-color);
-
+.first-content {
+  margin: 40px 90px;
+  width: 400px;
+  font-size: 1.5rem;
+  font-family: "Poppins-Regular";
+  color: var(--white-color);
 }
 
-.box-container{
-    display: flex;
-    width: 630px;
-    justify-content: space-between;
-    align-items: center;
+.box-container {
+  display: flex;
+  width: 630px;
+  justify-content: space-between;
+  align-items: center;
 }
 
-.box-container button{
-    width: 80px;
-    background-color: var(--white-color);
-    border-radius: 20px;
-    border: none;
-    display: flex;
-    background-color:var(--white-color);
-    color: black ;
-    height: 40px;
-    align-items: center;
+.box-container button {
+  width: 80px;
+  background-color: var(--white-color);
+  border-radius: 20px;
+  border: none;
+  display: flex;
+  background-color: var(--white-color);
+  color: black;
+  height: 40px;
+  align-items: center;
 }
-.searchBox{
-     margin-left: 100px;
-     display: flev;    
-     width: 450px;
-     height: 50px;
-     border-radius: 20px;
-     background-color: rgba(255, 255, 255,0.4);
-
+.searchBox {
+  margin-left: 100px;
+  display: flex;
+  width: 450px;
+  height: 50px;
+  border-radius: 20px;
+  background-color: rgba(255, 255, 255, 0.4);
 }
-.searchBox input{
- height: 100%;
- width: 80%;
- background-color:transparent;
- border: none;
- font-size: 20px;
- align-items: center;
- border-radius: 20px;
- padding: 20px;
- outline: none;
-}
-
-.searchBox select{
-align-items: center;
-background-color: transparent;
-border: none;
-outline: none;
+.searchBox input {
+  height: 100%;
+  width: 80%;
+  background-color: transparent;
+  border: none;
+  font-size: 20px;
+  align-items: center;
+  border-radius: 20px;
+  padding: 20px;
+  outline: none;
 }
 
+.searchBox select {
+  align-items: center;
+  background-color: transparent;
+  border: none;
+  outline: none;
+}
