@@ -34,8 +34,8 @@ export default function SearchBar() {
                 {selectState==="job" ? (
                   <Container>
                   <Row>
-                  {jobData.map(data=>(
-                    <Col className='col-3 mt-5'>
+                  {jobData.filter(data=>data.id<=3).map(data=>(
+                    <Col className='col-3 my-5 '>
                      <JobCard {...data} key={data.id}/>
                      </Col>
                   ))}
