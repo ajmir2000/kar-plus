@@ -1,56 +1,52 @@
-import React from "react";
+import React, { useState } from "react";
 import "./searchBar.css";
-import {
-  Container,
-  Row,
-  Col,
-  InputGroup,
-  FormControl,
-  Button,
-  Dropdown,
-} from "react-bootstrap";
+import { Container, Col, Row } from "react-bootstrap";
+import jobData from "../cards/jobCards/jobList";
+import JobCard from "../cards/jobCards/jobCard";
 
 export default function SearchBar() {
-  return (
-    <>
-      <div>
-        <div className="box-container">
-          <div className="searchBox">
-            <input type="text" placeholder="search..." />
-            <span>
-              |
-              <select name="select">
-                <option value="talent">talent</option>
-                <option value="job">job</option>
-              </select>
-            </span>
-          </div>
+  const [selectState, setSelectState] = useState("talebt");
 
-          <button>Search</button>
+  const handleSelectChange = (event) => {
+    setSelectState(event.target.value);
+
+    console.log(selectState);
+  };
+
+  return (
+    <div>
+      <p className="first-content">
+        Find your dream job, Build your network or Hire the best talents!
+      </p>
+      <div className="box-container">
+        <div className="searchBox">
+          <input type="text" placeholder="search..." />
+          <span>
+            |
+            <select
+              name="select"
+              onChange={(event) => handleSelectChange(event)}>
+              <option value="talent">talent</option>
+              <option value="job">job</option>
+            </select>
+          </span>
         </div>
+
+        <button>Search</button>
       </div>
-      {/* this need for updateing  */}
-      {/* <Container>
-        <Row>
-          <Col>
-            <InputGroup className="d-flex">
-              <FormControl type="text" placeholder="search..." />
-              <InputGroup >
-                <InputGroup.Text>|</InputGroup.Text>
-                <Dropdown >
-                  <select name="select">
-                    <option value="talent">talent</option>
-                    <option value="job">job</option>
-                  </select>
-                </Dropdown>
-              </InputGroup>
-            </InputGroup>
-          </Col>
-          <Col>
-            <Button variant="primary">Search</Button>
-          </Col>
-        </Row>
-      </Container> */}
-    </>
+      {selectState === "job" ? (
+        <Container>
+          <Row>
+            {jobData
+              .filter((data) => data.id <= 3)
+              .map((data) => (
+                <Col className="col-3 my-5 ">
+                  <JobCard {...data} key={data.id} />
+                </Col>
+              ))}
+          </Row>
+        </Container>
+      ) : null}
+    </div>
   );
 }
