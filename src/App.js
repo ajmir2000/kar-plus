@@ -1,23 +1,17 @@
 import "reset-css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import LandingPage from "./pages/LandingPage/LandingPage";
-import LoginPage from "./pages/LoginPage/LoginPage";
+import {  useRoutes } from "react-router-dom";
 import NavBar from "./components/NavBar/NavBar";
-import SearchBar from "./components/SearchBar/SearchBar";
+import routes from "./routes";
 
 function App() {
+  let router=useRoutes(routes)
   return (
-    <div className="App">
-      <Router>
-        <NavBar />
-        <SearchBar/>
-        <Routes>
-          <Route path="/" element={<LandingPage />} />
-          <Route path="/login" element={<LoginPage />} />
-        </Routes>
-      </Router>
+   
+    <div className="App proBackground">
+    <NavBar/>
+    {router}
     </div>
   );
 }
