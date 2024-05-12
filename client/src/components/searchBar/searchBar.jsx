@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./searchBar.css";
-import { Container, Col, Row } from "react-bootstrap";
+import { Container, Col, Row, Button } from "react-bootstrap";
 import jobData from "../cards/jobCards/jobList";
 import JobCard from "../cards/jobCards/jobCard";
 
@@ -14,13 +14,45 @@ export default function SearchBar() {
   };
 
   return (
+    // <div>
+    //   <div className="box-container">
+    //     <div className="searchBox">
+    //       <input type="text" placeholder="search..." />
+    //       <span>
+    //         |
+    //         <select
+    //           name="select"
+    //           onChange={(event) => handleSelectChange(event)}>
+    //           <option value="talent">talent</option>
+    //           <option value="job">job</option>
+    //         </select>
+    //       </span>
+    //     </div>
+
+    //     <button>Search</button>
+    //   </div>
+    //   {selectState === "job" ? (
+    //     <Container>
+    //       <Row>
+    //         {jobData
+    //           .filter((data) => data.id <= 3)
+    //           .map((data) => (
+    //             <Col className="col-3 my-5 ">
+    //               <JobCard {...data} key={data.id} />
+    //             </Col>
+    //           ))}
+    //       </Row>
+    //     </Container>
+    //   ) : null}
+    // </div>
     <div>
-      <div className="box-container">
-        <div className="searchBox">
-          <input type="text" placeholder="search..." />
-          <span>
+      <div class="d-flex justify-content-between align-items-center">
+        <div class="d-flex searchBox">
+          <input type="text" class="form-control" placeholder="search..." />
+          <span class="mx-2">
             |
             <select
+              class="form-control"
               name="select"
               onChange={(event) => handleSelectChange(event)}>
               <option value="talent">talent</option>
@@ -29,20 +61,22 @@ export default function SearchBar() {
           </span>
         </div>
 
-        <button>Search</button>
+        <Button className="rounded-5 bg-white text-dark border-0">
+          Search
+        </Button>
       </div>
       {selectState === "job" ? (
-        <Container>
-          <Row>
+        <div class="container">
+          <div class="row">
             {jobData
               .filter((data) => data.id <= 3)
               .map((data) => (
-                <Col className="col-3 my-5 ">
+                <div class="col-3 my-5 ">
                   <JobCard {...data} key={data.id} />
-                </Col>
+                </div>
               ))}
-          </Row>
-        </Container>
+          </div>
+        </div>
       ) : null}
     </div>
   );
