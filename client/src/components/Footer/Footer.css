@@ -1,0 +1,58 @@
+.foter-items {
+    display: flex;
+    justify-content: space-evenly;
+  }
+  
+  .footer-items-1 {
+    display: flex;
+    justify-content: space-around;
+  }
+  
+  .footer-items-1 div {
+    margin: 20px;
+  }
+  .footer-items-1 div h6 {
+    color: #fff;
+  }
+  
+  .social-media-icons {
+    display: flex;
+    justify-content: space-evenly;
+  }
+  .social-media-icons a {
+    color: #fff;
+    margin: 5px;
+    font-size: 20px;
+  }
+  
+  .subscription {
+    display: flex;
+    justify-content: space-around;
+  }
+  .mail-icon {
+    display: flex;
+  }
+  .mail-icon span {
+    color: #fff;
+    font-size: 30px;
+    align-items: center;
+    margin-right: 5px;
+  }
+  .mail-icon p {
+    color: #fff;
+    font-size: 20px;
+  }
+  .input-button-container {
+    display: flex;
+    justify-content: space-evenly;
+  }
+  
+  .input-button-container input {
+    background-color: transparent;
+    color: #fff;
+    height: 3rem;
+    outline: none;
+    border: 1px solid #fff;
+    border-radius: 10px;
+  }
+  
