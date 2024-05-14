@@ -1,0 +1,31 @@
+.custom-social-media-icons a {
+  font-size: 23px;
+}
+
+.custom-mail-icon span {
+  color: rgba(3, 244, 148, 1);
+  font-size: 35px;
+}
+.custom-title-news {
+  color: #fff;
+  margin-bottom: 0;
+  font-size: 25px;
+}
+.custom-spam {
+  color: #fff;
+  margin-bottom: 0;
+  font-size: 14px;
+}
+
+.custom-placeholder::placeholder {
+  color: #fff;
+}
+.custom-placeholder:focus {
+  outline: none;
+  box-shadow: none;
+  
+}
+
+.custom-button-color {
+  color: rgba(3, 244, 148, 1);
+}
