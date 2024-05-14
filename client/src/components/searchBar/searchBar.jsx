@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./searchBar.css";
-import { Container, Button} from "react-bootstrap";
+import { Container, Button } from "react-bootstrap";
 import jobData from "../cards/jobCards/jobList";
 import JobCard from "../cards/jobCards/jobCard";
 
@@ -38,7 +38,10 @@ export default function SearchBar() {
         </div>
 
         <Button className="rounded-5 bg-white text-dark border-0 ms-4 py-3  col-2">
-         <h4 className="d-flex align-items-center  justify-content-center  m-auto "> Search</h4>
+          <h5 className="d-flex align-items-center  justify-content-center  m-auto ">
+            {" "}
+            Search
+          </h5>
         </Button>
       </div>
       <div>
