@@ -19,6 +19,7 @@ export default function AvailableJob() {
           </Row>
         </Container>
       </div>
+      
 
       <div className=" talent-category-container">
         <h2 className="m-5 text-success ">Our talents by category:</h2>

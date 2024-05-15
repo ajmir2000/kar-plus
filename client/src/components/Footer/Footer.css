@@ -29,3 +29,6 @@
 .custom-button-color {
   color: rgba(3, 244, 148, 1);
 }
+.custom-button-color:hover {
+  color: #19AC90;
+}
