@@ -5,13 +5,13 @@ import { TiStarFullOutline } from "react-icons/ti";
 
 export default function TalentCategory() {
   return (
-    <div id="category-talent">
-      <Card className="talent-card">
+    <>
+      <Card className="custom-talent-card m-3 p-2 rounded-4  ">
         <Card.Body>
           <Card.Title className="text-light">
             <h3>Sales & Marketing</h3>
           </Card.Title>
-          <div className="icons-container">
+          <div className="custom-icons-container d-flex justify-content-between  my-4">
             <span>
               <TiStarFullOutline />
               4.85/5
@@ -20,6 +20,6 @@ export default function TalentCategory() {
           </div>
         </Card.Body>
       </Card>
-    </div>
+    </>
   );
 }

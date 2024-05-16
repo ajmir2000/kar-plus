@@ -1,6 +1,3 @@
-
-
-
 .vailable-job-container {
   background-color: #fff;
   display: flex;
@@ -9,10 +6,14 @@
 .job-list-container {
   width: 90%;
   background-color: #f7f4f2;
-  height: 520px;
-
+  height: 520px !important;
+  margin-top: 70px !important;
 }
-
+.custom-avaliable-jobs{
+  margin-left: 7rem;
+  margin-top: 40px;
+  color: #198754;
+}
 .talent-category-container {
   width: 85%;
   margin: auto;
