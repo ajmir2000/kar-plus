@@ -82,6 +82,15 @@ export default function Footer() {
             </Button>
           </Form>
         </div>
+        <div className="custom-footer-line bg-white w-100 mt-4 "></div>
+        <div className="d-flex justify-content-center text-white mt-3">
+          <span className="px-3">
+            &copy; {new Date().getFullYear()} KarPlus
+          </span>
+          <span className="px-3 ">Term</span>
+          <span className="px-3">Privacy</span>
+          <span className="px-3">Cookies</span>
+        </div>
       </Container>
     </>
   );
