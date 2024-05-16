@@ -4,18 +4,20 @@ import JobCard from "../cards/jobCards/jobCard";
 import jobData from "../cards/jobCards/jobList";
 import { Container, Row, Col } from "react-bootstrap";
 import TalentCategory from "../talentCategory/talentCategory";
+import Pagination from "../PaginationPart/PaginationPart.jsx";
 export default function AvailableJob() {
   return (
-    <div className="vailable-job-container">
-      <div className="job-list-container">
+    <div className="vailable-job-container ">
+      <div className="job-list-container rounded-5 m-auto mt-5 ">
         <h2 className="ms-5 mt-4 text-success">Available Jobs:</h2>
         <Container>
-          <Row>
+          <Row className="d-flex justify-content-center me-4  ">
             {jobData.map((data) => (
-              <Col className="col-4" key={data.id}>
+              <div className="col-4 me-5" key={data.id}>
                 <JobCard {...data} />
-              </Col>
+              </div>
             ))}
+            <Pagination />
           </Row>
         </Container>
       </div>
