@@ -3,5 +3,5 @@
 }
 .proBackground {
   /* global 94%+ browsers support */
-  background: linear-gradient(122deg, rgba(3, 244, 148, 1) 41%, rgba(57, 220, 178, 1) 77%);
+  background: linear-gradient(122deg, #25CA86, #19AC90 77%);
 }
