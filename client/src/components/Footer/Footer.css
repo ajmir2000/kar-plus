@@ -3,7 +3,7 @@
 }
 
 .custom-mail-icon span {
-  color: rgba(3, 244, 148, 1);
+  color: #3BAD81;
   font-size: 35px;
 }
 .custom-title-news {
@@ -27,10 +27,10 @@
 }
 
 .custom-button-color {
-  color: rgba(3, 244, 148, 1);
+  color: #19AC90;
 }
 .custom-button-color:hover {
-  color: #19AC90;
+  color: #000000;
 }
 .custom-footer-line{
   height: 1px;
