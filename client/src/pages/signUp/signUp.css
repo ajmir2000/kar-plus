@@ -1,0 +1,80 @@
+.custom-scale {
+  height: 520px;
+  width: 70%;
+  border-radius: 20px;
+}
+.custom-sublings-div {
+  width: 50%;
+  border-radius: 20px;
+}
+
+/* first div styles   */
+
+.custom-div-style {
+  height: 80%;
+  width: 80%;
+  background-color: #25ca86;
+  border-radius: 20px;
+}
+
+.custom-div-style p {
+  font-size: 12px;
+}
+.images {
+  width: 100%;
+}
+
+.images img {
+  width: 50%;
+}
+
+/* second div styles*/
+
+.custom-paragraph {
+  font-size: 10px;
+}
+
+.custom-input-field {
+  height: 40px;
+  width: 85%;
+  border-radius: 15px;
+  background: #f3f3f3;
+  outline: none;
+}
+
+.custom-input-field input {
+  height: 100%;
+  width: 100%;
+  border-radius: 15px;
+  border: none;
+  outline: none;
+}
+.custom-forget-password {
+  font-size: 12px;
+  cursor: pointer;
+}
+.custom-submit {
+  height: 40px;
+  width: 85%;
+  border-radius: 15px;
+  background-color: #25ca86;
+}
+
+.custom-submit input {
+  width: 100%;
+  height: 100%;
+  outline: none;
+  border-radius: 15px;
+}
+
+.custom-buttons button {
+  width: 45%;
+}
+
+.custom-suggestion {
+  font-size: 12px;
+}
+
+.custom-checkbox {
+  font-size: 12px;
+}
