@@ -51,7 +51,7 @@ export default function SearchBar() {
               {jobData
                 .filter((data) => data.id <= 3)
                 .map((data) => (
-                  <div class="col-3 my-5 ">
+                  <div class="col-3 my-5 mx-4 ">
                     <JobCard {...data} key={data.id} />
                   </div>
                 ))}

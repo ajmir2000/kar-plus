@@ -1,0 +1,31 @@
+.custom-font-size-send-email {
+  font-size: 11px;
+}
+.custom-verify-input input {
+  border-radius: 8px;
+  background-color: #f8f9fa;
+  /* background-color: #25CA86; */
+  /* background-color: #1EB88A; */
+  border: none;
+}
+/* .custom-verify-input input:focus{
+    outline: none;
+     background-color: #1EB88A;
+     color: white;
+}
+.custom-verify-input input:valid{
+    outline: none;
+     background-color: #1EB88A;
+     color: white;
+} */
+
+.custom-verify-btn {
+  background-color: #25ca86;
+}
+.custom-resend-code {
+  font-size: 8px;
+}
+.custom-resend-code a {
+  color: #25ca86;
+  text-decoration: none;
+}
