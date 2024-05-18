@@ -1,0 +1,10 @@
+/* background-color: #25CA86; */
+/* background-color: #1EB88A; */
+
+.active-line-switch {
+  border-bottom: 3px solid #1eb88a;
+  top: -1.5px;
+}
+.custom-margin-link-job-talent-switch{
+    margin-left: 3.5rem;
+}

@@ -7,13 +7,15 @@ import routes from "./routes.jsx";
 
 function App() {
   const router = useRoutes(routes);
-  return <>
-  <div className="App proBackground">
-    <NavBar/>
-    {router}
-   
-    </div>
-  </>;
+  return (
+    <>
+      <div className="App proBackground">
+        <NavBar />
+
+        {router}
+      </div>
+    </>
+  );
 }
 
 export default App;
