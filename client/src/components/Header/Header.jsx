@@ -8,10 +8,10 @@ export default function Header() {
   return (
     <>
       <Container>
-        <div class="row align-items-center">
-          <div class="col-1 d-none d-md-block"></div>
-          <div class="col-12 col-md-6 ms-md-5 text-center text-md-start mb-4 mb-md-0">
-            <h3 class="text-white">
+        <div className="row align-items-center">
+          <div className="col-1 d-none d-md-block"></div>
+          <div className="col-12 col-md-6 ms-md-5 text-center text-md-start mb-4 mb-md-0">
+            <h3 className="text-white">
               Find your dream job, Build your network or Hire the best talents!
             </h3>
           </div>
