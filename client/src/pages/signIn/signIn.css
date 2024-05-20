@@ -1,6 +1,6 @@
-.custom-scale {
-  height: 520px;
-  width: 70%;
+.custom-signin-scale {
+  min-height: 520px;
+  width: 80%;
   border-radius: 20px;
 }
 .custom-sublings-div {
