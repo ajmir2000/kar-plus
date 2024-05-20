@@ -25,7 +25,7 @@ export default function AvailableJob() {
           </Container>
         </div>
 
-        <div className=" talent-category-container">
+        {/* <div className=" talent-category-container">
           <h2 className="m-4 text-success pt-5 ">Our talents by category:</h2>
           <Container className="pb-5 mb-5">
             <Row>
@@ -53,6 +53,24 @@ export default function AvailableJob() {
               <div className="col-3">
                 <TalentCategory />
               </div>
+            </Row>
+          </Container>
+        </div> */}
+        <div className="talent-category-container">
+          <h2 className="m-4 text-success py-5">Our talents by category:</h2>
+          <Container className="pb-5 mb-5">
+            <Row>
+              {Array.from({ length: 8 }).map((_, index) => (
+                <Col
+                  xs={12}
+                  sm={6}
+                  md={4}
+                  lg={3}
+                  className="mb-4 d-flex justify-content-center "
+                  key={index}>
+                  <TalentCategory />
+                </Col>
+              ))}
             </Row>
           </Container>
         </div>

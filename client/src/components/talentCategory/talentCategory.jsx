@@ -6,7 +6,7 @@ import { TiStarFullOutline } from "react-icons/ti";
 export default function TalentCategory() {
   return (
     <>
-      <Card className="custom-talent-card m-3 p-2 rounded-4  ">
+      <Card className="custom-talent-card p-2 rounded-4  ">
         <Card.Body>
           <Card.Title className="text-light">
             <h3>Sales & Marketing</h3>
