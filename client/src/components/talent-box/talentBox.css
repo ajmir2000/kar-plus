@@ -1,0 +1,62 @@
+.custom-talent-box-container{
+    background-color: #f3f3f3;
+    border-radius: 20px;
+}
+.custom-talent-box-skill-pic{
+    border-radius: 10px;
+    
+}
+.custom-talent-box-skill-pic img{
+    height: 110px;
+    width: 110px;
+    border-radius: 10px;
+}
+.custom-talent-box-profile-picture{
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+}
+
+.custom-talent-box-profile-picture img{
+    height: 100%;
+    width: 100%;
+    border-radius: 50%;
+}
+
+.custom-talent-box-profile-details h5{
+    font-size: 13px;
+
+}
+
+.custom-talent-box-profile-details h5 span{
+    font-size: 10px;
+}
+.custom-talent-box-container button{
+    height: 40px;
+    width: 150\px;
+    border-radius: 20px;
+}
+
+.custom-talent-card-sub-menus p{
+    margin: 0 20px;
+    font-size: 9px;
+}
+
+.custom-talent-box-talent-category-container div{
+    margin: 0 10px; 
+    height: 20px;
+    background-color:rgb(208, 210, 203);
+    display: flex;
+    align-items: center;
+    border-radius: 7px ;
+    padding: 8px;
+    font-size: 10px;
+}
+
+.custom-talent-box-text-body h5{
+    font-size: 18px;
+}
+.custom-talent-box-text-body h5 span{
+    font-size: 16px;
+
+} 
