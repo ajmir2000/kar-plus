@@ -16,7 +16,8 @@ export default function JobTalentSwitch() {
           className={`nav-link ${
             activeLink === "jobs" ? "position-absolute active-line-switch" : ""
           }`}
-          onClick={() => setActiveLink("jobs")}>
+          onClick={() => setActiveLink("jobs")}
+        >
           Jobs
         </Link>
         <Link
@@ -26,7 +27,8 @@ export default function JobTalentSwitch() {
               ? "position-absolute active-line-switch"
               : ""
           }`}
-          onClick={() => setActiveLink("talent")}>
+          onClick={() => setActiveLink("talent")}
+        >
           Talent
         </Link>
       </div>

@@ -26,7 +26,7 @@ export default function VerifyCode() {
                 value={otp}
                 onChange={setOtp}
                 numInputs={5}
-                renderSeparator={<span className="px-2"></span>}
+                renderSeparator={<span className="px-2">-</span>}
                 renderInput={(props) => <input {...props} />}
                 shouldAutoFocus={true}
               />
