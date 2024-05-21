@@ -12,6 +12,8 @@ import {
 
 import JobTalentSwitch from "../../components/JobTalentSwitch/JobTalentSwitch";
 
+import TalentBox from "../../components/talent-box/talentBox";
+
 export default function FindTalent() {
   return (
     <Container fluid className="bg-white ">
@@ -24,7 +26,8 @@ export default function FindTalent() {
               <Accordion>
                 <Accordion.Item
                   eventKey="0"
-                  className="border-0 bg-transparent ">
+                  className="border-0 bg-transparent "
+                >
                   <Accordion.Header className="custom-accordion-header bg-white ">
                     <span className="text-secondary ">Skills</span>
                   </Accordion.Header>
@@ -61,7 +64,8 @@ export default function FindTalent() {
               <Accordion>
                 <Accordion.Item
                   eventKey="1"
-                  className="border-0 bg-transparent  ">
+                  className="border-0 bg-transparent  "
+                >
                   <Accordion.Header className="custom-accordion-header bg-white ">
                     {" "}
                     <span className="text-secondary custom-accordion-header">
@@ -104,7 +108,8 @@ export default function FindTalent() {
               <Accordion>
                 <Accordion.Item
                   eventKey="2"
-                  className="border-0 bg-transparent ">
+                  className="border-0 bg-transparent "
+                >
                   <Accordion.Header className="custom-accordion-header bg-white ">
                     {" "}
                     <span className="text-secondary custom-accordion-header">
@@ -141,6 +146,14 @@ export default function FindTalent() {
                 </Accordion.Item>
               </Accordion>
             </div>
+          </div>
+          <div className="col-9">
+            <TalentBox />
+            <TalentBox />
+            <TalentBox />
+            <TalentBox />
+            <TalentBox />
+            <TalentBox />
           </div>
         </Row>
       </div>
