@@ -1,11 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { Container } from "react-bootstrap";
-import { MdAlternateEmail,MdOutlinePerson } from "react-icons/md";
+import { MdAlternateEmail, MdOutlinePerson } from "react-icons/md";
 import { RiLockPasswordLine } from "react-icons/ri";
 import { FcGoogle } from "react-icons/fc";
 import { RiFacebookCircleFill } from "react-icons/ri";
-import { FaUser } from 'react-icons/fa';
+import { FaUser } from "react-icons/fa";
 import "./signUp.css";
 
 export default function SignUp() {
@@ -42,12 +42,13 @@ export default function SignUp() {
               <p className="muted custom-paragraph">Register to Karplus</p>
             </div>
             <form className="mt-4">
-            <div className="custom-signup-input-field d-flex text-align-center outline-none m-2">
+              <div className="custom-signup-input-field d-flex text-align-center outline-none m-2">
                 <MdOutlinePerson className="fs-3 mt-1" />
                 <input
                   className="bg-transparent border-0"
                   type="text"
                   placeholder="username"
+                  id="username"
                 />
               </div>
               <div className="custom-signup-input-field d-flex text-align-center outline-none m-2 m-2">
@@ -56,6 +57,7 @@ export default function SignUp() {
                   className="bg-transparent border-0 "
                   type="email"
                   placeholder="Email address"
+                  id="email"
                 />
               </div>
 
@@ -65,17 +67,14 @@ export default function SignUp() {
                   className="bg-transparent border-0 "
                   type="password"
                   placeholder="password"
+                  id="password"
                 />
               </div>
 
-              
-
               <div className="custom-signup-submit mt-3">
-                <input
-                  className="border-0 bg-transparent text-light btn btn-primary"
-                  type="submit"
-                  value="Register"
-                />
+                <button className="border-0 bg-transparent text-light btn mt-1 align-items-center custom-sign-btn ">
+                  SIGN UP
+                </button>
               </div>
               <div className="d-flex text-align-left ms-2 custom-signup-checkbox mt-3">
                 <input type="checkbox" className="me-2" />i accept{" "}
@@ -94,15 +93,13 @@ export default function SignUp() {
                   facebook
                 </button>
               </div>
-              <p className="mt-2 lead custom-signup-suggestion">
-                Already have an acount?{" "}
-                <Link
-                  to="/signin"
-                  className="text-success text-decoration-none">
-                  login
-                </Link>
-              </p>
             </form>
+            <p className="mt-2 lead custom-signup-suggestion">
+              Already have an acount?{" "}
+              <Link to="/signin" className="text-success text-decoration-none">
+                login
+              </Link>
+            </p>
           </div>
         </div>
       </Container>
