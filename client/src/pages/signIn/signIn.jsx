@@ -130,8 +130,8 @@ export default function SignIn() {
                 </Link>
               </p>
             </form>
+            {error && <p className="text-danger mt-3">{error}</p>}
           </div>
-          {error && <p className="text-danger mt-3">{error}</p>}
         </div>
       </Container>
     </>
