@@ -1,14 +1,50 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { Container } from "react-bootstrap";
 import { MdAlternateEmail, MdOutlinePerson } from "react-icons/md";
 import { RiLockPasswordLine } from "react-icons/ri";
 import { FcGoogle } from "react-icons/fc";
 import { RiFacebookCircleFill } from "react-icons/ri";
-import { FaUser } from "react-icons/fa";
+
 import "./signUp.css";
 
 export default function SignUp() {
+  const [formData, setFormData] = useState({});
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.id]: e.target.value,
+    });
+  };
+  const handleSubmit = async (e) => {
+    setLoading(true);
+    e.preventDefault();
+    try {
+      const res = await fetch("/api/auth/signup", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+      const data = await res.json();
+      if (data.success === false) {
+        setLoading(false);
+        setError(data.message);
+        return;
+      }
+      setLoading(false);
+      setError(null);
+      navigate("/signin")
+    } catch (error) {
+      setLoading(false);
+      setError(error.message);
+    }
+  };
+
   return (
     <>
       <Container className="px-3 px-md-5 py-4 text-center">
@@ -41,7 +77,7 @@ export default function SignUp() {
               <h4 className="fw-bold">Create New Account</h4>
               <p className="muted custom-paragraph">Register to Karplus</p>
             </div>
-            <form className="mt-4">
+            <form onSubmit={handleSubmit} className="mt-4">
               <div className="custom-signup-input-field d-flex text-align-center outline-none m-2">
                 <MdOutlinePerson className="fs-3 mt-1" />
                 <input
@@ -49,6 +85,7 @@ export default function SignUp() {
                   type="text"
                   placeholder="username"
                   id="username"
+                  onChange={handleChange}
                 />
               </div>
               <div className="custom-signup-input-field d-flex text-align-center outline-none m-2 m-2">
@@ -58,6 +95,7 @@ export default function SignUp() {
                   type="email"
                   placeholder="Email address"
                   id="email"
+                  onChange={handleChange}
                 />
               </div>
 
@@ -68,12 +106,15 @@ export default function SignUp() {
                   type="password"
                   placeholder="password"
                   id="password"
+                  onChange={handleChange}
                 />
               </div>
 
               <div className="custom-signup-submit mt-3">
-                <button className="border-0 bg-transparent text-light btn mt-1 align-items-center custom-sign-btn ">
-                  SIGN UP
+                <button
+                  disabled={loading}
+                  className="border-0 bg-transparent text-light btn mt-1 align-items-center custom-sign-btn text-uppercase  ">
+                  {loading ? "Loading..." : "Sign up"}
                 </button>
               </div>
               <div className="d-flex text-align-left ms-2 custom-signup-checkbox mt-3">
@@ -100,6 +141,7 @@ export default function SignUp() {
                 login
               </Link>
             </p>
+            {error && <p className="text-danger mt-3">{error}</p>}
           </div>
         </div>
       </Container>
