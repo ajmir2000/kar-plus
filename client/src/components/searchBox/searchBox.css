@@ -1,0 +1,21 @@
+.custom-search-box-container{
+    height: 3rem;
+    width: 33rem;
+    background-color:var(--white-color);
+    border-radius: 20px;
+    position: absolute;
+    top: 130px;
+    left: 30%;
+
+    margin: auto;
+    
+    box-shadow: 0 10px 5px #f3f3f3 ;
+
+}
+.custom-search-box-container input{
+    background-color: transparent;
+    width: 100%;
+    border: none;
+    outline: none;
+    margin-left: 1rem;
+}

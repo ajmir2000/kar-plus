@@ -1,5 +1,6 @@
 import React from "react";
 import JobTalentSwitch from "../../components/JobTalentSwitch/JobTalentSwitch";
+import JobBox from "../../components/job-box/jobBox";
 import { Container, Row } from "react-bootstrap";
 
 import {
@@ -9,12 +10,14 @@ import {
   FormControl,
   Button,
 } from "react-bootstrap";
+import SearchBox from "../../components/searchBox/searchBox";
 
 
 
 export default function FindWork() {
   return (
     <Container fluid className="bg-white ">
+      <SearchBox placeholder="Search job..." className="custom-findWork-searchBox"/>
       <div className="container pt-5">
         <JobTalentSwitch />
         <Row className="d-flex  ">
@@ -144,7 +147,12 @@ export default function FindWork() {
               </Accordion>
             </div>
           </div>
-          <div className="col-9"></div>
+          <div className="col-9">
+            <JobBox/>
+            <JobBox/>
+            <JobBox/>
+            <JobBox/>
+          </div>
         </Row>
       </div>
     </Container>
