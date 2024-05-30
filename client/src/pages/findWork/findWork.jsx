@@ -28,7 +28,7 @@ export default function FindTalent() {
                   className="border-0 bg-transparent "
                 >
                   <Accordion.Header className="custom-accordion-header bg-white ">
-                    <span className="text-secondary ">Skills</span>
+                    <span className="text-secondary ">Catagory</span>
                   </Accordion.Header>
                   <Accordion.Body>
                     <Form.Check

@@ -35,28 +35,28 @@ export default function FindTalent() {
                     <Form.Check
                       type="checkbox"
                       className="text-secondary custom-accordion-checked "
-                      label="Kabul"
+                      label="Web Developer"
                     />
                     <Form.Check
                       type="checkbox"
-                      label="Panishir"
+                      label="Graphic Designer"
                       className="text-secondary custom-accordion-checked "
                       defaultChecked
                     />
                     <Form.Check
                       type="checkbox"
                       className="text-secondary custom-accordion-checked "
-                      label="Kapisa"
+                      label="Writer"
                     />
                     <Form.Check
                       type="checkbox"
                       className="text-secondary custom-accordion-checked "
-                      label="Parwan"
+                      label="AI Engineer"
                     />
                     <Form.Check
                       type="checkbox"
                       className="text-secondary custom-accordion-checked "
-                      label="Jalalabad"
+                      label="SEO Analysis"
                     />
                   </Accordion.Body>
                 </Accordion.Item>
