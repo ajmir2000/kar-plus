@@ -28,35 +28,26 @@ export default function FindTalent() {
                   className="border-0 bg-transparent "
                 >
                   <Accordion.Header className="custom-accordion-header bg-white ">
-                    <span className="text-secondary ">Catagory</span>
+                    <span className="text-secondary ">Experience level</span>
                   </Accordion.Header>
                   <Accordion.Body>
                     <Form.Check
                       type="checkbox"
                       className="text-secondary custom-accordion-checked "
-                      label="Kabul"
+                      label="Entry Level"
                     />
                     <Form.Check
                       type="checkbox"
-                      label="Panishir"
+                      label="Intermediate"
                       className="text-secondary custom-accordion-checked "
                       defaultChecked
                     />
                     <Form.Check
                       type="checkbox"
                       className="text-secondary custom-accordion-checked "
-                      label="Kapisa"
+                      label="Expert"
                     />
-                    <Form.Check
-                      type="checkbox"
-                      className="text-secondary custom-accordion-checked "
-                      label="Parwan"
-                    />
-                    <Form.Check
-                      type="checkbox"
-                      className="text-secondary custom-accordion-checked "
-                      label="Jalalabad"
-                    />
+
                   </Accordion.Body>
                 </Accordion.Item>
               </Accordion>
