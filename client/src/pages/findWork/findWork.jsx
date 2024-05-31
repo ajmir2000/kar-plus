@@ -103,33 +103,33 @@ export default function FindTalent() {
                   <Accordion.Header className="custom-accordion-header bg-white ">
                     {" "}
                     <span className="text-secondary custom-accordion-header">
-                      Hourly Rate
+                      Salary Range
                     </span>{" "}
                   </Accordion.Header>
                   <Accordion.Body>
                     <Form.Check
                       type="radio"
-                      name="hourlyRate"
-                      label="Any hourly rate"
+                      name="salaryRange"
+                      label="Any Salary Range"
                       className="text-secondary custom-accordion-checked "
                       defaultChecked
                     />
                     <Form.Check
                       type="radio"
-                      name="hourlyRate"
-                      label="$0 - $20"
+                      name="salaryRange"
+                      label="$100 - $200"
                       className="text-secondary custom-accordion-checked "
                     />
                     <Form.Check
                       type="radio"
-                      name="hourlyRate"
-                      label="$20 - $40"
+                      name="salaryRange"
+                      label="$300 - $500"
                       className="text-secondary custom-accordion-checked "
                     />
                     <Form.Check
                       type="radio"
-                      name="hourlyRate"
-                      label="$50 - $100"
+                      name="salaryRange"
+                      label="$600 - $1000"
                       className="text-secondary custom-accordion-checked "
                     />
                   </Accordion.Body>
