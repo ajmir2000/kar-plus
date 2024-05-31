@@ -12,12 +12,13 @@ import {
   signInSuccess,
   signInFailure,
 } from "../../redux/user/userSlice.js";
+import OAuth from "../../components/OAuth/OAuth.jsx";
 
 export default function SignIn() {
   const [formData, setFormData] = useState({});
   // const [error, setError] = useState(null);
   // const [loading, setLoading] = useState(false);
-  const {loading, error} = useSelector((state) => state.user)
+  const { loading, error } = useSelector((state) => state.user);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const handleChange = (e) => {
@@ -125,9 +126,8 @@ export default function SignIn() {
               </div>
               <p className="mt-3">--- or login with ---</p>
               <div className="d-flex custom-buttons">
-                <button className="btn btn-light">
-                  <FcGoogle /> Google
-                </button>
+                <OAuth />
+
                 <button className="btn btn-light ms-lg-5">
                   <RiFacebookCircleFill className="text-primary" />
                   facebook

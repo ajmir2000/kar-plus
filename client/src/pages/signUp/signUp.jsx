@@ -7,6 +7,7 @@ import { FcGoogle } from "react-icons/fc";
 import { RiFacebookCircleFill } from "react-icons/ri";
 
 import "./signUp.css";
+import OAuth from "../../components/OAuth/OAuth";
 
 export default function SignUp() {
   const [formData, setFormData] = useState({});
@@ -38,7 +39,7 @@ export default function SignUp() {
       }
       setLoading(false);
       setError(null);
-      navigate("/signin")
+      navigate("/signin");
     } catch (error) {
       setLoading(false);
       setError(error.message);
@@ -126,9 +127,8 @@ export default function SignUp() {
 
               <p className="mt-3">--- or login with ---</p>
               <div className="d-flex custom-signup-buttons">
-                <button className="btn btn-light">
-                  <FcGoogle /> Google
-                </button>
+                <OAuth />
+
                 <button className="btn btn-light">
                   <RiFacebookCircleFill className="text-primary" />
                   facebook
