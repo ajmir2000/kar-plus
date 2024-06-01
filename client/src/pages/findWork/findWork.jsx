@@ -1,4 +1,14 @@
 import React from "react";
+import { Container, Row } from "react-bootstrap";
+
+import {
+  Accordion,
+  Form,
+  InputGroup,
+  FormControl,
+  Button,
+} from "react-bootstrap";
+
 import JobTalentSwitch from "../../components/JobTalentSwitch/JobTalentSwitch";
 import JobBox from "../../components/job-box/jobBox";
 import { Container, Row } from "react-bootstrap";
