@@ -1,40 +1,40 @@
-.custom-scale {
-  height: 520px;
-  width: 70%;
+.custom-signin-scale {
+  min-height: 520px;
+  width: 80%;
   border-radius: 20px;
 }
-.custom-sublings-div {
+.custom-signin-sublings-div {
   width: 50%;
   border-radius: 20px;
 }
 
 /* first div styles   */
 
-.custom-div-style {
+.custom-signin-div-style {
   height: 80%;
   width: 80%;
   background-color: #25ca86;
   border-radius: 20px;
 }
 
-.custom-div-style p {
+.custom-signin-div-style p {
   font-size: 12px;
 }
-.images {
+.custom-signin-images {
   width: 100%;
 }
 
-.images img {
+.custom-signin-images img {
   width: 50%;
 }
 
 /* second div styles*/
 
-.custom-paragraph {
+.custom-signin-paragraph {
   font-size: 10px;
 }
 
-.custom-input-field {
+.custom-signin-input-field {
   height: 40px;
   width: 85%;
   border-radius: 15px;
@@ -42,35 +42,35 @@
   outline: none;
 }
 
-.custom-input-field input {
+.custom-signin-input-field input {
   height: 100%;
   width: 100%;
   border-radius: 15px;
   border: none;
   outline: none;
 }
-.custom-forget-password {
+.custom-signin-forget-password {
   font-size: 12px;
   cursor: pointer;
 }
-.custom-submit {
+.custom-signin-submit {
   height: 40px;
   width: 85%;
   border-radius: 15px;
   background-color: #25ca86;
 }
 
-.custom-submit input {
+.custom-signin-submit input {
   width: 100%;
   height: 100%;
   outline: none;
   border-radius: 15px;
 }
 
-.custom-buttons button {
+.custom-signin-buttons button {
   width: 45%;
 }
 
-.custom-suggestion {
+.custom-signin-suggestion {
   font-size: 12px;
 }

@@ -1,0 +1,10 @@
+.custom-accordion-header button.accordion-button {
+  background-color: #fff;
+  border: none !important;
+  outline: none !important;
+}
+
+.custom-accordion-checked input:checked {
+  background-color: #25CA86;
+  border: none;
+}

@@ -6,7 +6,7 @@
 .job-list-container {
   width: 90%;
   background-color: #f7f4f2;
-  height: 520px !important;
+  min-height: 520px !important;
   margin-top: 70px !important;
 }
 .custom-avaliable-jobs{

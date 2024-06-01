@@ -12,8 +12,8 @@ import {
 export default function JobCard({ Image, title, person, vocanceNum }) {
   return (
     <>
-      <Card className="custom-item bg-white rounded-5 p-2 m-3 border-0 ">
-        <div className="d-flex">
+      <Card className="custom-item bg-white rounded-4 p-2 p m-3 border-0 m-lg-0 ">
+        <div className="d-flex ">
           <div className="d-flex">
             <div className="d-flex">
               <div className="custom-img-container bg-white mt-3 rounded-3 d-flex  justify-content-center align-items-center  ">
@@ -21,14 +21,14 @@ export default function JobCard({ Image, title, person, vocanceNum }) {
               </div>
               <Card.Title className="custom-job-text mt-3">{title}</Card.Title>
             </div>
-            <span className="bookmark me-5">
+            <span className="bookmark">
               <FaBookmark />
               {/* this icon for unbookmark use on logic of this project */}
               {/* <IoBookmarkOutline /> */}
             </span>
           </div>
         </div>
-        <div className="custom-company-name d-flex justify-content-center ">
+        <div className="custom-company-name d-flex justify-content-center ps-lg-4  ">
           {person}
         </div>
 
