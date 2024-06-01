@@ -1,10 +1,10 @@
 .custom-signup-scale {
-  height: 520px;
-  width: 70%;
+  min-height: 520px;
+  width: 80%;
   border-radius: 20px;
 }
 .custom-signup-sublings-div {
-  width: 50%;
+  max-width: 50%;
   border-radius: 20px;
 }
 
@@ -58,6 +58,9 @@
   width: 85%;
   border-radius: 15px;
   background-color: #25ca86;
+}
+.custom-signup-submit:hover {
+  opacity: 80%;
 }
 
 .custom-signup-submit input {

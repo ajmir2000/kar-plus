@@ -2,11 +2,12 @@ import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
 import Form from "react-bootstrap/Form";
 import Nav from "react-bootstrap/Nav";
-import { Navbar, } from "react-bootstrap";
+import { Navbar } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import "./NavBar.css";
-
+import { useSelector } from "react-redux";
 function NavBar() {
+  const { currentUser } = useSelector((state) => state.user);
   return (
     <Navbar expand="lg" className="bg-transparent p-5">
       <Container>
@@ -30,18 +31,28 @@ function NavBar() {
               About us
             </Link>
           </Nav>
-          <Form className="d-flex">
-            <Link to="signin">
-              <Button className="mx-3 bg-transparent border-0 text-light">
-                Sign in
-              </Button>
+          {currentUser ? (
+            <Link to="/profile">
+              <img
+                className="rounded-5  w-50 "
+                src={currentUser.avatar}
+                alt="profile"
+              />
             </Link>
-            <Link to="signup">
-              <Button className="rounded-5 bg-white text-dark border-0">
-                Sign up
-              </Button>
-            </Link>
-          </Form>
+          ) : (
+            <Form className="d-flex">
+              <Link to="signin">
+                <Button className="mx-3 bg-transparent border-0 text-light">
+                  Sign in
+                </Button>
+              </Link>
+              <Link to="signup">
+                <Button className="rounded-5 bg-white text-dark border-0">
+                  Sign up
+                </Button>
+              </Link>
+            </Form>
+          )}
         </Navbar.Collapse>
       </Container>
     </Navbar>
