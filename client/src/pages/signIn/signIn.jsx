@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { Container, Button } from "react-bootstrap";
 import { MdAlternateEmail } from "react-icons/md";
@@ -7,7 +7,17 @@ import { FcGoogle } from "react-icons/fc";
 import { RiFacebookCircleFill } from "react-icons/ri";
 import "./signIn.css";
 
+
 export default function SignIn() {
+
+
+
+
+
+
+
+
+
   return (
     <>
       <Container className="px-5 py-4 text-center">
@@ -58,6 +68,7 @@ export default function SignIn() {
                   className="bg-transparent border-0"
                   type="password"
                   placeholder="password"
+                  
                 />
               </div>
               <div className="text-end text-success me-5 custom-signin-forget-password">

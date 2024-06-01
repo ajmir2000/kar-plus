@@ -1,0 +1,23 @@
+.custom-jobBox-container{
+    background-color: #f3f3f3;
+    border-radius: 20px;
+}
+
+.custom-jobBox-pic-div{
+   border-radius: 10px;
+    height: 6rem;
+    width: 6rem;
+}
+.custom-pic-div img{
+    border-radius: 10px;
+}
+
+.custom-jobBox-title-div h3{
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.custom-jobBox-btn-container button{
+    background-color: rgb(232, 226, 216);
+    font-family: 14px;
+}

@@ -13,10 +13,14 @@ import {
 import JobTalentSwitch from "../../components/JobTalentSwitch/JobTalentSwitch";
 
 import TalentBox from "../../components/talent-box/talentBox";
+import SearchBox from "../../components/searchBox/searchBox";
+
+
 
 export default function FindTalent() {
   return (
     <Container fluid className="bg-white ">
+      <SearchBox placeholder="find talent..."/>
       <div className="container pt-5">
         <JobTalentSwitch />
 
