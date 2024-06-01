@@ -1,17 +1,8 @@
 import React from "react";
 import { Container, Row } from "react-bootstrap";
 
-import {
-  Accordion,
-  Form,
-  InputGroup,
-  FormControl,
-  Button,
-} from "react-bootstrap";
-
 import JobTalentSwitch from "../../components/JobTalentSwitch/JobTalentSwitch";
 import JobBox from "../../components/job-box/jobBox";
-import { Container, Row } from "react-bootstrap";
 
 import {
   Accordion,
@@ -22,12 +13,13 @@ import {
 } from "react-bootstrap";
 import SearchBox from "../../components/searchBox/searchBox";
 
-
-
 export default function FindWork() {
   return (
     <Container fluid className="bg-white ">
-      <SearchBox placeholder="Search job..." className="custom-findWork-searchBox"/>
+      <SearchBox
+        placeholder="Search job..."
+        className="custom-findWork-searchBox"
+      />
       <div className="container pt-5">
         <JobTalentSwitch />
         <Row className="d-flex  ">
@@ -36,8 +28,7 @@ export default function FindWork() {
               <Accordion>
                 <Accordion.Item
                   eventKey="0"
-                  className="border-0 bg-transparent "
-                >
+                  className="border-0 bg-transparent ">
                   <Accordion.Header className="custom-accordion-header bg-white ">
                     <span className="text-secondary ">Category</span>
                   </Accordion.Header>
@@ -74,8 +65,7 @@ export default function FindWork() {
               <Accordion>
                 <Accordion.Item
                   eventKey="1"
-                  className="border-0 bg-transparent  "
-                >
+                  className="border-0 bg-transparent  ">
                   <Accordion.Header className="custom-accordion-header bg-white ">
                     {" "}
                     <span className="text-secondary custom-accordion-header">
@@ -118,8 +108,7 @@ export default function FindWork() {
               <Accordion>
                 <Accordion.Item
                   eventKey="2"
-                  className="border-0 bg-transparent "
-                >
+                  className="border-0 bg-transparent ">
                   <Accordion.Header className="custom-accordion-header bg-white ">
                     {" "}
                     <span className="text-secondary custom-accordion-header">
@@ -158,10 +147,10 @@ export default function FindWork() {
             </div>
           </div>
           <div className="col-9">
-            <JobBox/>
-            <JobBox/>
-            <JobBox/>
-            <JobBox/>
+            <JobBox />
+            <JobBox />
+            <JobBox />
+            <JobBox />
           </div>
         </Row>
       </div>
