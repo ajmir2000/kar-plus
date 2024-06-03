@@ -1,0 +1,23 @@
+.custom-cmpanyCard-container{
+    height: 9rem;
+    width: 22rem;
+    background-color:rgba(0, 0, 0, 0.06);
+    border-radius: 20px;
+    margin: 15px;
+}
+
+.custom-companyCard-img{
+    height: 80px;
+    width: 80px;
+    border-radius: 15px;
+}
+
+.custom-cardCompany-text-container h5{
+    color: #1bc26e;
+    font-size:20px;
+}
+
+.custom-cardCompany-text-container p{
+    font-size: 13px;
+    
+}
