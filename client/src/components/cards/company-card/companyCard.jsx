@@ -3,9 +3,10 @@ import './companyCard.css'
 import { FaBookmark } from "react-icons/fa6";
 import { Link } from 'react-router-dom';
 
+
 export default function CompanyCard({title,image,location,id}) {
   return (
-    <Link to={`/companies/${id}`}>
+    <Link className="custom-companyCard-Link" to={`/companies/${id}`}>
       <div className="custom-cmpanyCard-container d-flex align-items-center p-4">
         <img src={image} alt="picture" className="custom-companyCard-img" />
         <div className="custom-cardCompany-text-container text-align-center ms-3">

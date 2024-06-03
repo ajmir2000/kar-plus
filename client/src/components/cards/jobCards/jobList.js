@@ -130,7 +130,7 @@ export const companyData = [
   },
    {
     id: 11,
-    title: "eTESALAT",
+    title: "Etesalat",
     location: "Kabul, Afghanistan",
     image: "asset-folder/images/download.png",
     description:
@@ -146,7 +146,7 @@ export const companyData = [
   },
    {
     id: 13,
-    title: "mETA",
+    title: "Meta",
     location: "Kabul, Afghanistan",
     image: "asset-folder/images/c31566130735783.6186962073880.png",
     description:
@@ -154,7 +154,7 @@ export const companyData = [
   },
  {
     id: 14,
-    title: "rOSHAN",
+    title: "Roshan",
     location: "Kabul, Afghanistan",
     image: "asset-folder/images/images.jpeg",
     description:
@@ -163,7 +163,7 @@ export const companyData = [
 
    {
     id: 15,
-    title: "rOSHAN",
+    title: "Roshan",
     location: "Kabul, Afghanistan",
     image: "asset-folder/images/images.jpeg",
     description:

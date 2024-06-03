@@ -5,6 +5,9 @@
     border-radius: 20px;
     margin: 15px;
 }
+.custom-companyCard-Link{
+    text-decoration: none;
+}
 
 .custom-companyCard-img{
     height: 80px;

@@ -1,0 +1,66 @@
+.custom-companyDetails-btn{
+    background-color: #c1c198c4;
+    border-radius: 15px;
+    border: none;
+    margin-left: 120px;
+    
+}
+
+.custom-details-container{
+margin: 40px;
+padding: 30px;
+}
+
+.custom-company-ddetail-box{
+    width: 80%;
+    background-color: rgba(0, 0, 0, 0.1); ;
+    margin-left: 80px;
+    border-radius: 20px;
+    position: relative;
+}
+
+
+
+.custom-company-detail-icons{
+    width: 40%;
+}
+
+.custom-company-detail-child-box{
+    background-color: rgba(0, 0, 0, 0.6);
+    height: 130px;
+    border-radius: inherit;
+}
+
+.custom-detali-image{
+    height: 110px;
+    width: 110px;
+    background-color: red;
+    position: absolute;
+    top: 95px;
+    left: 50px;
+    border-radius: 15px;
+}
+
+.custom-company-detail-title-div{
+    margin-left: 190px;
+}
+.custom-company-detail-title-div button{
+    background-color: #f3f3f3;
+    border-radius: 10px;
+    font-size: 12px;
+}
+
+.custom-companyDetail-description{
+    margin: 75px 50px;
+}
+.custom-companyDetails-text-div{
+    border-right: 1px solid black;
+}
+
+.custom-companyDetail-activeJob-box{
+    background-color:rgba(0, 0, 0, 0.1) ;
+    width: 80%;
+    margin: 70px auto;
+    padding: 70px;
+    border-radius: 20px;
+}

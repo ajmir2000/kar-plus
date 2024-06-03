@@ -12,7 +12,7 @@ import SignIn from "./pages/signIn/signIn.jsx";
 import SignUp from "./pages/signUp/signUp.jsx";
 import FindWork from "./pages/findWork/findWork.jsx";
 import Profile from "./pages/Profile/Profile.jsx";
-import CompanyDetails from "./pages/companyCarddetails/companyDetails.jsx";
+import CompanyDetails from "./pages/companyCardDetail/companyDetails.jsx";
 
 function App() {
   return (
