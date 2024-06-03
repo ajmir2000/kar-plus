@@ -12,6 +12,7 @@ import SignIn from "./pages/signIn/signIn.jsx";
 import SignUp from "./pages/signUp/signUp.jsx";
 import FindWork from "./pages/findWork/findWork.jsx";
 import Profile from "./pages/Profile/Profile.jsx";
+import CompanyDetails from "./pages/companyCardDetail/companyDetails.jsx";
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
             <Route path="/signin" element={<SignIn />} />
             <Route path="/signup" element={<SignUp />} />
             <Route path="/companies" element={<Companies />} />
+            <Route path="/companies/:id" element={<CompanyDetails/>}/>
             <Route element={<PrivateRoute />}>
               <Route path="/profile" element={<Profile />} />
             </Route>
