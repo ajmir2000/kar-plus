@@ -102,9 +102,17 @@ console.log(selectedOption)
                     <Form.Check
                       type="radio"
                       className="text-secondary custom-accordion-checked "
+                      label="All categories"
+                      value=""
+                      name="category"
+                      onChange={handleChange}
+                    />
+                    <Form.Check
+                      type="radio"
+                      className="text-secondary custom-accordion-checked "
                       label="Accounting"
                       value="Accounting"
-                      name="Accounting"
+                      name="category"
                       onChange={handleChange}
                     />
                     =
@@ -112,7 +120,7 @@ console.log(selectedOption)
                       type="radio"
                       label="Banking"
                       value="Banking"
-                      name="Banking"
+                      name="category"
                       onChange={handleChange}
                       className="text-secondary custom-accordion-checked "
                       defaultChecked
@@ -120,7 +128,7 @@ console.log(selectedOption)
                     <Form.Check
                       type="radio"
                       value="AI speacialist"
-                      name="AI speacialist"
+                      name="category"
                       className="text-secondary custom-accordion-checked "
                       label="AI speacialist"
                       onChange={handleChange}
@@ -130,14 +138,14 @@ console.log(selectedOption)
                       className="text-secondary custom-accordion-checked "
                       label="Writer"
                       value="Writer"
-                      name="Writer"
+                      name="category"
                       onChange="handleChange"
                     />
                     <Form.Check
                       type="radio"
                       className="text-secondary custom-accordion-checked "
                       label="Product Designer"
-                      name="Product Designer"
+                      name="category"
                       value="Product Designer"
                       onChange={handleChange}
                     />
