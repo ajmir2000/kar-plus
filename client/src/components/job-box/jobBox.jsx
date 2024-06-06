@@ -3,16 +3,10 @@ import { Container,Row,Col,Button } from 'react-bootstrap';
 import './jobBox.css'
 import { FaBookmark } from "react-icons/fa";
 import { CiLocationOn } from "react-icons/ci";
-import { IoPersonOutline } from "react-icons/io5";
+import { TbCategory } from "react-icons/tb";
 import { GoDiscussionOutdated } from "react-icons/go";
 import { RiMoneyDollarCircleLine } from "react-icons/ri";
-export default function JobBox({
-  jobTitle,
-  jobLocation,
-  companyLogo,
-  companyName,
-  
-}) {
+export default function JobBox({ jobTitle, jobLocation, companyLogo, companyName, category,salaryRange }) {
   const [currentDate, setCurrentDate] = useState(
     new Date().toLocaleDateString()
   );
@@ -38,8 +32,8 @@ export default function JobBox({
           </button>
 
           <button className="btn btn-sm rounded-pill">
-            <IoPersonOutline className="text-success fs-5  me-2" />
-            16 Vacancies
+            <TbCategory className="text-success fs-5  me-2" />
+            {category}
           </button>
 
           <button className="btn btn-sm rounded-pill">
@@ -49,7 +43,7 @@ export default function JobBox({
 
           <button className="btn btn-sm rounded-pill">
             <RiMoneyDollarCircleLine className="text-success fs-5  me-2" />
-            $200-$400
+            {salaryRange}
           </button>
         </div>
       </div>

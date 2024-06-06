@@ -49,11 +49,15 @@ const filteredData=(jobData,selectedOption,searcchValue)=>{
   }
    
   if(selectedOption){
-    filteredJobs = filteredJobs.filter(({ category, jobTitle, salaryRange })=>{
-      jobTitle.toLowerCase()===selectedOption.toLowerCase() ||
-      category.toLowerCase()===selectedOption.toLowerCase() ||
-      salaryRange===selectedOption
-    });
+    filteredJobs = filteredJobs.filter(
+      ({ category, jobLocation, salaryRange }) => {
+        return (
+          jobLocation.toLowerCase()===selectedOption.toLowerCase()||
+          category.toLowerCase() === selectedOption.toLowerCase() ||
+          salaryRange.toLowerCase() === selectedOption.toLowerCase()
+        );
+      }
+    );
 
   
   }
@@ -69,7 +73,7 @@ console.log(result)
 
 
 
-
+console.log(selectedOption)
 
 
 
@@ -79,7 +83,7 @@ console.log(result)
         placeholder="Search job..."
         className="custom-findWork-searchBox"
         searcchValue={searcchValue}
-        inputHamdleChange={inputHamdleChange}  
+        inputHamdleChange={inputHamdleChange}
       />
       <div className="container pt-5">
         <JobTalentSwitch />
@@ -96,30 +100,46 @@ console.log(result)
                   </Accordion.Header>
                   <Accordion.Body>
                     <Form.Check
-                      type="checkbox"
+                      type="radio"
                       className="text-secondary custom-accordion-checked "
                       label="Accounting"
+                      value="Accounting"
+                      name="Accounting"
+                      onChange={handleChange}
                     />
+                    =
                     <Form.Check
-                      type="checkbox"
+                      type="radio"
                       label="Banking"
+                      value="Banking"
+                      name="Banking"
+                      onChange={handleChange}
                       className="text-secondary custom-accordion-checked "
                       defaultChecked
                     />
                     <Form.Check
-                      type="checkbox"
+                      type="radio"
+                      value="AI speacialist"
+                      name="AI speacialist"
                       className="text-secondary custom-accordion-checked "
                       label="AI speacialist"
+                      onChange={handleChange}
                     />
                     <Form.Check
-                      type="checkbox"
+                      type="radio"
                       className="text-secondary custom-accordion-checked "
                       label="Writer"
+                      value="Writer"
+                      name="Writer"
+                      onChange="handleChange"
                     />
                     <Form.Check
-                      type="checkbox"
+                      type="radio"
                       className="text-secondary custom-accordion-checked "
                       label="Product Designer"
+                      name="Product Designer"
+                      value="Product Designer"
+                      onChange={handleChange}
                     />
                   </Accordion.Body>
                 </Accordion.Item>
@@ -140,30 +160,55 @@ console.log(result)
                       <FormControl placeholder="Location" />
                       <Button variant="outline-secondary">Search</Button>
                     </InputGroup>
+
                     <Form.Check
-                      type="checkbox"
+                      type="radio"
+                      label="ALl"
+                      className="text-secondary custom-accordion-checked "
+                      value=""
+                      name="location"
+                      onChange={handleChange}
+                    />
+
+                    <Form.Check
+                      type="radio"
                       label="Kabul"
                       className="text-secondary custom-accordion-checked "
+                      value="Kabul"
+                      name="location"
+                      onChange={handleChange}
                     />
                     <Form.Check
-                      type="checkbox"
+                      type="radio"
                       label="Panishir"
                       className="text-secondary custom-accordion-checked "
+                      value="Panjshir"
+                      name="location"
+                      onChange={handleChange}
                     />
                     <Form.Check
-                      type="checkbox"
+                      type="radio"
                       label="Kapisa"
                       className="text-secondary custom-accordion-checked "
+                      value="Kapisa"
+                      name="location"
+                      onChange={handleChange}
                     />
                     <Form.Check
-                      type="checkbox"
+                      type="radio"
                       label="Parwan"
                       className="text-secondary custom-accordion-checked "
+                      value="Parwan"
+                      name="location"
+                      onChange={handleChange}
                     />
                     <Form.Check
-                      type="checkbox"
+                      type="radio"
                       label="Jalalabad"
                       className="text-secondary custom-accordion-checked "
+                      value="Jalalabad"
+                      name="location"
+                      onChange={handleChange}
                     />
                   </Accordion.Body>
                 </Accordion.Item>
@@ -184,6 +229,8 @@ console.log(result)
                       type="radio"
                       name="hourlyRate"
                       label="Any"
+                      value=""
+                      onChange={handleChange}
                       className="text-secondary custom-accordion-checked "
                       defaultChecked
                     />
@@ -191,18 +238,24 @@ console.log(result)
                       type="radio"
                       name="hourlyRate"
                       label="$0 - $20"
+                      value="$0-$20"
                       className="text-secondary custom-accordion-checked "
+                      onChange={handleChange}
                     />
                     <Form.Check
                       type="radio"
                       name="hourlyRate"
                       label="$20 - $40"
+                      value="$20 - $40"
+                      onChange={handleChange}
                       className="text-secondary custom-accordion-checked "
                     />
                     <Form.Check
                       type="radio"
                       name="hourlyRate"
                       label="$50 - $100"
+                      value="$50 - $100"
+                      onChange={handleChange}
                       className="text-secondary custom-accordion-checked "
                     />
                   </Accordion.Body>
@@ -211,8 +264,8 @@ console.log(result)
             </div>
           </div>
           <div className="col-9">
-            {result.map(job=>(
-              <JobBox key={job.id} {...job}/>
+            {result.map((job) => (
+              <JobBox key={job.id} {...job} />
             ))}
           </div>
         </Row>
