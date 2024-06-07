@@ -1,0 +1,73 @@
+[
+  {
+    "id": 1,
+    "companyName": "meta",
+    "jobTitle": "Software Engineer",
+    "companyLogo": "./asset-folder/images/c31566130735783.6186962073880.png",
+     "salaryRange":"$0-$20",
+    "jobLocation": "Kabul",
+    "category":"Product Designer",
+    "end-date":"2024-6-6",
+    "postingDate": "2024-6-5",
+    "experienceLevel": "Any experience",
+    "employmentType": "Full-time",
+    "description": "Mollit in laborum tempor Lorem incididunt irure. Aute eu ex ad sunt. Pariatur sint culpa do incididunt eiusmod eiusmod culpa. laborum tempor Lorem incididunt."
+  },
+  {
+    "id": 2,
+    "companyName": "Etesalat",
+    "jobTitle": "Accounter",
+    "companyLogo":"./asset-folder/images/c31566130735783.6186962073880.png",
+     "salaryRange":"$20-$40",
+    "jobLocation": "Panjshir",
+    "category":"accounting",
+    "end-date":"2024-6-6",
+    "postingDate": "2024-6-5",
+    "experienceLevel": "Any experience",
+    "employmentType": "Full-time",
+    "description": "Mollit in laborum tempor Lorem incididunt irure. Aute eu ex ad sunt. Pariatur sint culpa do incididunt eiusmod eiusmod culpa. laborum tempor Lorem incididunt."
+  },
+  {
+    "id": 3,
+    "companyName": "meta",
+    "jobTitle": "financial manager",
+    "companyLogo": "./asset-folder/images/c31566130735783.6186962073880.png",
+     "salaryRange":"$0-$20",
+    "jobLocation": "Parwan",
+    "category":"Banking",
+    "end-date":"2024-6-6",
+    "postingDate": "2024-6-5",
+    "experienceLevel": "Any experience",
+    "employmentType": "Full-time",
+    "description": "Mollit in laborum tempor Lorem incididunt irure. Aute eu ex ad sunt. Pariatur sint culpa do incididunt eiusmod eiusmod culpa. laborum tempor Lorem incididunt."
+  },
+  {
+    "id": 4,
+    "companyName": "Roshan",
+    "jobTitle": "web developer",
+    "companyLogo": "./asset-folder/images/images.jpeg",
+     "salaryRange":"any",
+    "jobLocation": "Kapisa",
+    "category":"Product Designer",
+    "end-date":"2024-6-6",
+    "postingDate": "2024-6-5",
+    "experienceLevel": "Any experience",
+    "employmentType": "Full-time",
+    "description": "Mollit in laborum tempor Lorem incididunt irure. Aute eu ex ad sunt. Pariatur sint culpa do incididunt eiusmod eiusmod culpa. laborum tempor Lorem incididunt."
+  },
+  {
+    "id": 5,
+    "companyName": "Alokozay",
+    "jobTitle": "Administration manager",
+    "companyLogo": "./asset-folder/images/download (1).jpeg",
+     "salaryRange":"$20-$40",
+    "jobLocation": "Jalalabad",
+    "category":"Product Designer",
+    "end-date":"2024-6-6",
+    "postingDate": "2024-6-5",
+    "experienceLevel": "Any experience",
+    "employmentType": "Full-time",
+    "description": "Mollit in laborum tempor Lorem incididunt irure. Aute eu ex ad sunt. Pariatur sint culpa do incididunt eiusmod eiusmod culpa. laborum tempor Lorem incididunt."
+  }
+ 
+]
