@@ -45,3 +45,12 @@ export const createJob = async (req, res, next) => {
     next(error);
   }
 };
+
+export const getAllJobs = async (req, res, next) => {
+  try {
+    const jobs = await Job.find({}).sort({ createdAt: -1 });
+    res.status(200).json(jobs);
+  } catch (error) {
+    next(error);
+  }
+};

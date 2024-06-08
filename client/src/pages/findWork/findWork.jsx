@@ -14,68 +14,63 @@ import {
 import SearchBox from "../../components/searchBox/searchBox";
 
 export default function FindWork() {
-   const [searcchValue,setSearchValue]=useState("")
-   const [selectedOption,setSelectedIption]=useState(null)
-   const [jobData,setJobData]=useState([])
+  const [searcchValue, setSearchValue] = useState("");
+  const [selectedOption, setSelectedIption] = useState(null);
+  const [jobData, setJobData] = useState([]);
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false);
 
-  useEffect(()=>{
-    fetch("job.json").then(res=>res.json())
-    .then(data=>setJobData(data))
-  },[])
-  
-   const inputHamdleChange=(event)=>{
-    setSearchValue(event.target.value)
-   }
-//-------checkbox based filtering----------
-   const handleChange=(event)=>{
-    setSelectedIption(event.target.value)
-   }
+  useEffect(() => {
+    fetch("job.json").then((res) => res.json());
+    fetch("/api/job/all-job")
+      .then((res) => res.json())
+      .then((data) => {
+        setJobData(data);
+        setLoading(false);
+      });
+  }, []);
 
-   const filteredJob=jobData.filter((job)=>
-    job.jobTitle.toLowerCase().indexOf(searcchValue.toLocaleLowerCase())!==-1 )
+  const inputHandleChange = (event) => {
+    setSearchValue(event.target.value);
+  };
+  //-------checkbox based filtering----------
+  const handleChange = (event) => {
+    setSelectedIption(event.target.value);
+  };
 
+  const filteredJob = jobData.filter(
+    (job) =>
+      job.jobTitle.toLowerCase().indexOf(searcchValue.toLocaleLowerCase()) !==
+      -1
+  );
 
+  //---main function---
 
+  const filteredData = (jobData, selectedOption, searcchValue) => {
+    let filteredJobs = jobData;
 
+    if (searcchValue) {
+      filteredJobs = filteredJob;
+    }
 
+    if (selectedOption) {
+      filteredJobs = filteredJobs.filter(
+        ({ category, jobLocation, salaryRange }) => {
+          return (
+            jobLocation.toLowerCase() === selectedOption.toLowerCase() ||
+            category.toLowerCase() === selectedOption.toLowerCase() ||
+            salaryRange.toLowerCase() === selectedOption.toLowerCase()
+          );
+        }
+      );
+    }
 
-//---main function---
-
-const filteredData=(jobData,selectedOption,searcchValue)=>{
-  let filteredJobs=jobData
-
-  if(searcchValue){
-    filteredJobs=filteredJob;
-  }
-   
-  if(selectedOption){
-    filteredJobs = filteredJobs.filter(
-      ({ category, jobLocation, salaryRange }) => {
-        return (
-          jobLocation.toLowerCase()===selectedOption.toLowerCase()||
-          category.toLowerCase() === selectedOption.toLowerCase() ||
-          salaryRange.toLowerCase() === selectedOption.toLowerCase()
-        );
-      }
-    );
-
-  
-  }
- 
     return filteredJobs;
- 
+  };
+  const result = filteredData(jobData, selectedOption, searcchValue);
+  console.log(result);
 
-}
- const result=filteredData(jobData,selectedOption,searcchValue)
-console.log(result)
-
-
-
-
-
-console.log(selectedOption)
-
-
+  console.log(selectedOption);
 
   return (
     <Container fluid className="bg-white ">
@@ -83,7 +78,7 @@ console.log(selectedOption)
         placeholder="Search job..."
         className="custom-findWork-searchBox"
         searcchValue={searcchValue}
-        inputHamdleChange={inputHamdleChange}
+        inputHandleChange={inputHandleChange}
       />
       <div className="container pt-5">
         <JobTalentSwitch />
@@ -93,8 +88,7 @@ console.log(selectedOption)
               <Accordion>
                 <Accordion.Item
                   eventKey="0"
-                  className="border-0 bg-transparent "
-                >
+                  className="border-0 bg-transparent ">
                   <Accordion.Header className="custom-accordion-header bg-white ">
                     <span className="text-secondary ">Category</span>
                   </Accordion.Header>
@@ -155,8 +149,7 @@ console.log(selectedOption)
               <Accordion>
                 <Accordion.Item
                   eventKey="1"
-                  className="border-0 bg-transparent  "
-                >
+                  className="border-0 bg-transparent  ">
                   <Accordion.Header className="custom-accordion-header bg-white ">
                     {" "}
                     <span className="text-secondary custom-accordion-header">
@@ -224,8 +217,7 @@ console.log(selectedOption)
               <Accordion>
                 <Accordion.Item
                   eventKey="2"
-                  className="border-0 bg-transparent "
-                >
+                  className="border-0 bg-transparent ">
                   <Accordion.Header className="custom-accordion-header bg-white ">
                     {" "}
                     <span className="text-secondary custom-accordion-header">
@@ -273,7 +265,7 @@ console.log(selectedOption)
           </div>
           <div className="col-9">
             {result.map((job) => (
-              <JobBox key={job.id} {...job} />
+              <JobBox key={job._id} {...job} />
             ))}
           </div>
         </Row>
