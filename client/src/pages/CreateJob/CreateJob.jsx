@@ -14,27 +14,49 @@ const CreateJob = () => {
     register,
     handleSubmit,
     formState: { errors },
-    reset 
+    reset,
   } = useForm();
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false);
 
-  const onSubmit = (data) => {
-    console.log(data)
-    data.skills = selectedOption;
-    fetch("http://localhost:5000/post-job", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(data),
-    })
-      .then((res) => res.json())
-      .then((result) => {
-        // console.log(result);
-        if(result.acknowledged === true){
-          alert("Job Posted Successfully!!")
-        }
-        reset(); // Reset the form
+  const onSubmit = async (e) => {
+    // e.preventDefault();
+    e.skills = selectedOption;
+    console.log(e);
+    setLoading(true);
+    try {
+      const res = await fetch("/api/job/create-job", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(e),
       });
+      const data = await res.json();
 
-    // console.log(data)
+      if (data.success === false) {
+        setLoading(false);
+        setError(data.message);
+
+        return;
+      }
+      setLoading(false);
+      setError(null);
+
+      // navigate("/");
+
+      // .then((res) => res.json())
+      // .then((result) => {
+      //   // console.log(result);
+      //   if(result.acknowledged === true){
+      //     alert("Job Posted Successfully!!")
+      //   }
+      //   reset(); // Reset the form
+      // });
+    } catch (error) {
+      setLoading(false);
+      setError(error.message);
+    }
+
+    // console.log(e)
   };
 
   const options = [
@@ -56,7 +78,9 @@ const CreateJob = () => {
 
       {/* form */}
       <div className="bg-light py-3 py-lg-5 px-3 px-lg-5">
-        <form onSubmit={handleSubmit(onSubmit)} className="space-y-3 space-y-lg-4">
+        <form
+          onSubmit={handleSubmit(onSubmit)}
+          className="space-y-3 space-y-lg-4">
           {/* 1st row */}
           <div className="row align-items-center justify-content-between g-4">
             <div className="col-lg-6">
@@ -132,10 +156,7 @@ const CreateJob = () => {
 
             <div className="col-lg-6">
               <label className="form-label mb-2">Experience Level</label>
-              <select
-                {...register("experienceLevel")}
-                className="form-control"
-              >
+              <select {...register("experienceLevel")} className="form-control">
                 <option value="">Select Your Experience Level</option>
                 <option value="NoExperience">No experience</option>
                 <option value="Internship">Internship</option>
@@ -170,10 +191,7 @@ const CreateJob = () => {
 
             <div className="col-lg-6">
               <label className="form-label mb-2">Employment Type</label>
-              <select
-                {...register("employmentType")}
-                className="form-control"
-              >
+              <select {...register("employmentType")} className="form-control">
                 <option value="">Select your job type</option>
                 <option value="Full-time">Full-time</option>
                 <option value="Part-time">Part-time</option>
@@ -184,21 +202,23 @@ const CreateJob = () => {
 
           {/* 7th row */}
           <div className="w-100">
-          <label className="form-label mb-2">Job Description</label>
-          <textarea
+            <label className="form-label mb-2">Job Description</label>
+            <textarea
               className="form-control p-3"
               rows={6}
               {...register("description")}
               placeholder="job description"
-              defaultValue={"Mollit in laborum tempor Lorem incididunt irure. Aute eu ex ad sunt. Pariatur sint culpa do incididunt eiusmod eiusmod culpa. laborum tempor Lorem incididunt."}
+              defaultValue={
+                "Mollit in laborum tempor Lorem incididunt irure. Aute eu ex ad sunt. Pariatur sint culpa do incididunt eiusmod eiusmod culpa. laborum tempor Lorem incididunt."
+              }
             />
           </div>
 
           {/* last row */}
           <div className="w-100">
-          <label className="form-label mb-2">Job Posted by</label>
-          <input
-          type="email"
+            <label className="form-label mb-2">Job Posted by</label>
+            <input
+              type="email"
               // value={user?.email}
               className="form-control p-3"
               {...register("postedBy")}
