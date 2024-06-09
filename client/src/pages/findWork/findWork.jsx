@@ -19,9 +19,11 @@ export default function FindWork() {
   const [jobData, setJobData] = useState([]);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 6;
 
   useEffect(() => {
-    fetch("job.json").then((res) => res.json());
+   // fetch("job.json").then((res) => res.json());
     fetch("/api/job/all-job")
       .then((res) => res.json())
       .then((data) => {
@@ -43,6 +45,27 @@ export default function FindWork() {
       job.jobTitle.toLowerCase().indexOf(searchValue.toLocaleLowerCase()) !== -1
   );
 
+  // Function to calculate the index range for the current page
+  const calculatePageRange = () => {
+    const startIndex = (currentPage - 1) * itemsPerPage;
+    const endIndex = startIndex + itemsPerPage;
+    return { startIndex, endIndex };
+  };
+
+  // Function to handle next page
+  const nextPage = () => {
+    if (currentPage < Math.ceil(filteredJob.length / itemsPerPage)) {
+      setCurrentPage(currentPage + 1);
+    }
+  };
+
+  // Function to handle previous page
+  const prevPage = () => {
+    if (currentPage > 1) {
+      setCurrentPage(currentPage - 1);
+    }
+  };
+
   //---main function---
 
   const filteredData = (jobData, selectedOption, searchValue) => {
@@ -54,11 +77,10 @@ export default function FindWork() {
 
     if (selectedOption) {
       filteredJobs = filteredJobs.filter(
-        ({ category, jobLocation, salaryRange }) => {
+        ({ jobLocation, category, salaryRange }) => {
           return (
-            jobLocation.toLowerCase() === selectedOption.toLowerCase() ||
-            category.toLowerCase() === selectedOption.toLowerCase() ||
-            salaryRange.toLowerCase() === selectedOption.toLowerCase()
+            jobLocation.toLowerCase() === selectedOption.toLowerCase() 
+           
           );
         }
       );
@@ -66,10 +88,14 @@ export default function FindWork() {
 
     return filteredJobs;
   };
-  const result = filteredData(jobData, selectedOption, searchValue);
+  let result = filteredData(jobData, selectedOption, searchValue);
   console.log(result);
 
   console.log(selectedOption);
+
+  const { startIndex, endIndex } = calculatePageRange();
+result = result.slice(startIndex, endIndex);
+
 
   return (
     <Container fluid className="bg-white ">
@@ -268,10 +294,39 @@ export default function FindWork() {
           <div className="col-9">
             <h2 className="mx-auto mt-3">{result.length} Jobs</h2>
 
-            {result.length>0 ? ( result.map((job) => (
-              <JobBox key={job._id} {...job} />
-            ))) : <p >  no job found</p>}
-           
+            {result.length > 0 ? (
+              result.map((job) => <JobBox key={job._id} {...job} />)
+            ) : (
+              <p> no job found</p>
+            )}
+
+            {result.length > 0 ? (
+              <div className="d-flex justify-content-center mt-4 p-5 ">
+                <button
+                  onClick={prevPage}
+                  disabled={currentPage === 1}
+                  className=" btn btn-success text-light p-2 me-2"
+                >
+                  Previous
+                </button>
+                <span className="nt-2 fw-bold">
+                  Page {currentPage} of{" "}
+                  {Math.ceil(filteredJob.length / itemsPerPage)}
+                </span>
+                <button
+                  onClick={nextPage}
+                  disabled={
+                    currentPage === Math.ceil(filteredJob.length / itemsPerPage)
+                  }
+                  className=" btn btn-success text-light p-2 ms-2"
+                >
+                  Next
+                </button>
+              </div>
+            ) : (
+              ""
+            )}
+          
           </div>
         </Row>
       </div>
