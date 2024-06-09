@@ -50,6 +50,11 @@ const jobSchema = new mongoose.Schema(
       type: Array,
       require: true,
     },
+    postedBy: {
+      type: String,
+      require: true,
+      unique: true,
+    },
   },
 
   { timestamps: true }

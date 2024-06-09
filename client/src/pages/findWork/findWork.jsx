@@ -57,9 +57,7 @@ export default function FindWork() {
         ({ category, jobLocation, salaryRange }) => {
           return (
             
-            jobLocation.toLowerCase() === selectedOption.toLowerCase() ||
-            category.toLowerCase() === selectedOption.toLowerCase() ||
-            salaryRange.toLowerCase() === selectedOption.toLowerCase()
+            jobLocation.toLowerCase() === selectedOption.toLowerCase()
           );
         }
       );
@@ -175,17 +173,17 @@ export default function FindWork() {
 
                     <Form.Check
                       type="radio"
-                      label="Kabul"
+                      label="San Francisco"
                       className="text-secondary custom-accordion-checked "
-                      defaultValue="Kabul"
+                      defaultValue="San Francisco"
                       name="location"
                       onChange={handleChange}
                     />
                     <Form.Check
                       type="radio"
-                      label="Panishir"
+                      label="Brussels"
                       className="text-secondary custom-accordion-checked "
-                      defaultValue="Panjshir"
+                      defaultValue="Brussels"
                       name="location"
                       onChange={handleChange}
                     />

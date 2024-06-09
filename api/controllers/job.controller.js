@@ -1,7 +1,5 @@
 import Job from "../models/job.model.js";
-import bcryptjs from "bcryptjs";
 import { errorHandler } from "../utils/error.js";
-import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
 dotenv.config();
 
@@ -49,6 +47,18 @@ export const createJob = async (req, res, next) => {
 export const getAllJobs = async (req, res, next) => {
   try {
     const jobs = await Job.find({}).sort({ createdAt: -1 });
+    res.status(200).json(jobs);
+  } catch (error) {
+    next(error);
+  }
+};
+
+export const myJobs = async (req, res, next) => {
+  const  email  = req.params.email;
+  
+  try {
+    const jobs = await Job.find({ postedBy: email });
+    console.log(jobs)
     res.status(200).json(jobs);
   } catch (error) {
     next(error);

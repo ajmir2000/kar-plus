@@ -14,6 +14,7 @@ import FindWork from "./pages/findWork/findWork.jsx";
 import Profile from "./pages/Profile/Profile.jsx";
 import CompanyDetails from "./pages/companyCardDetail/companyDetails.jsx";
 import CreateJob from "./pages/CreateJob/CreateJob.jsx";
+import MyJobs from "./pages/MyJobs/MyJobs.jsx";
 
 function App() {
   return (
@@ -31,9 +32,11 @@ function App() {
             <Route path="/signup" element={<SignUp />} />
             <Route path="/companies" element={<Companies />} />
             <Route path="/companies/:id" element={<CompanyDetails />} />
-            <Route path="/create-job" element={<CreateJob />} />
+
             <Route element={<PrivateRoute />}>
               <Route path="/profile" element={<Profile />} />
+              <Route path="/create-job" element={<CreateJob />} />
+              <Route path="/my-job" element={<MyJobs />} />
             </Route>
           </Routes>
         </BrowserRouter>
