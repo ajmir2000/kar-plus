@@ -87,7 +87,8 @@ export default function FindWork() {
               <Accordion>
                 <Accordion.Item
                   eventKey="0"
-                  className="border-0 bg-transparent ">
+                  className="border-0 bg-transparent "
+                >
                   <Accordion.Header className="custom-accordion-header bg-white ">
                     <span className="text-secondary ">Category</span>
                   </Accordion.Header>
@@ -148,7 +149,8 @@ export default function FindWork() {
               <Accordion>
                 <Accordion.Item
                   eventKey="1"
-                  className="border-0 bg-transparent  ">
+                  className="border-0 bg-transparent  "
+                >
                   <Accordion.Header className="custom-accordion-header bg-white ">
                     {" "}
                     <span className="text-secondary custom-accordion-header">
@@ -216,7 +218,8 @@ export default function FindWork() {
               <Accordion>
                 <Accordion.Item
                   eventKey="2"
-                  className="border-0 bg-transparent ">
+                  className="border-0 bg-transparent "
+                >
                   <Accordion.Header className="custom-accordion-header bg-white ">
                     {" "}
                     <span className="text-secondary custom-accordion-header">
@@ -263,9 +266,12 @@ export default function FindWork() {
             </div>
           </div>
           <div className="col-9">
-            {result.map((job) => (
+            <h2 className="mx-auto mt-3">{result.length} Jobs</h2>
+
+            {result.length>0 ? ( result.map((job) => (
               <JobBox key={job._id} {...job} />
-            ))}
+            ))) : <p >  no job found</p>}
+           
           </div>
         </Row>
       </div>
