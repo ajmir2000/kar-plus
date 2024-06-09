@@ -14,14 +14,14 @@ import {
 import SearchBox from "../../components/searchBox/searchBox";
 
 export default function FindWork() {
-  const [searcchValue, setSearchValue] = useState("");
+  const [searchValue, setSearchValue] = useState("");
   const [selectedOption, setSelectedIption] = useState(null);
   const [jobData, setJobData] = useState([]);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
 
-  useEffect(() => {
-    fetch("job.json").then((res) => res.json());
+  useEffect( () => {
+    // fetch("job.json").then((res) => res.json());
     fetch("/api/job/all-job")
       .then((res) => res.json())
       .then((data) => {
@@ -40,16 +40,15 @@ export default function FindWork() {
 
   const filteredJob = jobData.filter(
     (job) =>
-      job.jobTitle.toLowerCase().indexOf(searcchValue.toLocaleLowerCase()) !==
-      -1
+      job.jobTitle.toLowerCase().indexOf(searchValue.toLocaleLowerCase()) !== -1
   );
 
   //---main function---
 
-  const filteredData = (jobData, selectedOption, searcchValue) => {
+  const filteredData = (jobData, selectedOption, searchValue) => {
     let filteredJobs = jobData;
 
-    if (searcchValue) {
+    if (searchValue) {
       filteredJobs = filteredJob;
     }
 
@@ -57,6 +56,7 @@ export default function FindWork() {
       filteredJobs = filteredJobs.filter(
         ({ category, jobLocation, salaryRange }) => {
           return (
+            
             jobLocation.toLowerCase() === selectedOption.toLowerCase() ||
             category.toLowerCase() === selectedOption.toLowerCase() ||
             salaryRange.toLowerCase() === selectedOption.toLowerCase()
@@ -67,7 +67,7 @@ export default function FindWork() {
 
     return filteredJobs;
   };
-  const result = filteredData(jobData, selectedOption, searcchValue);
+  const result = filteredData(jobData, selectedOption, searchValue);
   console.log(result);
 
   console.log(selectedOption);
@@ -77,7 +77,7 @@ export default function FindWork() {
       <SearchBox
         placeholder="Search job..."
         className="custom-findWork-searchBox"
-        searcchValue={searcchValue}
+        searchValue={searchValue}
         inputHandleChange={inputHandleChange}
       />
       <div className="container pt-5">
@@ -97,7 +97,7 @@ export default function FindWork() {
                       type="radio"
                       className="text-secondary custom-accordion-checked "
                       label="All categories"
-                      value=""
+                      defaultValue=""
                       name="category"
                       onChange={handleChange}
                     />
@@ -105,7 +105,7 @@ export default function FindWork() {
                       type="radio"
                       className="text-secondary custom-accordion-checked "
                       label="Accounting"
-                      value="Accounting"
+                      defaultValue="Accounting"
                       name="category"
                       onChange={handleChange}
                     />
@@ -113,7 +113,7 @@ export default function FindWork() {
                     <Form.Check
                       type="radio"
                       label="Banking"
-                      value="Banking"
+                      defaultValue="Banking"
                       name="category"
                       onChange={handleChange}
                       className="text-secondary custom-accordion-checked "
@@ -121,7 +121,7 @@ export default function FindWork() {
                     />
                     <Form.Check
                       type="radio"
-                      value="AI speacialist"
+                      defaultValue="AI speacialist"
                       name="category"
                       className="text-secondary custom-accordion-checked "
                       label="AI speacialist"
@@ -131,16 +131,16 @@ export default function FindWork() {
                       type="radio"
                       className="text-secondary custom-accordion-checked "
                       label="Writer"
-                      value="Writer"
+                      defaultValue="Writer"
                       name="category"
-                      onChange="handleChange"
+                      onChange={handleChange}
                     />
                     <Form.Check
                       type="radio"
                       className="text-secondary custom-accordion-checked "
                       label="Product Designer"
                       name="category"
-                      value="Product Designer"
+                      defaultValue="Product Designer"
                       onChange={handleChange}
                     />
                   </Accordion.Body>
@@ -166,7 +166,7 @@ export default function FindWork() {
                       type="radio"
                       label="ALl"
                       className="text-secondary custom-accordion-checked "
-                      value=""
+                      defaultValue=""
                       name="location"
                       onChange={handleChange}
                     />
@@ -175,7 +175,7 @@ export default function FindWork() {
                       type="radio"
                       label="Kabul"
                       className="text-secondary custom-accordion-checked "
-                      value="Kabul"
+                      defaultValue="Kabul"
                       name="location"
                       onChange={handleChange}
                     />
@@ -183,7 +183,7 @@ export default function FindWork() {
                       type="radio"
                       label="Panishir"
                       className="text-secondary custom-accordion-checked "
-                      value="Panjshir"
+                      defaultValue="Panjshir"
                       name="location"
                       onChange={handleChange}
                     />
@@ -191,7 +191,7 @@ export default function FindWork() {
                       type="radio"
                       label="Kapisa"
                       className="text-secondary custom-accordion-checked "
-                      value="Kapisa"
+                      defaultValue="Kapisa"
                       name="location"
                       onChange={handleChange}
                     />
@@ -199,7 +199,7 @@ export default function FindWork() {
                       type="radio"
                       label="Parwan"
                       className="text-secondary custom-accordion-checked "
-                      value="Parwan"
+                      defaultValue="Parwan"
                       name="location"
                       onChange={handleChange}
                     />
@@ -207,7 +207,7 @@ export default function FindWork() {
                       type="radio"
                       label="Jalalabad"
                       className="text-secondary custom-accordion-checked "
-                      value="Jalalabad"
+                      defaultValue="Jalalabad"
                       name="location"
                       onChange={handleChange}
                     />
@@ -229,7 +229,7 @@ export default function FindWork() {
                       type="radio"
                       name="hourlyRate"
                       label="Any"
-                      value=""
+                      defaultValue=""
                       onChange={handleChange}
                       className="text-secondary custom-accordion-checked "
                       defaultChecked
@@ -238,7 +238,7 @@ export default function FindWork() {
                       type="radio"
                       name="hourlyRate"
                       label="$0 - $20"
-                      value="$0-$20"
+                      defaultValue="$0-$20"
                       className="text-secondary custom-accordion-checked "
                       onChange={handleChange}
                     />
@@ -246,7 +246,7 @@ export default function FindWork() {
                       type="radio"
                       name="hourlyRate"
                       label="$20 - $40"
-                      value="$20 - $40"
+                      defaultValue="$20 - $40"
                       onChange={handleChange}
                       className="text-secondary custom-accordion-checked "
                     />
@@ -254,7 +254,7 @@ export default function FindWork() {
                       type="radio"
                       name="hourlyRate"
                       label="$50 - $100"
-                      value="$50 - $100"
+                      defaultValue="$50 - $100"
                       onChange={handleChange}
                       className="text-secondary custom-accordion-checked "
                     />
