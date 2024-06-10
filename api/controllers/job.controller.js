@@ -54,12 +54,27 @@ export const getAllJobs = async (req, res, next) => {
 };
 
 export const myJobs = async (req, res, next) => {
-  const  email  = req.params.email;
-  
+  const email = req.params.email;
+
   try {
     const jobs = await Job.find({ postedBy: email });
-    console.log(jobs)
+
     res.status(200).json(jobs);
+  } catch (error) {
+    next(error);
+  }
+};
+
+export const deleteJob = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const deletedJob = await Job.findByIdAndDelete(id);
+
+    if (!deletedJob) {
+      return res.status(404).json({ message: "Job not found" });
+    }
+
+    res.status(200).json({ acknowledged: true });
   } catch (error) {
     next(error);
   }

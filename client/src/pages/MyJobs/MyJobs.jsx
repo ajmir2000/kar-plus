@@ -6,7 +6,7 @@ import "./MyJobs.css";
 
 const MyJobs = () => {
   const { currentUser } = useSelector((state) => state.user);
-  console.log(currentUser.email)
+
   //   const { user } = useContext(AuthContext);
   const [jobs, setJobs] = useState([]);
   const [searchText, setSearchText] = useState("");
@@ -24,7 +24,7 @@ const MyJobs = () => {
         setIsLoading(false);
       });
   }, [searchText, currentUser]);
-//   console.log(jobs)
+  //   console.log(jobs)
 
   // Pagination
   const indexOfLastItem = currentPage * itemsPerPage;
@@ -50,7 +50,7 @@ const MyJobs = () => {
 
   // delete a job
   const handleDelete = (id) => {
-    fetch(`http://localhost:5000/job/${id}`, {
+    fetch(`/api/job/delete/${id}`, {
       method: "DELETE",
     })
       .then((res) => res.json())

@@ -4,8 +4,10 @@ import React, { useState } from "react";
 // import { FaDollarSign } from "react-icons/fa";
 import { useForm } from "react-hook-form";
 import CreatableSelect from "react-select/creatable";
+import { useSelector } from "react-redux";
 
 const CreateJob = () => {
+  const { currentUser } = useSelector((state) => state.user);
   const [selectedOption, setSelectedOption] = useState(null);
 
   // const { user } = useContext(AuthContext);
@@ -219,7 +221,7 @@ const CreateJob = () => {
             <label className="form-label mb-2">Job Posted by</label>
             <input
               type="email"
-              // value={user?.email}
+              value={currentUser.email}
               className="form-control p-3"
               {...register("postedBy")}
               placeholder="your email"
