@@ -125,7 +125,7 @@ const MyJobs = () => {
                             ${job.minPrice} - ${job.maxPrice}k
                           </td>
                           <td>
-                            <Link to={`/edit-job/${job?._id}`}>Edit</Link>
+                            <Link to={`/edit-job/${job._id}`}>Edit</Link>
                           </td>
                           <td>
                             <button

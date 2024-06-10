@@ -79,3 +79,19 @@ export const deleteJob = async (req, res, next) => {
     next(error);
   }
 };
+
+export const updateJob = async (req, res, next) => {
+  const id = req.params.id;
+  console.log(id);
+  try {
+    const job = await Job.findById(id);
+
+    if (!job) {
+      return res.status(404).json({ error: "Job not found" });
+    }
+    console.log(job);
+    res.status(201).json(job);
+  } catch (error) {
+    next(error);
+  }
+};
