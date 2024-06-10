@@ -23,7 +23,7 @@ export default function FindWork() {
   const itemsPerPage = 6;
 
   useEffect(() => {
-   // fetch("job.json").then((res) => res.json());
+    //fetch("job.json").then((res) => res.json());
     fetch("/api/job/all-job")
       .then((res) => res.json())
       .then((data) => {
@@ -79,8 +79,9 @@ export default function FindWork() {
       filteredJobs = filteredJobs.filter(
         ({ jobLocation, category, salaryRange }) => {
           return (
-            jobLocation.toLowerCase() === selectedOption.toLowerCase() 
-           
+            jobLocation.toLowerCase() === selectedOption.toLowerCase() ||
+            category.toLowerCase() === selectedOption.toLowerCase() ||
+            salaryRange.toLowerCase() === selectedOption.toLowerCase()
           );
         }
       );
