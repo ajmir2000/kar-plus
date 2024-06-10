@@ -38,7 +38,7 @@ export const createJob = async (req, res, next) => {
 
   try {
     await newJob.save();
-    res.status(201).json("Job created successfully!");
+    res.status(201).json({ acknowledged: true });
   } catch (error) {
     next(error);
   }

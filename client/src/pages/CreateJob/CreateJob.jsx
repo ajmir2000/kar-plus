@@ -1,16 +1,13 @@
-/* eslint-disable react/no-unknown-property */
 import React, { useState } from "react";
-// import PageHeader from "../components/PageHeader";
-// import { FaDollarSign } from "react-icons/fa";
 import { useForm } from "react-hook-form";
 import CreatableSelect from "react-select/creatable";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 const CreateJob = () => {
   const { currentUser } = useSelector((state) => state.user);
   const [selectedOption, setSelectedOption] = useState(null);
-
-  // const { user } = useContext(AuthContext);
+  const navigate = useNavigate();
 
   const {
     register,
@@ -33,6 +30,12 @@ const CreateJob = () => {
         body: JSON.stringify(e),
       });
       const data = await res.json();
+      if (data.acknowledged === true) {
+        alert("Job Posted Successfully!!");
+        navigate("/find-work");
+        reset(); // Reset the form
+        selectedOption("");
+      }
 
       if (data.success === false) {
         setLoading(false);
@@ -42,23 +45,10 @@ const CreateJob = () => {
       }
       setLoading(false);
       setError(null);
-
-      // navigate("/");
-
-      // .then((res) => res.json())
-      // .then((result) => {
-      //   // console.log(result);
-      //   if(result.acknowledged === true){
-      //     alert("Job Posted Successfully!!")
-      //   }
-      //   reset(); // Reset the form
-      // });
     } catch (error) {
       setLoading(false);
       setError(error.message);
     }
-
-    // console.log(e)
   };
 
   const options = [
