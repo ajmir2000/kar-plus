@@ -57,7 +57,7 @@ export const myJobs = async (req, res, next) => {
   const email = req.params.email;
 
   try {
-    const jobs = await Job.find({ postedBy: email });
+    const jobs = await Job.find({ postedBy: email }).sort({ createdAt: -1 });
 
     res.status(200).json(jobs);
   } catch (error) {

@@ -78,7 +78,8 @@ const CreateJob = () => {
             <div className="col-lg-6">
               <label className="form-label mb-2">Job Title</label>
               <input
-                defaultValue="Web Developer"
+                // defaultValue="Web Developer"
+                placeholder="Web Developer"
                 {...register("jobTitle")}
                 className="form-control"
               />
