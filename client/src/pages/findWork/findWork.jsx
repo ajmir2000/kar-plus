@@ -79,9 +79,9 @@ export default function FindWork() {
       filteredJobs = filteredJobs.filter(
         ({ jobLocation, category, salaryRange }) => {
           return (
-            jobLocation.toLowerCase() === selectedOption.toLowerCase() ||
-            category.toLowerCase() === selectedOption.toLowerCase() ||
-            salaryRange.toLowerCase() === selectedOption.toLowerCase()
+          jobLocation &&  jobLocation.toLowerCase() === selectedOption.toLowerCase() ||
+          category && category.toLowerCase() === selectedOption.toLowerCase() ||
+           salaryRange && salaryRange.toLowerCase() === selectedOption.toLowerCase()
           );
         }
       );
