@@ -68,7 +68,7 @@ export default function FindWork() {
 
   //---main function---
 
-  const filteredData = (jobData, selectedOption, searchValue) => {
+  const filteredData = (jobData, selectedOption, searchValue, salaryType) => {
     let filteredJobs = jobData;
 
     if (searchValue) {
@@ -77,11 +77,19 @@ export default function FindWork() {
 
     if (selectedOption) {
       filteredJobs = filteredJobs.filter(
-        ({ jobLocation, category, salaryRange }) => {
+        ({ jobLocation, category, salaryRange,salaryType, experienceLevel }) => {
           return (
-            jobLocation.toLowerCase() === selectedOption.toLowerCase() 
-           
-          );
+            (jobLocation &&
+              jobLocation.toLowerCase() === selectedOption.toLowerCase()) ||
+            (category &&
+              category.toLowerCase() === selectedOption.toLowerCase()) ||
+            (salaryRange &&
+              salaryRange.toLowerCase() === selectedOption.toLowerCase()) ||
+            (salaryType &&
+              salaryType.toLowerCase() === selectedOption.toLowerCase()) ||
+             ( experienceLevel && experienceLevel.toLowerCase()===selectedOption.toLowerCase()
+          )
+        )
         }
       );
     }
@@ -289,6 +297,88 @@ result = result.slice(startIndex, endIndex);
                   </Accordion.Body>
                 </Accordion.Item>
               </Accordion>
+
+              <Accordion>
+                <Accordion.Item
+                  eventKey="2"
+                  className="border-0 bg-transparent "
+                >
+                  <Accordion.Header className="custom-accordion-header bg-white ">
+                    {" "}
+                    <span className="text-secondary custom-accordion-header">
+                      SalaryType
+                    </span>{" "}
+                  </Accordion.Header>
+                  <Accordion.Body>
+                    <Form.Check
+                      type="radio"
+                      name="SalaryType"
+                      label="Hourly"
+                      defaultValue="hourly"
+                      onChange={handleChange}
+                      className="text-secondary custom-accordion-checked "
+                      defaultChecked
+                    />
+                    <Form.Check
+                      type="radio"
+                      name="SalaryType"
+                      label="Monthly"
+                      defaultValue="monthly"
+                      className="text-secondary custom-accordion-checked "
+                      onChange={handleChange}
+                    />
+                    <Form.Check
+                      type="radio"
+                      name="SalaryType"
+                      label="Yearly"
+                      defaultValue="yearly"
+                      onChange={handleChange}
+                      className="text-secondary custom-accordion-checked "
+                    />
+                  </Accordion.Body>
+                </Accordion.Item>
+              </Accordion>
+
+              <Accordion>
+                <Accordion.Item
+                  eventKey="2"
+                  className="border-0 bg-transparent "
+                >
+                  <Accordion.Header className="custom-accordion-header bg-white ">
+                    {" "}
+                    <span className="text-secondary custom-accordion-header">
+                      Experience level
+                    </span>{" "}
+                  </Accordion.Header>
+                  <Accordion.Body>
+                    <Form.Check
+                      type="radio"
+                      name="experienceLevel"
+                      label="Any experience"
+                      defaultValue="Any experience"
+                      onChange={handleChange}
+                      className="text-secondary custom-accordion-checked "
+                      defaultChecked
+                    />
+                    <Form.Check
+                      type="radio"
+                      name="experienceLevel"
+                      label="Internship"
+                      defaultValue="Internship"
+                      className="text-secondary custom-accordion-checked "
+                      onChange={handleChange}
+                    />
+                    <Form.Check
+                      type="radio"
+                      name="experienceLevel"
+                      label="Work remotely"
+                      defaultValue="Work remotely"
+                      onChange={handleChange}
+                      className="text-secondary custom-accordion-checked "
+                    />
+                  </Accordion.Body>
+                </Accordion.Item>
+              </Accordion>
             </div>
           </div>
           <div className="col-9">
@@ -326,7 +416,6 @@ result = result.slice(startIndex, endIndex);
             ) : (
               ""
             )}
-          
           </div>
         </Row>
       </div>
