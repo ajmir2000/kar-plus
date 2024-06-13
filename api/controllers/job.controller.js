@@ -80,7 +80,7 @@ export const deleteJob = async (req, res, next) => {
   }
 };
 
-export const updateJob = async (req, res, next) => {
+export const getJobById = async (req, res, next) => {
   const id = req.params.id;
   console.log(id);
   try {
@@ -89,8 +89,26 @@ export const updateJob = async (req, res, next) => {
     if (!job) {
       return res.status(404).json({ error: "Job not found" });
     }
-    console.log(job);
+
     res.status(201).json(job);
+  } catch (error) {
+    next(error);
+  }
+};
+
+export const editJob = async (req, res, next) => {
+  const { id } = req.params;
+  const updateData = req.body;
+
+  try {
+    const updatedJob = await Job.findByIdAndUpdate(id, updateData, {
+      new: true,
+    });
+    if (updatedJob) {
+      res.json({ acknowledged: true, job: updatedJob });
+    } else {
+      res.status(404).json({ acknowledged: false, message: "Job not found" });
+    }
   } catch (error) {
     next(error);
   }

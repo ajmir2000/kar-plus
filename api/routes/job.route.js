@@ -3,9 +3,10 @@ import { verifyToken } from "../utils/verifyUser.js";
 import {
   createJob,
   deleteJob,
+  editJob,
   getAllJobs,
+  getJobById,
   myJobs,
-  updateJob,
 } from "../controllers/job.controller.js";
 
 const router = express.Router();
@@ -15,6 +16,8 @@ router.get("/all-job", getAllJobs);
 router.get("/my-job/:email", myJobs);
 router.delete("/delete/:id", deleteJob);
 // get single job using id
-router.get("/all-job/:id", updateJob);
+router.get("/all-job/:id", getJobById);
+// edit job using id
+router.post("/edit-job/:id", editJob);
 
 export default router;
