@@ -354,7 +354,7 @@ result = result.slice(startIndex, endIndex);
                     <Form.Check
                       type="radio"
                       name="experienceLevel"
-                      label="Any experience"
+                      label="No experience"
                       defaultValue="Any experience"
                       onChange={handleChange}
                       className="text-secondary custom-accordion-checked "
