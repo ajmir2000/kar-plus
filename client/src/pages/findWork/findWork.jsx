@@ -201,17 +201,17 @@ result = result.slice(startIndex, endIndex);
 
                     <Form.Check
                       type="radio"
-                      label="Kabul"
+                      label="San Francisco"
                       className="text-secondary custom-accordion-checked "
-                      defaultValue="Kabul"
+                      defaultValue="San Francisco"
                       name="location"
                       onChange={handleChange}
                     />
                     <Form.Check
                       type="radio"
-                      label="Panishir"
+                      label="Brussels"
                       className="text-secondary custom-accordion-checked "
-                      defaultValue="Panjshir"
+                      defaultValue="Brussels"
                       name="location"
                       onChange={handleChange}
                     />

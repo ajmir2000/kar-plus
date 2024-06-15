@@ -19,6 +19,7 @@ import {
   signOutUserSuccess,
 } from "../../redux/user/userSlice";
 import { useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
 export default function Profile() {
   const fileRef = useRef(null);
   const { currentUser, loading, error } = useSelector((state) => state.user);
@@ -68,7 +69,7 @@ export default function Profile() {
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.id]: e.target.value });
   };
-
+// console.log(formData)
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -188,6 +189,22 @@ export default function Profile() {
           {loading ? "Loading..." : "Update"}
         </button>
       </form>
+      <div className="d-flex justify-content-between mt-3">
+        <button>
+          <Link
+            to="/my-job"
+            className="btn btn-success text-white rounded p-3 text-uppercase hover-opacity-95 disabled-opacity-80">
+            My JOBS
+          </Link>
+        </button>
+        <button>
+          <Link
+            to="/create-job"
+            className="btn btn-info text-white rounded p-3 text-uppercase hover-opacity-95 disabled-opacity-80">
+            Create JOB
+          </Link>
+        </button>
+      </div>
       <div className="d-flex justify-content-between mt-5">
         <span
           onClick={handleDeleteUser}
