@@ -3,10 +3,20 @@ import { Container,Row,Col,Button } from 'react-bootstrap';
 import './jobBox.css'
 import { FaBookmark } from "react-icons/fa";
 import { CiLocationOn } from "react-icons/ci";
-import { TbCategory } from "react-icons/tb";
+import { FaRegClock } from "react-icons/fa6";
 import { GoDiscussionOutdated } from "react-icons/go";
-import { RiMoneyDollarCircleLine } from "react-icons/ri";
-export default function JobBox({ jobTitle, jobLocation, companyLogo, companyName, category,salaryRange }) {
+import { TbCurrencyAfghani } from "react-icons/tb";;
+export default function JobBox({
+  jobTitle,
+  jobLocation,
+  companyLogo,
+  companyName,
+  employmentType,
+  minPrice,
+  maxPrice,
+  postingDate,
+  description,
+}) {
   const [currentDate, setCurrentDate] = useState(
     new Date().toLocaleDateString()
   );
@@ -14,7 +24,7 @@ export default function JobBox({ jobTitle, jobLocation, companyLogo, companyName
   return (
     <div className="col-9 d-flex custom-jobBox-container mt-5 w-100 p-4">
       <div className="custom-jobBox-pic-div">
-        <img className="h-100 w-100" src={companyLogo} alt="picture" />
+        <img  src={companyLogo} alt="picture" />
       </div>
       <div className="d-flex flex-column mx-5">
         <div className="custom-jobBox-title-div">
@@ -32,19 +42,23 @@ export default function JobBox({ jobTitle, jobLocation, companyLogo, companyName
           </button>
 
           <button className="btn btn-sm rounded-pill">
-            <TbCategory className="text-success fs-5  me-2" />
-            {category}
+            <FaRegClock className="text-success fs-5  me-2" />
+            {employmentType}
+          </button>
+
+          <button className="btn btn-sm rounded-pill">
+            <TbCurrencyAfghani className="text-success fs-5  me-2" />
+            {minPrice}-{maxPrice}k
           </button>
 
           <button className="btn btn-sm rounded-pill">
             <GoDiscussionOutdated className="text-success fs-5  me-2" />
-            {currentDate}
+            {postingDate.slice(0, 10)}
           </button>
+        </div>
 
-          <button className="btn btn-sm rounded-pill">
-            <RiMoneyDollarCircleLine className="text-success fs-5  me-2" />
-            {salaryRange}
-          </button>
+        <div className='mt-4'>
+          <p>{description}</p>
         </div>
       </div>
     </div>

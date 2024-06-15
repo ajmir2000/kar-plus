@@ -5,11 +5,12 @@
 
 .custom-jobBox-pic-div{
    border-radius: 10px;
-    height: 6rem;
-    width: 6rem;
+
 }
-.custom-pic-div img{
+.custom-jobBox-pic-div img{
     border-radius: 10px;
+      height: 6rem;
+    width: 6rem;
 }
 
 .custom-jobBox-title-div h3{
