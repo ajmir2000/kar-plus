@@ -82,7 +82,7 @@ export const deleteJob = async (req, res, next) => {
 
 export const getJobById = async (req, res, next) => {
   const id = req.params.id;
-  console.log(id);
+
   try {
     const job = await Job.findById(id);
 

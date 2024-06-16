@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { useLoaderData, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import CreatableSelect from "react-select/creatable";
 import PageHeader from "../../components/PageHeader/PageHeader.jsx";
 import { useSelector } from "react-redux";
@@ -9,6 +9,7 @@ const UpdateJob = () => {
   const { id } = useParams();
   const [singleJob, setSingleJob] = useState({});
   const { currentUser } = useSelector((state) => state.user);
+  const [selectedOption, setSelectedOption] = useState(null);
 
   const {
     register,
@@ -22,14 +23,18 @@ const UpdateJob = () => {
     fetch(`/api/job/all-job/${id}`)
       .then((res) => res.json())
       .then((data) => {
+        // Ensure postingDate is in YYYY-MM-DD format
+        if (data.postingDate) {
+          data.postingDate = data.postingDate.slice(0, 10);
+        }
         setSingleJob(data);
         reset(data); // Initialize form with fetched data
         setSelectedOption(data.skills);
       });
   }, [id, reset]);
 
-  const [selectedOption, setSelectedOption] = useState(null);
 
+console.log(selectedOption)
   const onSubmit = (data) => {
     data.skills = selectedOption || singleJob.skills; // Retain existing skills if not updated
     fetch(`/api/job/edit-job/${id}`, {
@@ -157,7 +162,10 @@ const UpdateJob = () => {
             <label className="form-label mb-2">Required Skill Sets:</label>
             <CreatableSelect
               className="form-control py-4"
-              defaultValue={selectedOption}
+              // defaultValue={ [ { value: "JavaScript", label: "JavaScript" },
+              //   { value: "C++", label: "C++" },]}
+              // defaultValue={selectedOption}
+              value={selectedOption}
               onChange={setSelectedOption}
               options={options}
               isMulti
