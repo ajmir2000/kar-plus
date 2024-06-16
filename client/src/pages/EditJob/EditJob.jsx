@@ -33,8 +33,6 @@ const UpdateJob = () => {
       });
   }, [id, reset]);
 
-
-console.log(selectedOption)
   const onSubmit = (data) => {
     data.skills = selectedOption || singleJob.skills; // Retain existing skills if not updated
     fetch(`/api/job/edit-job/${id}`, {
@@ -162,9 +160,6 @@ console.log(selectedOption)
             <label className="form-label mb-2">Required Skill Sets:</label>
             <CreatableSelect
               className="form-control py-4"
-              // defaultValue={ [ { value: "JavaScript", label: "JavaScript" },
-              //   { value: "C++", label: "C++" },]}
-              // defaultValue={selectedOption}
               value={selectedOption}
               onChange={setSelectedOption}
               options={options}

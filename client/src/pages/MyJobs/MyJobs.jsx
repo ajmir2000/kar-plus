@@ -1,14 +1,13 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-// import { AuthContext } from "../context/AuthProvider";
 import { useSelector } from "react-redux";
 import "./MyJobs.css";
 
 const MyJobs = () => {
   const { currentUser } = useSelector((state) => state.user);
 
-  //   const { user } = useContext(AuthContext);
   const [jobs, setJobs] = useState([]);
+  const [filteredJobs, setFilteredJobs] = useState([]);
   const [searchText, setSearchText] = useState("");
   const [isLoading, setIsLoading] = useState(true);
 
@@ -21,34 +20,29 @@ const MyJobs = () => {
       .then((res) => res.json())
       .then((data) => {
         setJobs(data);
+        setFilteredJobs(data);
         setIsLoading(false);
       });
-  }, [searchText, currentUser]);
-  //   console.log(jobs)
+  }, [currentUser]);
 
-  // Pagination
+  useEffect(() => {
+    const filter = jobs.filter((job) =>
+      job.jobTitle.toLowerCase().includes(searchText.toLowerCase())
+    );
+    setFilteredJobs(filter);
+    setCurrentPage(1); // Reset to the first page on search
+  }, [searchText, jobs]);
+
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentJobs = jobs.slice(indexOfFirstItem, indexOfLastItem);
+  const currentJobs = filteredJobs.slice(indexOfFirstItem, indexOfLastItem);
 
-  // search functionality
-  const handleSearch = () => {
-    const filter = jobs.filter(
-      (job) =>
-        job.jobTitle.toLowerCase().indexOf(searchText.toLowerCase()) !== -1
-    );
-    setJobs(filter);
-    setIsLoading(false);
-  };
-
-  // pagination previous and next
   const nextPage = () => {
-    if (indexOfLastItem < jobs.length) {
+    if (indexOfLastItem < filteredJobs.length) {
       setCurrentPage(currentPage + 1);
     }
   };
 
-  // delete a job
   const handleDelete = (id) => {
     fetch(`/api/job/delete/${id}`, {
       method: "DELETE",
@@ -57,7 +51,9 @@ const MyJobs = () => {
       .then((data) => {
         if (data.acknowledged === true) {
           alert("Job Deleted Successfully!!");
-          setJobs(jobs.filter((job) => job._id !== id));
+          const updatedJobs = jobs.filter((job) => job._id !== id);
+          setJobs(updatedJobs);
+          setFilteredJobs(updatedJobs);
         }
       });
   };
@@ -75,50 +71,49 @@ const MyJobs = () => {
         <div className="text-center mb-2">
           <input
             onChange={(e) => setSearchText(e.target.value)}
+            value={searchText}
             type="text"
             className="form-control mb-2"
             placeholder="Search jobs"
           />
-          <button onClick={handleSearch} className="btn btn-primary">
-            Search
+          <button onClick={() => setSearchText("")} className="btn btn-primary">
+            Clear
           </button>
         </div>
 
-        {/* table */}
-        <section>
-          <div className="mx-auto mt-5">
-            <div className="card shadow-lg">
-              <div className="card-header d-flex justify-content-between">
-                <h3 className="card-title">All Jobs</h3>
-                <Link
-                  to="/create-job"
-                  className="btn btn-dark text-white text-xs font-bold">
-                  Post A New Job
-                </Link>
-              </div>
+        {isLoading ? (
+          <div className="d-flex justify-content-center align-items-center h-20">
+            <p>Loading...</p>
+          </div>
+        ) : (
+          <section>
+            <div className="mx-auto mt-5">
+              <div className="card shadow-lg">
+                <div className="card-header d-flex justify-content-between">
+                  <h3 className="card-title">All Jobs</h3>
+                  <Link
+                    to="/create-job"
+                    className="btn btn-dark text-white text-xs font-bold">
+                    Post A New Job
+                  </Link>
+                </div>
 
-              <div className="table-responsive">
-                <table className="table">
-                  <thead>
-                    <tr>
-                      <th>No.</th>
-                      <th>Title</th>
-                      <th>Company Name</th>
-                      <th>Salary</th>
-                      <th>Edit</th>
-                      <th>Delete</th>
-                    </tr>
-                  </thead>
-
-                  {isLoading ? (
-                    <div className="d-flex justify-content-center align-items-center h-20">
-                      <p>loading......</p>
-                    </div>
-                  ) : (
+                <div className="table-responsive">
+                  <table className="table">
+                    <thead>
+                      <tr>
+                        <th>No.</th>
+                        <th>Title</th>
+                        <th>Company Name</th>
+                        <th>Salary</th>
+                        <th>Edit</th>
+                        <th>Delete</th>
+                      </tr>
+                    </thead>
                     <tbody>
                       {currentJobs.map((job, index) => (
-                        <tr key={index}>
-                          <td>{index + 1}</td>
+                        <tr key={job._id}>
+                          <td>{indexOfFirstItem + index + 1}</td>
                           <td>{job.jobTitle}</td>
                           <td>{job.companyName}</td>
                           <td>
@@ -137,26 +132,25 @@ const MyJobs = () => {
                         </tr>
                       ))}
                     </tbody>
-                  )}
-                </table>
+                  </table>
+                </div>
               </div>
             </div>
-          </div>
 
-          {/* pagination */}
-          <div className="d-flex justify-content-center mt-3">
-            {currentPage > 1 && (
-              <button onClick={prevPage} className="btn btn-secondary mx-2">
-                Previous
-              </button>
-            )}
-            {indexOfLastItem < jobs.length && (
-              <button onClick={nextPage} className="btn btn-secondary mx-2">
-                Next
-              </button>
-            )}
-          </div>
-        </section>
+            <div className="d-flex justify-content-center mt-3">
+              {currentPage > 1 && (
+                <button onClick={prevPage} className="btn btn-secondary mx-2">
+                  Previous
+                </button>
+              )}
+              {indexOfLastItem < filteredJobs.length && (
+                <button onClick={nextPage} className="btn btn-secondary mx-2">
+                  Next
+                </button>
+              )}
+            </div>
+          </section>
+        )}
       </div>
     </div>
   );
