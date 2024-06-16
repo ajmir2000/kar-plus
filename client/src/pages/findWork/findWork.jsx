@@ -77,7 +77,13 @@ export default function FindWork() {
 
     if (selectedOption) {
       filteredJobs = filteredJobs.filter(
-        ({ jobLocation, category, salaryRange,salaryType, experienceLevel }) => {
+        ({
+          jobLocation,
+          category,
+          salaryRange,
+          salaryType,
+          experienceLevel,
+        }) => {
           return (
             (jobLocation &&
               jobLocation.toLowerCase() === selectedOption.toLowerCase()) ||
@@ -87,9 +93,9 @@ export default function FindWork() {
               salaryRange.toLowerCase() === selectedOption.toLowerCase()) ||
             (salaryType &&
               salaryType.toLowerCase() === selectedOption.toLowerCase()) ||
-             ( experienceLevel && experienceLevel.toLowerCase()===selectedOption.toLowerCase()
-          )
-        )
+            (experienceLevel &&
+              experienceLevel.toLowerCase() === selectedOption.toLowerCase())
+          );
         }
       );
     }
@@ -97,13 +103,13 @@ export default function FindWork() {
     return filteredJobs;
   };
   let result = filteredData(jobData, selectedOption, searchValue);
-  console.log(result);
+
+  const jobsAmount = result.length;
 
   console.log(selectedOption);
 
   const { startIndex, endIndex } = calculatePageRange();
-result = result.slice(startIndex, endIndex);
-
+  result = result.slice(startIndex, endIndex);
 
   return (
     <Container fluid className="bg-white ">
@@ -121,8 +127,7 @@ result = result.slice(startIndex, endIndex);
               <Accordion>
                 <Accordion.Item
                   eventKey="0"
-                  className="border-0 bg-transparent "
-                >
+                  className="border-0 bg-transparent ">
                   <Accordion.Header className="custom-accordion-header bg-white ">
                     <span className="text-secondary ">Category</span>
                   </Accordion.Header>
@@ -183,8 +188,7 @@ result = result.slice(startIndex, endIndex);
               <Accordion>
                 <Accordion.Item
                   eventKey="1"
-                  className="border-0 bg-transparent  "
-                >
+                  className="border-0 bg-transparent  ">
                   <Accordion.Header className="custom-accordion-header bg-white ">
                     {" "}
                     <span className="text-secondary custom-accordion-header">
@@ -252,8 +256,7 @@ result = result.slice(startIndex, endIndex);
               <Accordion>
                 <Accordion.Item
                   eventKey="2"
-                  className="border-0 bg-transparent "
-                >
+                  className="border-0 bg-transparent ">
                   <Accordion.Header className="custom-accordion-header bg-white ">
                     {" "}
                     <span className="text-secondary custom-accordion-header">
@@ -301,8 +304,7 @@ result = result.slice(startIndex, endIndex);
               <Accordion>
                 <Accordion.Item
                   eventKey="2"
-                  className="border-0 bg-transparent "
-                >
+                  className="border-0 bg-transparent ">
                   <Accordion.Header className="custom-accordion-header bg-white ">
                     {" "}
                     <span className="text-secondary custom-accordion-header">
@@ -342,8 +344,7 @@ result = result.slice(startIndex, endIndex);
               <Accordion>
                 <Accordion.Item
                   eventKey="2"
-                  className="border-0 bg-transparent "
-                >
+                  className="border-0 bg-transparent ">
                   <Accordion.Header className="custom-accordion-header bg-white ">
                     {" "}
                     <span className="text-secondary custom-accordion-header">
@@ -382,7 +383,7 @@ result = result.slice(startIndex, endIndex);
             </div>
           </div>
           <div className="col-9">
-            <h2 className="mx-auto mt-3">{result.length} Jobs</h2>
+            <h2 className="mx-auto mt-3">{jobsAmount} Jobs</h2>
 
             {result.length > 0 ? (
               result.map((job) => <JobBox key={job._id} {...job} />)
@@ -395,8 +396,7 @@ result = result.slice(startIndex, endIndex);
                 <button
                   onClick={prevPage}
                   disabled={currentPage === 1}
-                  className=" btn btn-success text-light p-2 me-2"
-                >
+                  className=" btn btn-success text-light p-2 me-2">
                   Previous
                 </button>
                 <span className="nt-2 fw-bold">
@@ -408,8 +408,7 @@ result = result.slice(startIndex, endIndex);
                   disabled={
                     currentPage === Math.ceil(filteredJob.length / itemsPerPage)
                   }
-                  className=" btn btn-success text-light p-2 ms-2"
-                >
+                  className=" btn btn-success text-light p-2 ms-2">
                   Next
                 </button>
               </div>
