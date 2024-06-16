@@ -106,7 +106,7 @@ export default function FindWork() {
 
   const jobsAmount = result.length;
 
-  console.log(selectedOption);
+  
 
   const { startIndex, endIndex } = calculatePageRange();
   result = result.slice(startIndex, endIndex);
