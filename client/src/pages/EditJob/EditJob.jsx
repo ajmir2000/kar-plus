@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import CreatableSelect from "react-select/creatable";
 import PageHeader from "../../components/PageHeader/PageHeader.jsx";
 import { useSelector } from "react-redux";
@@ -10,6 +10,7 @@ const UpdateJob = () => {
   const [singleJob, setSingleJob] = useState({});
   const { currentUser } = useSelector((state) => state.user);
   const [selectedOption, setSelectedOption] = useState(null);
+  const navigate = useNavigate();
 
   const {
     register,
@@ -46,6 +47,7 @@ const UpdateJob = () => {
       .then((result) => {
         if (result.acknowledged === true) {
           alert("Job Updated Successfully!!");
+          navigate("/my-job");
         }
       });
   };
