@@ -1,5 +1,6 @@
 import "./App.css";
 import "reset-css";
+import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import NavBar from "./components/NavBar/NavBar.jsx";
@@ -16,6 +17,9 @@ import CompanyDetails from "./pages/companyCardDetail/companyDetails.jsx";
 import CreateJob from "./pages/CreateJob/CreateJob.jsx";
 import MyJobs from "./pages/MyJobs/MyJobs.jsx";
 import EditJob from "./pages/EditJob/EditJob.jsx";
+import TalentOrder from "./pages/talentOrder/talentOrder.jsx";
+import Messages from "./pages/messages/messages.jsx";
+import Message from "./pages/message/message.jsx";
 
 function App() {
   return (
@@ -33,6 +37,10 @@ function App() {
             <Route path="/signup" element={<SignUp />} />
             <Route path="/companies" element={<Companies />} />
             <Route path="/companies/:id" element={<CompanyDetails />} />
+            <Route path="/talent-order"  element={<TalentOrder/>}/>
+            <Route path="/messages"  element={<Messages/>}/>
+            <Route path="/message/:id"  element={<Message/>}/>
+
 
             <Route element={<PrivateRoute />}>
               <Route path="/profile" element={<Profile />} />

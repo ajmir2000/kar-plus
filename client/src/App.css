@@ -5,3 +5,8 @@
   /* global 94%+ browsers support */
   background: linear-gradient(122deg, #25CA86, #19AC90 77%);
 }
+
+.link {
+    text-decoration: none;
+    color: inherit;
+  }

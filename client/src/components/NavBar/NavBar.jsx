@@ -1,3 +1,4 @@
+import React, { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
 import Form from "react-bootstrap/Form";
@@ -8,6 +9,7 @@ import "./NavBar.css";
 import { useSelector } from "react-redux";
 function NavBar() {
   const { currentUser } = useSelector((state) => state.user);
+  const [open,setOpen]=useState(false)
   return (
     <Navbar expand="lg" className="bg-transparent p-5">
       <Container>
@@ -32,13 +34,26 @@ function NavBar() {
             </Link>
           </Nav>
           {currentUser ? (
-            <Link to="/profile">
+            <div onClick={() => setOpen(!open)} className="position-relative">
               <img
                 className="rounded-5  w-50 "
                 src={currentUser.avatar}
                 alt="profile"
               />
-            </Link>
+              {open && (
+                <div className="options">
+                  <Link className="link" to="/Profile">
+                    Profile
+                  </Link>
+                  <Link className="link" to="/talent-order">
+                    Orders
+                  </Link>
+                  <Link className="link" to="/messages">
+                    Messages
+                  </Link>
+                </div>
+              )}
+            </div>
           ) : (
             <Form className="d-flex">
               <Link to="signin">
