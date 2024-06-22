@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { Container } from "react-bootstrap";
+import { Container,Button } from "react-bootstrap";
 import { MdAlternateEmail, MdOutlinePerson } from "react-icons/md";
 import { RiLockPasswordLine } from "react-icons/ri";
 import { FcGoogle } from "react-icons/fc";
 import { RiFacebookCircleFill } from "react-icons/ri";
+import { FaRegUser } from "react-icons/fa";
 
 import "./signUp.css";
 import OAuth from "../../components/OAuth/OAuth";
@@ -14,12 +15,15 @@ export default function SignUp() {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+  const [role, setRole] = useState("");
+
   const handleChange = (e) => {
     setFormData({
       ...formData,
       [e.target.id]: e.target.value,
     });
   };
+  console.log(formData);
   const handleSubmit = async (e) => {
     setLoading(true);
     e.preventDefault();
@@ -80,6 +84,17 @@ export default function SignUp() {
             </div>
             <form onSubmit={handleSubmit} className="mt-4">
               <div className="custom-signup-input-field d-flex text-align-center outline-none m-2">
+                <FaRegUser />
+                <select
+                  className="bg-transparent border-0"
+                  id="role"
+                  onChange={handleChange}>
+                  <option value="">Select Role</option>
+                  <option value="Employer">Employer</option>
+                  <option value="Job Seeker">Job Seeker</option>
+                </select>
+              </div>
+              <div className="custom-signup-input-field d-flex text-align-center outline-none m-2">
                 <MdOutlinePerson className="fs-3 mt-1" />
                 <input
                   className="bg-transparent border-0"
@@ -126,12 +141,11 @@ export default function SignUp() {
               </div>
 
               <p className="mt-3">--- or login with ---</p>
-              <div className="d-flex custom-signup-buttons">
-                <OAuth />
-
-                <button className="btn btn-light">
-                  <RiFacebookCircleFill className="text-primary" />
-                  facebook
+              <div className="">
+                <button type="button"
+                  disabled={formData.role ? false : true}
+                  className={formData.role ? "bg-success " : "bg-light"}>
+                  <OAuth role={formData.role} />
                 </button>
               </div>
             </form>

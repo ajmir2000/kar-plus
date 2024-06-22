@@ -6,11 +6,18 @@ import dotenv from "dotenv";
 dotenv.config();
 
 export const singup = async (req, res, next) => {
-  const { username, email, password } = req.body;
+  const { username, email, password, role } = req.body;
   const hashedPassword = bcryptjs.hashSync(password, 10);
-  const newUser = new User({ username, email, password: hashedPassword });
+  const newUser = new User({ username, email, role, password: hashedPassword });
 
   try {
+    if (!username || !email || !password || !role) {
+      return next(errorHandler(401, "Please fill full form!"));
+    }
+    const isEmail = await User.findOne({ email });
+    if (isEmail) {
+      return next(errorHandler(401, "Email already registered!"));
+    }
     await newUser.save();
     res.status(201).json("User created successfully!");
   } catch (error) {
@@ -19,14 +26,31 @@ export const singup = async (req, res, next) => {
 };
 
 export const singin = async (req, res, next) => {
-  const { email, password } = req.body;
+  const { email, password, role } = req.body;
   try {
+    if (!email || !password || !role) {
+      return next(
+        errorHandler(401, "Please provide email ,password and role.")
+      );
+    }
     const validUser = await User.findOne({ email });
-    if (!validUser) return next(errorHandler(404, "User not found!"));
+    if (!validUser)
+      return next(
+        errorHandler(404, "User not found!, Invalid Email Or Password.")
+      );
     const validPassword = bcryptjs.compareSync(password, validUser.password);
-    if (!validPassword) return next(errorHandler(401, "Wrong credentials!"));
+    if (!validPassword)
+      return next(
+        errorHandler(401, "Wrong credentials!, Invalid Email Or Password.")
+      );
+    if (validUser.role !== role) {
+      return next(
+        errorHandler(404, `User with provided email and ${role} not found!`)
+      );
+    }
+
     const token = jwt.sign({ id: validUser._id }, process.env.JWT_SECRET);
-    // by this method we can remove password for the client he or she can not see the password on respose
+    // by this method we can remove password for the client he or she can not see the password on respose, it is a secure point.
     const { password: pass, ...rest } = validUser._doc;
     res
       .cookie("access_token", token, { httpOnly: true })
@@ -59,6 +83,7 @@ export const google = async (req, res, next) => {
         email: req.body.email,
         password: hashedPassword,
         avatar: req.body.photo,
+        role: req.body.role,
       });
       await newUser.save();
       const token = jwt.sign({ id: newUser._id }, process.env.JWT_SECRET);

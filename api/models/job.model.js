@@ -55,6 +55,28 @@ const jobSchema = new mongoose.Schema(
       require: true,
       unique: true,
     },
+    country: {
+      type: String,
+      required: [true, "Please provide a country name."],
+    },
+    city: {
+      type: String,
+      required: [true, "Please provide a city name."],
+    },
+    location: {
+      type: String,
+      required: [true, "Please provide location."],
+      minLength: [20, "Location must contian at least 20 characters!"],
+    },
+    expired: {
+      type: Boolean,
+      default: false,
+    },
+    postedId: {
+      type: mongoose.Schema.ObjectId,
+      ref: "User",
+      required: true,
+    },
   },
 
   { timestamps: true }

@@ -13,6 +13,7 @@ import {
   signInFailure,
 } from "../../redux/user/userSlice.js";
 import OAuth from "../../components/OAuth/OAuth.jsx";
+import { FaRegUser } from "react-icons/fa";
 
 export default function SignIn() {
   const [formData, setFormData] = useState({});
@@ -21,12 +22,14 @@ export default function SignIn() {
   const { loading, error } = useSelector((state) => state.user);
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
   const handleChange = (e) => {
     setFormData({
       ...formData,
       [e.target.id]: e.target.value,
     });
   };
+  console.log(formData.role);
   const handleSubmit = async (e) => {
     //  we use instead of setLoading(true); the below line.
     dispatch(signInStart());
@@ -92,6 +95,18 @@ export default function SignIn() {
               </p>
             </div>
             <form onSubmit={handleSubmit} className="mt-4">
+              <div className="custom-signup-input-field d-flex text-align-center outline-none m-2">
+                <FaRegUser />
+                <select
+                  className="bg-transparent border-0"
+                  id="role"
+                  onChange={handleChange}>
+                  <option value="">Select Role</option>
+                  <option value="Employer">Employer</option>
+                  <option value="Job Seeker">Job Seeker</option>
+                </select>
+              </div>
+
               <div className="custom-signin-input-field d-flex text-align-center outline-none m-2 m-2">
                 <MdAlternateEmail className="fs-3 mt-1" />
                 <input
@@ -126,8 +141,11 @@ export default function SignIn() {
               </div>
               <p className="mt-3">--- or login with ---</p>
               <div className="d-flex custom-buttons">
-                <OAuth />
-
+                <button type="button"
+                  disabled={formData.role ? false : true}
+                  className={formData.role ? "bg-success " : "bg-light"}>
+                  <OAuth role={formData.role} />
+                </button>
                 <button className="btn btn-light ms-lg-5">
                   <RiFacebookCircleFill className="text-primary" />
                   facebook
