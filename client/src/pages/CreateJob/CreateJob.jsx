@@ -1,14 +1,27 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import CreatableSelect from "react-select/creatable";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
+import {
+  getDownloadURL,
+  getStorage,
+  ref,
+  uploadBytesResumable,
+} from "firebase/storage";
+import { app } from "../../firebase";
 
 const CreateJob = () => {
   const { currentUser } = useSelector((state) => state.user);
   const [selectedOption, setSelectedOption] = useState(null);
-  const navigate = useNavigate();
 
+  const [file, setFile] = useState(undefined);
+  const [filePerc, setFilePerc] = useState(0);
+  const [fileUploadError, setFileUploadError] = useState(false);
+  const [formData, setFormData] = useState({});
+  const navigate = useNavigate();
+  console.log(currentUser._id);
   const {
     register,
     handleSubmit,
@@ -17,11 +30,43 @@ const CreateJob = () => {
   } = useForm();
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
+  useEffect(() => {
+    if (file) {
+      handleFileUpload(file);
+    }
+  }, [file]);
 
+  const handleFileUpload = (file) => {
+    const storage = getStorage(app);
+    const fileName = new Date().getTime() + file.name;
+    const storageRef = ref(storage, fileName);
+    const uploadTask = uploadBytesResumable(storageRef, file);
+
+    uploadTask.on(
+      "state_changed",
+      (snapshot) => {
+        const progress =
+          (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+        setFilePerc(Math.round(progress));
+      },
+      (error) => {
+        setFileUploadError(true);
+        console.log(error);
+      },
+      () => {
+        getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) =>
+          setFormData({ companyLogo: downloadURL })
+        );
+      }
+    );
+  };
+  console.log(formData);
   const onSubmit = async (e) => {
     // e.preventDefault();
     e.skills = selectedOption;
-    console.log(e);
+    e.employerId = currentUser._id;
+    e.companyLogo = formData.companyLogo;
+    console.log(e.companyLogo);
     setLoading(true);
     try {
       const res = await fetch("/api/job/create-job", {
@@ -40,7 +85,8 @@ const CreateJob = () => {
       if (data.success === false) {
         setLoading(false);
         setError(data.message);
-
+        alert(data.message);
+        // toast.error(data.message);
         return;
       }
       setLoading(false);
@@ -87,7 +133,7 @@ const CreateJob = () => {
             <div className="col-lg-6">
               <label className="form-label mb-2">Company Name</label>
               <input
-                placeholder="Ex: Microsoft"
+                placeholder="Ex: Roshan"
                 {...register("companyName")}
                 className="form-control"
               />
@@ -99,7 +145,7 @@ const CreateJob = () => {
             <div className="col-lg-6">
               <label className="form-label mb-2">Minimum Salary</label>
               <input
-                placeholder="$20k"
+                placeholder="20k"
                 {...register("minPrice")}
                 className="form-control"
               />
@@ -107,7 +153,7 @@ const CreateJob = () => {
             <div className="col-lg-6">
               <label className="form-label mb-2">Maximum Salary</label>
               <input
-                placeholder="$100k"
+                placeholder="100k"
                 {...register("maxPrice")}
                 className="form-control"
               />
@@ -126,10 +172,26 @@ const CreateJob = () => {
               </select>
             </div>
             <div className="col-lg-6">
+              <label className="form-label mb-2">country</label>
+              <input
+                placeholder="Ex: Afghanistan"
+                {...register("country")}
+                className="form-control"
+              />
+            </div>{" "}
+            <div className="col-lg-6">
+              <label className="form-label mb-2">city</label>
+              <input
+                placeholder="Ex: Kabul"
+                {...register("city")}
+                className="form-control"
+              />
+            </div>
+            <div className="col-lg-6">
               <label className="form-label mb-2">Job Location</label>
               <input
-                placeholder="Ex: New York"
-                {...register("jobLocation")}
+                placeholder="Ex: Wazri Mohammad Akbar khan, street 17 "
+                {...register("location")}
                 className="form-control"
               />
             </div>
@@ -174,12 +236,17 @@ const CreateJob = () => {
           <div className="row g-4">
             <div className="col-lg-6">
               <label className="form-label mb-2">Company Logo</label>
+
               <input
-                type="url"
-                placeholder="Paste your image url: https://weshare.com/img1.jpg"
-                {...register("companyLogo")}
+                //we use e.target.files[0] becuse if user select multi image file we choose the first one.
+                onChange={(e) => setFile(e.target.files[0])}
+                type="file"
+                placeholder="Upload Your Campany Image  or Logo"
+                // {...register("companyLogo")}
                 className="form-control"
+                accept="image/*"
               />
+              {`upload ${filePerc}% `}
             </div>
 
             <div className="col-lg-6">
@@ -214,7 +281,7 @@ const CreateJob = () => {
               type="email"
               value={currentUser.email}
               className="form-control p-3"
-              {...register("postedBy")}
+              {...register("employerEmail")}
               placeholder="your email"
             />
           </div>

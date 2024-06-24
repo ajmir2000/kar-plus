@@ -26,10 +26,6 @@ const jobSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    jobLocation: {
-      type: String,
-      required: true,
-    },
     postingDate: {
       type: Date,
       required: true,
@@ -50,10 +46,9 @@ const jobSchema = new mongoose.Schema(
       type: Array,
       require: true,
     },
-    postedBy: {
+    employerEmail: {
       type: String,
       require: true,
-      unique: true,
     },
     country: {
       type: String,
@@ -66,13 +61,13 @@ const jobSchema = new mongoose.Schema(
     location: {
       type: String,
       required: [true, "Please provide location."],
-      minLength: [20, "Location must contian at least 20 characters!"],
+      minLength: [10, "Location must contian at least 20 characters!"],
     },
     expired: {
       type: Boolean,
       default: false,
     },
-    postedId: {
+    employerId: {
       type: mongoose.Schema.ObjectId,
       ref: "User",
       required: true,

@@ -10,30 +10,56 @@ export const createJob = async (req, res, next) => {
     description,
     employmentType,
     experienceLevel,
-    jobLocation,
+    location,
+    country,
+    city,
     jobTitle,
     maxPrice,
     minPrice,
-    postedBy,
+    employerEmail,
     postingDate,
     salaryType,
     skills,
+    employerId,
   } = req.body;
-
+  if (
+    !companyLogo ||
+    !companyName ||
+    !description ||
+    !employmentType ||
+    !experienceLevel ||
+    !location ||
+    !country ||
+    !city ||
+    !jobTitle ||
+    !maxPrice ||
+    !minPrice ||
+    !employerEmail ||
+    !postingDate ||
+    !salaryType ||
+    !skills ||
+    !employerId
+  ) {
+    next(errorHandler(404, "Please fill all filed"));
+  }
+  console.log(employerId);
   const newJob = new Job({
     companyLogo,
     companyName,
     description,
     employmentType,
     experienceLevel,
-    jobLocation,
+    location,
+    city,
+    country,
     jobTitle,
     maxPrice,
     minPrice,
-    postedBy,
+    employerEmail,
     postingDate,
     salaryType,
     skills,
+    employerId,
   });
 
   try {
@@ -41,6 +67,7 @@ export const createJob = async (req, res, next) => {
     res.status(201).json({ acknowledged: true });
   } catch (error) {
     next(error);
+    console.log(error);
   }
 };
 

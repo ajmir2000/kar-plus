@@ -174,7 +174,7 @@ export default function JobBox({
           </div>
         </div>
       </Link>
-      <button className="btn-primary">Apply</button>
+   
     </div>
   );
 }

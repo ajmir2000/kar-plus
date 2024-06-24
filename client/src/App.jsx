@@ -17,6 +17,7 @@ import CreateJob from "./pages/CreateJob/CreateJob.jsx";
 import MyJobs from "./pages/MyJobs/MyJobs.jsx";
 import EditJob from "./pages/EditJob/EditJob.jsx";
 import JobDetails from "./pages/JobDetails/JobDetails.jsx";
+import Application from "./pages/Application/Application.jsx";
 
 function App() {
   return (
@@ -41,6 +42,7 @@ function App() {
               <Route path="/my-job" element={<MyJobs />} />
               <Route path="/edit-job/:id" element={<EditJob />} />
               <Route path="/job-detail/:id" element={<JobDetails />} />
+              <Route path="/apply-job/:id" element={<Application />} />
             </Route>
           </Routes>
         </BrowserRouter>

@@ -10,6 +10,7 @@ export const verifyToken = (req, res, next) => {
     if (err) return next(errorHandler(403, "Forbidden"));
     // user parameter is just the ID of user becuse we select the id of user when we make the cookie
     req.user = user;
+
     next();
   });
 };

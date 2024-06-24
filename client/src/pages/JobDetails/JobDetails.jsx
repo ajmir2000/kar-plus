@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import PageHeader from "../../components/PageHeader/PageHeader.jsx";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { FaBriefcase } from "react-icons/fa6";
 // import Swal from "sweetalert2";
 import { useLocation } from "react-router-dom";
@@ -82,6 +82,7 @@ const JobDetails = () => {
           {/* <button className="btn btn-info ms-2" onClick={handleJobApply}>
             Apply Now
           </button> */}
+             <button type="button" className="btn-primary"> <Link to={`/apply-job/${id}`}>Apply</Link></button>+
         </div>
 
         {/* job details */}
