@@ -26,15 +26,6 @@ const applicationSchema = new mongoose.Schema({
     required: [true, "Please enter your Address!"],
   },
   resume: {
-    // public_id: {
-    //   type: String,
-    //   required: true,
-    // },
-    // url: {
-    //   type: String,
-    //   required: true,
-    // },
-
     type: String,
   },
   applicantID: {

@@ -13,46 +13,52 @@ export const postApplication = async (req, res, next) => {
     phone,
     role,
     jobId,
-  } = req.body;
-  console.log(req.body.jobId);
-  // console.log(name, address, coverletter, resume, jobSeekerId, phone, role);
+  } = await req.body;
+  // console.log(req.body);
+  // console.log(name, address, coverLetter, resume, jobSeekerId, phone, role);
   try {
     if (role === "Employer") {
       return next(
         errorHandler(400, "Employer not allowed to access this resource.")
       );
     }
-
+    const applicationDetails = await Application.findById(jobSeekerId);
+    if (applicationDetails) {
+      return next(
+        errorHandler(400, "You Apply Before, Please try on new Jobs")
+      );
+    }
+    console.log(applicationDetails);
     const applicantID = {
       user: jobSeekerId,
       role: "Job Seeker",
     };
-    // if (!jobId) {
-    //   return next(errorHandler(404, "Job not found!1"));
-    // }
+    if (!jobId) {
+      return next(errorHandler(404, "Job not found!1"));
+    }
     const jobDetails = await Job.findById(jobId);
     if (!jobDetails) {
       return next(errorHandler(404, "Job not found!2"));
     }
-
+    console.log(jobDetails.employerId);
     const employerID = {
       user: jobDetails.employerId,
       role: "Employer",
     };
     // console.log(jobDetails);
     // console.log(name, address, coverletter, resume, jobSeekerId, phone, role);
-    // if (
-    //   !name ||
-    //   !email ||
-    //   !coverLetter ||
-    //   !phone ||
-    //   !address ||
-    //   !applicantID ||
-    //   !employerID ||
-    //   !resume
-    // ) {
-    //   return next(errorHandler(400, "Please fill all fields."));
-    // }
+    if (
+      !name ||
+      !email ||
+      !coverLetter ||
+      !phone ||
+      !address ||
+      !applicantID ||
+      !employerID ||
+      !resume
+    ) {
+      return next(errorHandler(400, "Please fill all fields."));
+    }
     const application = await Application.create({
       name,
       email,
