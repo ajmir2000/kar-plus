@@ -18,20 +18,21 @@ const jobSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    minPrice: {
+    salaryFrom: {
       type: String,
-      required: true,
+     
     },
-    maxPrice: {
+    salaryTo: {
       type: String,
-      required: true,
+   
     },
     companySalary: {
       type: String,
-      require: true,
+      required: true,
     },
     // salaryType: {
     //   type: String,
+    //   enum: ["Hourly", "Monthly", "Yearly"],
     //   required: true,
     // },
     postingDate: {
@@ -44,6 +45,7 @@ const jobSchema = new mongoose.Schema(
     },
     employmentType: {
       type: String,
+      enum: ["Full-time", "Part-time"],
       required: true,
     },
     jobSummary: {
@@ -59,12 +61,12 @@ const jobSchema = new mongoose.Schema(
       required: true,
     },
     skills: {
-      type: Array,
-      require: true,
+      type: [String],
+      required: true,
     },
     employerEmail: {
       type: String,
-      require: true,
+      required: true,
     },
     country: {
       type: String,
@@ -77,7 +79,7 @@ const jobSchema = new mongoose.Schema(
     location: {
       type: String,
       required: [true, "Please provide location."],
-      minLength: [10, "Location must contian at least 20 characters!"],
+      minLength: [20, "Location must contain at least 20 characters!"],
     },
     expired: {
       type: Boolean,
@@ -89,24 +91,24 @@ const jobSchema = new mongoose.Schema(
       required: true,
     },
     closingDate: {
-      type: String,
-      require: true,
+      type: Date,
+      required: true,
     },
     vacancies: {
       type: Number,
-      require: true,
+      required: true,
     },
-    yearsofExperience: {
+    yearsOfExperience: {
       type: Number,
-      require: true,
+      default: "Not Specified",
     },
     probationPeriod: {
-      type: String,
+      type: Number,
       default: "Not Specified",
     },
     contractType: {
       type: String,
-      require: true,
+      default: "Not Specified",
     },
     contractDuration: {
       type: String,
@@ -114,12 +116,15 @@ const jobSchema = new mongoose.Schema(
     },
     contractExtensible: {
       type: String,
-      require: true,
+      required: true,
     },
-    minimumEducation: { type: String, require: true },
+    minimumEducation: {
+      type: String,
+      required: true,
+    },
     gender: {
       type: String,
-      require: true,
+      required: true,
     },
     jobVisitors: {
       type: Number,
@@ -140,14 +145,13 @@ const jobSchema = new mongoose.Schema(
     submissionGuideline: {
       type: String,
       default:
-        "To apply for this vacancy, please use the following link: Kindly use Google Chrome Browser for smooth access For further information please contact us at ",
+        "To apply for this vacancy, please use the following link: Kindly use Google Chrome Browser for smooth access. For further information please contact us at ",
     },
     functionalArea: {
-      type: Array,
-      require: true,
+      type: [String],
+      required: true,
     },
   },
-
   { timestamps: true }
 );
 
