@@ -20,15 +20,12 @@ const jobSchema = new mongoose.Schema(
     },
     salaryFrom: {
       type: String,
-     
     },
     salaryTo: {
       type: String,
-   
     },
     companySalary: {
       type: String,
-      required: true,
     },
     // salaryType: {
     //   type: String,
@@ -39,10 +36,7 @@ const jobSchema = new mongoose.Schema(
       type: Date,
       required: true,
     },
-    experienceLevel: {
-      type: String,
-      required: true,
-    },
+
     employmentType: {
       type: String,
       enum: ["Full-time", "Part-time"],
@@ -61,7 +55,7 @@ const jobSchema = new mongoose.Schema(
       required: true,
     },
     skills: {
-      type: [String],
+      type: Array,
       required: true,
     },
     employerEmail: {
@@ -72,14 +66,14 @@ const jobSchema = new mongoose.Schema(
       type: String,
       required: [true, "Please provide a country name."],
     },
-    provinces: {
+    province: {
       type: String,
-      required: [true, "Please provide a city name."],
+      required: [true, "Please provide a province name."],
     },
     location: {
       type: String,
       required: [true, "Please provide location."],
-      minLength: [20, "Location must contain at least 20 characters!"],
+      minLength: [10, "Location must contain at least 10 characters!"],
     },
     expired: {
       type: Boolean,
@@ -99,11 +93,11 @@ const jobSchema = new mongoose.Schema(
       required: true,
     },
     yearsOfExperience: {
-      type: Number,
+      type: String,
       default: "Not Specified",
     },
     probationPeriod: {
-      type: Number,
+      type: String,
       default: "Not Specified",
     },
     contractType: {
@@ -146,10 +140,6 @@ const jobSchema = new mongoose.Schema(
       type: String,
       default:
         "To apply for this vacancy, please use the following link: Kindly use Google Chrome Browser for smooth access. For further information please contact us at ",
-    },
-    functionalArea: {
-      type: [String],
-      required: true,
     },
   },
   { timestamps: true }

@@ -12,7 +12,7 @@ export const createJob = async (req, res, next) => {
     experienceLevel,
     location,
     country,
-    city,
+    province,
     jobTitle,
     maxPrice,
     minPrice,
@@ -21,27 +21,49 @@ export const createJob = async (req, res, next) => {
     salaryType,
     skills,
     employerId,
+    aboutCompany,
+    salaryFrom,
+    salaryTo,
+    companySalary,
+    jobSummary,
+    dutiesResponsibilities,
+    jobRequirements,
+    provinces,
+    closingDate,
+    vacancies,
+    yearsOfExperience,
+    probationPeriod,
+    contractType,
+    contractDuration,
+    contractExtensible,
+    minimumEducation,
+    gender,
+    jobVisitors,
+    bookmark,
+    physicalRequirements,
+    workingConditions,
+    submissionGuideline,
   } = req.body;
-  if (
-    !companyLogo ||
-    !companyName ||
-    !description ||
-    !employmentType ||
-    !experienceLevel ||
-    !location ||
-    !country ||
-    !city ||
-    !jobTitle ||
-    !maxPrice ||
-    !minPrice ||
-    !employerEmail ||
-    !postingDate ||
-    !salaryType ||
-    !skills ||
-    !employerId
-  ) {
-    next(errorHandler(404, "Please fill all filed"));
-  }
+  // if (
+  //   !companyLogo ||
+  //   !companyName ||
+  //   !description ||
+  //   !employmentType ||
+  //   !experienceLevel ||
+  //   !location ||
+  //   !country ||
+  //   !province ||
+  //   !jobTitle ||
+  //   !maxPrice ||
+  //   !minPrice ||
+  //   !employerEmail ||
+  //   !postingDate ||
+  //   !salaryType ||
+  //   !skills ||
+  //   !employerId
+  // ) {
+  //   return next(errorHandler(404, "Please fill all filed"));
+  // }
   console.log(employerId);
   const newJob = new Job({
     companyLogo,
@@ -50,8 +72,8 @@ export const createJob = async (req, res, next) => {
     employmentType,
     experienceLevel,
     location,
-    city,
     country,
+    province,
     jobTitle,
     maxPrice,
     minPrice,
@@ -60,6 +82,28 @@ export const createJob = async (req, res, next) => {
     salaryType,
     skills,
     employerId,
+    aboutCompany,
+    salaryFrom,
+    salaryTo,
+    companySalary,
+    jobSummary,
+    dutiesResponsibilities,
+    jobRequirements,
+    provinces,
+    closingDate,
+    vacancies,
+    yearsOfExperience,
+    probationPeriod,
+    contractType,
+    contractDuration,
+    contractExtensible,
+    minimumEducation,
+    gender,
+    jobVisitors,
+    bookmark,
+    physicalRequirements,
+    workingConditions,
+    submissionGuideline,
   });
 
   try {

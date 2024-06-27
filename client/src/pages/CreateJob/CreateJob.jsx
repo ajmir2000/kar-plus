@@ -77,6 +77,9 @@ const CreateJob = () => {
     data.employerId = currentUser._id;
     data.companyLogo = formData.companyLogo;
     data.salaryType = salaryType;
+    data.employerEmail = currentUser.email;
+
+    console.log(data);
 
     if (salaryType === "Company Scale") {
       data.minPrice = "";
@@ -158,33 +161,16 @@ const CreateJob = () => {
                 </option>
               </select>
             </div>
-            {/* <div>
-              {salaryType === "default" ? (
-                <p>Please provide Salary Type *</p>
-              ) : salaryType === "Fixed" ? (
-                <div className="ranged_salary">
-                  <input
-                    type="number"
-                    placeholder="Salary From"
-                    value={salaryFrom}
-                    onChange={(e) => setSalaryFrom(e.target.value)}
-                  />
-                  <input
-                    type="number"
-                    placeholder="Salary To"
-                    value={salaryTo}
-                    onChange={(e) => setSalaryTo(e.target.value)}
-                  />
-                </div>
-              ) : salaryType === "As per Company Scale" ? (
-                <input
-                  type="number"
-                  placeholder="Salary To"
-                  defaultValue="As per Company Scale"
-                  // onChange={(e) => setSalaryTo(e.target.value)}
-                />
-              ) : null}
-            </div> */}
+            <div className="col-lg-6">
+              <label className="form-label mb-2">employerEmail</label>
+              <input
+                type="email"
+                value={currentUser.email}
+                placeholder="E-mail"
+                {...register("employerEmail")}
+                className="form-control"
+              />
+            </div>
           </div>
 
           {salaryType === "Fixed" && (
@@ -218,10 +204,10 @@ const CreateJob = () => {
               />
             </div>
             <div className="col-lg-6">
-              <label className="form-label mb-2">City</label>
+              <label className="form-label mb-2">Province</label>
               <input
                 placeholder="Ex: Kabul"
-                {...register("city")}
+                {...register("province")}
                 className="form-control"
               />
             </div>
@@ -298,7 +284,8 @@ const CreateJob = () => {
               <select {...register("contractType")} className="form-control">
                 <option value="">Select your contract type</option>
                 <option value="Permanent">Permanent</option>
-                <option value="Temporary">Temporary</option>
+                <option value="Temporary">Temporary</option>{" "}
+                <option value="Fixed-term">Fixed-term</option>
               </select>
             </div>
           </div>
@@ -326,11 +313,18 @@ const CreateJob = () => {
           <div className="row g-4">
             <div className="col-lg-6">
               <label className="form-label mb-2">Minimum Education</label>
-              <input
-                type="text"
+
+              <select
                 {...register("minimumEducation")}
-                className="form-control"
-              />
+                className="form-control">
+                <option value="">Select Minimum Education</option>
+                <option value="Graduated From High School">
+                  Graduated From High School
+                </option>
+                <option value="Bachelor's Degree">Bachelor's Degree</option>
+                <option value="Master's Degree">Master's Degree</option>
+                <option value="PhD's Degree">PhD's Degree</option>
+              </select>
             </div>
             <div className="col-lg-6">
               <label className="form-label mb-2">Gender</label>
@@ -396,15 +390,6 @@ const CreateJob = () => {
               onChange={setSelectedOption}
               options={options}
               isMulti
-            />
-          </div>
-
-          <div className="w-100">
-            <label className="form-label mb-2">Functional Area</label>
-            <input
-              type="text"
-              {...register("functionalArea")}
-              className="form-control"
             />
           </div>
 
