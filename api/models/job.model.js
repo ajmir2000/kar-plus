@@ -6,6 +6,10 @@ const jobSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    aboutCompany: {
+      type: String,
+      required: true,
+    },
     jobTitle: {
       type: String,
       required: true,
@@ -22,10 +26,14 @@ const jobSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    salaryType: {
+    companySalary: {
       type: String,
-      required: true,
+      require: true,
     },
+    // salaryType: {
+    //   type: String,
+    //   required: true,
+    // },
     postingDate: {
       type: Date,
       required: true,
@@ -38,7 +46,15 @@ const jobSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    description: {
+    jobSummary: {
+      type: String,
+      required: true,
+    },
+    dutiesResponsibilities: {
+      type: String,
+      required: true,
+    },
+    jobRequirements: {
       type: String,
       required: true,
     },
@@ -54,7 +70,7 @@ const jobSchema = new mongoose.Schema(
       type: String,
       required: [true, "Please provide a country name."],
     },
-    city: {
+    provinces: {
       type: String,
       required: [true, "Please provide a city name."],
     },
@@ -71,6 +87,64 @@ const jobSchema = new mongoose.Schema(
       type: mongoose.Schema.ObjectId,
       ref: "User",
       required: true,
+    },
+    closingDate: {
+      type: String,
+      require: true,
+    },
+    vacancies: {
+      type: Number,
+      require: true,
+    },
+    yearsofExperience: {
+      type: Number,
+      require: true,
+    },
+    probationPeriod: {
+      type: String,
+      default: "Not Specified",
+    },
+    contractType: {
+      type: String,
+      require: true,
+    },
+    contractDuration: {
+      type: String,
+      default: "Not Specified",
+    },
+    contractExtensible: {
+      type: String,
+      require: true,
+    },
+    minimumEducation: { type: String, require: true },
+    gender: {
+      type: String,
+      require: true,
+    },
+    jobVisitors: {
+      type: Number,
+      default: 0,
+    },
+    bookmark: {
+      type: Boolean,
+      default: false,
+    },
+    physicalRequirements: {
+      type: String,
+      default: "",
+    },
+    workingConditions: {
+      type: String,
+      default: "",
+    },
+    submissionGuideline: {
+      type: String,
+      default:
+        "To apply for this vacancy, please use the following link: Kindly use Google Chrome Browser for smooth access For further information please contact us at ",
+    },
+    functionalArea: {
+      type: Array,
+      require: true,
     },
   },
 
