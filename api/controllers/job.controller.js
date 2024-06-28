@@ -111,7 +111,7 @@ export const createJob = async (req, res, next) => {
     res.status(201).json({ acknowledged: true });
   } catch (error) {
     next(error);
-    console.log(error);
+    // console.log(error);
   }
 };
 

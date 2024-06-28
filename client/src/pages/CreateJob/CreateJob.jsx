@@ -362,6 +362,7 @@ const CreateJob = () => {
                 onChange={handleFileChange}
                 type="file"
                 className="form-control"
+                // accept=".pdf,.doc,.docx,.png,.jpg,.jpeg"
                 accept=".png,.jpg,.jpeg"
                 required
               />

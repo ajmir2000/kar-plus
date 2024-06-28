@@ -2,34 +2,23 @@ import mongoose from "mongoose";
 import validator from "validator";
 
 const applicationSchema = new mongoose.Schema({
-  name: {
+  username: {
     type: String,
     required: [true, "Please enter your Name!"],
     minLength: [3, "Name must contain at least 3 Characters!"],
     maxLength: [30, "Name cannot exceed 30 Characters!"],
   },
-  email: {
-    type: String,
-    required: [true, "Please enter your Email!"],
-    validate: [validator.isEmail, "Please provide a valid Email!"],
-  },
-  coverLetter: {
-    type: String,
-    required: [true, "Please provide a cover letter!"],
-  },
-  phone: {
-    type: Number,
-    required: [true, "Please enter your Phone Number!"],
-  },
-  address: {
-    type: String,
-    required: [true, "Please enter your Address!"],
-  },
+
   resume: {
     type: String,
+    required: [true, "Please upload your CV !"],
   },
-  applicantID: {
-    user: {
+  jobID: {
+    type: String,
+    required: true,
+  },
+  jobSeekerID: {
+    userID: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
       required: true,
@@ -39,9 +28,14 @@ const applicationSchema = new mongoose.Schema({
       enum: ["Job Seeker"],
       required: true,
     },
+    email: {
+      type: String,
+      required: [true, "Please enter your Email!"],
+      validate: [validator.isEmail, "Please provide a valid Email!"],
+    },
   },
   employerID: {
-    user: {
+    userID: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
       required: true,
@@ -50,6 +44,11 @@ const applicationSchema = new mongoose.Schema({
       type: String,
       enum: ["Employer"],
       required: true,
+    },
+    email: {
+      type: String,
+      required: [true, "Please enter your Email!"],
+      validate: [validator.isEmail, "Please provide a valid Email!"],
     },
   },
 });
