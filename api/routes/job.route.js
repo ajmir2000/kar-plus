@@ -13,7 +13,7 @@ const router = express.Router();
 
 router.post("/create-job", createJob);
 router.get("/all-job", getAllJobs);
-router.get("/my-job/:email", myJobs);
+router.get("/my-job/:id", myJobs);
 router.delete("/delete/:id", deleteJob);
 // get single job using id
 router.get("/all-job/:id", getJobById);

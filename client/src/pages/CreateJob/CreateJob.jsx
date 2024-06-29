@@ -19,8 +19,10 @@ const CreateJob = () => {
   const [fileUploadError, setFileUploadError] = useState(false);
   const [formData, setFormData] = useState({});
   const [salaryType, setSalaryType] = useState(""); // New state for salary type
+  const [salaryFrom, setSalaryFrom] = useState("");
+  const [salaryTo, setSalaryTo] = useState("");
   const navigate = useNavigate();
-
+  console.log(salaryType);
   const {
     register,
     handleSubmit,
@@ -85,13 +87,21 @@ const CreateJob = () => {
     data.skills = selectedOption;
     data.employerId = currentUser._id;
     data.companyLogo = formData.companyLogo;
-    data.salaryType = salaryType;
     data.employerEmail = currentUser.email;
+    data.employerID = currentUser._id;
+    data.salaryType = salaryType;
 
     if (salaryType === "As per Company Scale") {
-      data.minPrice = "";
-      data.maxPrice = "";
+      data.salaryFrom = "Not Specified";
+      data.salaryTo = "Not Specified";
+      data.companySalary = "As per Company Scale";
+    } else {
+      data.salaryType === "Fixed"
+      data.salaryFrom = salaryFrom;
+      data.salaryTo = salaryTo;
+      data.companySalary = "Not Specified";
     }
+    console.log(data);
 
     setLoading(true);
     try {
@@ -175,75 +185,74 @@ const CreateJob = () => {
               <label className="form-label mb-2">Salary Type</label>
               <select
                 value={salaryType}
-                onChange={(e) => setSalaryType(e.target.value)}
-                className="form-control">
-                <option value="default">Select salary type</option>
+                required
+                className={`form-control ${
+                  errors.salaryFrom ? "is-invalid" : ""
+                }`}
+                onChange={(e) => setSalaryType(e.target.value)}>
+                <option value="">Select salary type</option>
                 <option value="Fixed">Fixed Salary</option>
                 <option value="As per Company Scale">
                   As per Company Scale
                 </option>
               </select>
-            </div>
-            <div className="col-lg-6">
-              <label className="form-label mb-2">Employer Email</label>
-              <input
-                type="email"
-                value={currentUser.email}
-                placeholder="E-mail"
-                {...register("employerEmail", {
-                  required: "Employer Email is required",
-                })}
-                className={`form-control ${
-                  errors.employerEmail ? "is-invalid" : ""
-                }`}
-              />
-              {errors.employerEmail && (
-                <div className="invalid-feedback">
-                  {errors.employerEmail.message}
+            </div>{" "}
+            {salaryType === "Fixed" && (
+              <div className="row g-4">
+                <div className="col-lg-6">
+                  <label className="form-label mb-2">Minimum Salary</label>
+                  <input
+                    placeholder="20k"
+                    required
+                    onChange={(e) => setSalaryFrom(e.target.value)}
+                    className={`form-control ${
+                      errors.salaryFrom ? "is-invalid" : ""
+                    }`}
+                  />
+                  {errors.salaryFrom && (
+                    <div className="invalid-feedback">
+                      {errors.salaryFrom.message}
+                    </div>
+                  )}
                 </div>
-              )}
-            </div>
+                <div className="col-lg-6">
+                  <label className="form-label mb-2">Maximum Salary</label>
+                  <input
+                    placeholder="100k"
+                    required
+                    onChange={(e) => setSalaryTo(e.target.value)}
+                    className={`form-control ${
+                      errors.salaryTo ? "is-invalid" : ""
+                    }`}
+                  />
+                  {errors.salaryTo && (
+                    <div className="invalid-feedback">
+                      {errors.salaryTo.message}
+                    </div>
+                  )}
+                </div>
+              </div>
+            )}
           </div>
-
-          {salaryType === "Fixed" && (
-            <div className="row g-4">
-              <div className="col-lg-6">
-                <label className="form-label mb-2">Minimum Salary</label>
-                <input
-                  placeholder="20k"
-                  {...register("minPrice", {
-                    required: "Minimum Salary is required",
-                  })}
-                  className={`form-control ${
-                    errors.minPrice ? "is-invalid" : ""
-                  }`}
-                />
-                {errors.minPrice && (
-                  <div className="invalid-feedback">
-                    {errors.minPrice.message}
-                  </div>
-                )}
+          <div className="col-lg-6">
+            <label className="form-label mb-2">Employer Email</label>
+            <input
+              type="email"
+              value={currentUser.email}
+              placeholder="E-mail"
+              {...register("employerEmail", {
+                required: "Employer Email is required",
+              })}
+              className={`form-control ${
+                errors.employerEmail ? "is-invalid" : ""
+              }`}
+            />
+            {errors.employerEmail && (
+              <div className="invalid-feedback">
+                {errors.employerEmail.message}
               </div>
-              <div className="col-lg-6">
-                <label className="form-label mb-2">Maximum Salary</label>
-                <input
-                  placeholder="100k"
-                  {...register("maxPrice", {
-                    required: "Maximum Salary is required",
-                  })}
-                  className={`form-control ${
-                    errors.maxPrice ? "is-invalid" : ""
-                  }`}
-                />
-                {errors.maxPrice && (
-                  <div className="invalid-feedback">
-                    {errors.maxPrice.message}
-                  </div>
-                )}
-              </div>
-            </div>
-          )}
-
+            )}
+          </div>
           <div className="row g-4">
             <div className="col-lg-6">
               <label className="form-label mb-2">Country</label>

@@ -30,7 +30,7 @@ const JobDetails = () => {
     postedBy,
   } = jobData;
 
-  console.log(maxPrice);
+
 
   //   const [job, setJob] = useState([]);
   //   useEffect(() => {

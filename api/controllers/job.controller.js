@@ -14,14 +14,12 @@ export const createJob = async (req, res, next) => {
     country,
     province,
     jobTitle,
-    maxPrice,
-    minPrice,
     employerEmail,
     postingDate,
-    salaryType,
     skills,
     employerId,
     aboutCompany,
+    salaryType,
     salaryFrom,
     salaryTo,
     companySalary,
@@ -43,6 +41,7 @@ export const createJob = async (req, res, next) => {
     physicalRequirements,
     workingConditions,
     submissionGuideline,
+    employerID,
   } = req.body;
   // if (
   //   !companyLogo ||
@@ -75,14 +74,12 @@ export const createJob = async (req, res, next) => {
     country,
     province,
     jobTitle,
-    maxPrice,
-    minPrice,
     employerEmail,
     postingDate,
-    salaryType,
     skills,
     employerId,
     aboutCompany,
+    salaryType,
     salaryFrom,
     salaryTo,
     companySalary,
@@ -104,6 +101,7 @@ export const createJob = async (req, res, next) => {
     physicalRequirements,
     workingConditions,
     submissionGuideline,
+    employerID,
   });
 
   try {
@@ -111,7 +109,7 @@ export const createJob = async (req, res, next) => {
     res.status(201).json({ acknowledged: true });
   } catch (error) {
     next(error);
-    // console.log(error);
+    console.log(error);
   }
 };
 
@@ -125,14 +123,18 @@ export const getAllJobs = async (req, res, next) => {
 };
 
 export const myJobs = async (req, res, next) => {
-  const email = req.params.email;
-
+  const userID = req.params.id;
+  console.log(userID);
   try {
-    const jobs = await Job.find({ postedBy: email }).sort({ createdAt: -1 });
-
+    // const jobs = await Job.find({ postedBy: email }).sort({ createdAt: -1 });
+    const jobs = await Job.find({ employerID: userID }).sort({
+      createdAt: -1,
+    });
+    // console.log(jobs);
     res.status(200).json(jobs);
   } catch (error) {
     next(error);
+    // console.log(error);
   }
 };
 

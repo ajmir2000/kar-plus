@@ -16,7 +16,7 @@ const MyJobs = () => {
 
   useEffect(() => {
     setIsLoading(true);
-    fetch(`/api/job/my-job/${currentUser.email}`)
+    fetch(`/api/job/my-job/${currentUser._id}`)
       .then((res) => res.json())
       .then((data) => {
         setJobs(data);
@@ -24,7 +24,8 @@ const MyJobs = () => {
         setIsLoading(false);
       });
   }, [currentUser]);
-
+  console.log(jobs);
+  console.log(currentUser);
   useEffect(() => {
     const filter = jobs.filter((job) =>
       job.jobTitle.toLowerCase().includes(searchText.toLowerCase())
@@ -116,9 +117,14 @@ const MyJobs = () => {
                           <td>{indexOfFirstItem + index + 1}</td>
                           <td>{job.jobTitle}</td>
                           <td>{job.companyName}</td>
-                          <td>
-                            ${job.minPrice} - ${job.maxPrice}k
-                          </td>
+                          {job.salaryType === "As per Company Scale" ? (
+                            <td>{job.companySalary}</td>
+                          ) : (
+                            <td>
+                              {job.salaryFrom} - {job.salaryTo}
+                            </td>
+                          )}
+
                           <td>
                             <Link to={`/edit-job/${job._id}`}>Edit</Link>
                           </td>

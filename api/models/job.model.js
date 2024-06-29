@@ -20,18 +20,22 @@ const jobSchema = new mongoose.Schema(
     },
     salaryFrom: {
       type: String,
+      default: "Not Specified",
     },
     salaryTo: {
       type: String,
+      default: "Not Specified",
     },
     companySalary: {
       type: String,
+      enum: ["As per Company Scale", "Not Specified"],
+      default: "Not Specified",
     },
-    // salaryType: {
-    //   type: String,
-    //   enum: ["Hourly", "Monthly", "Yearly"],
-    //   required: true,
-    // },
+    salaryType: {
+      type: String,
+      enum: ["Fixed", "As per Company Scale"],
+      required: true,
+    },
     postingDate: {
       type: Date,
       required: true,
@@ -59,6 +63,10 @@ const jobSchema = new mongoose.Schema(
       required: true,
     },
     employerEmail: {
+      type: String,
+      required: true,
+    },
+    employerID: {
       type: String,
       required: true,
     },
