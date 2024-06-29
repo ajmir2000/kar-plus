@@ -92,11 +92,11 @@ const CreateJob = () => {
     data.salaryType = salaryType;
 
     if (salaryType === "As per Company Scale") {
-      data.salaryFrom = "Not Specified";
-      data.salaryTo = "Not Specified";
+      data.salaryFrom = "";
+      data.salaryTo = "";
       data.companySalary = "As per Company Scale";
     } else {
-      data.salaryType === "Fixed"
+      data.salaryType === "Fixed";
       data.salaryFrom = salaryFrom;
       data.salaryTo = salaryTo;
       data.companySalary = "Not Specified";
@@ -353,18 +353,6 @@ const CreateJob = () => {
           </div>
 
           <div className="row g-4">
-            {/* <div className="col-lg-6">
-              <label className="form-label mb-2">Company Logo</label>
-              <input
-                onChange={(e) => setFile(e.target.files[0])}
-                type="file"
-                className="form-control"
-                // accept=".pdf,.doc,.docx,.png,.jpg,.jpeg"
-                accept=".png,.jpg,.jpeg"
-                required
-              />
-              {`upload ${filePerc}% `}
-            </div> */}
             <div className="col-lg-6">
               <label className="form-label mb-2">Company Logo</label>
               <input
