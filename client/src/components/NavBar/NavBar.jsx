@@ -27,6 +27,9 @@ function NavBar() {
             <Link to="/companies" className="nav-link ms-3  text-light">
               Companies
             </Link>
+            <Link to="/my-application" className="nav-link ms-3  text-light">
+              My Application
+            </Link>
             <Link to="/about-us" className="nav-link ms-3  text-light">
               About us
             </Link>

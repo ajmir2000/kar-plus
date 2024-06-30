@@ -52,6 +52,16 @@ export const postApplication = async (req, res, next) => {
       email: emailJobSeeker,
       role: "Job Seeker",
     };
+    const {
+      vacancies,
+      closingDate,
+      location,
+      country,
+      province,
+      jobTitle,
+      companyName,
+    } = jobDetails;
+    // console.log(jobDetails);
     // console.log(jobDetails);
     // console.log(name, address, coverletter, resume, jobSeekerId, phone, role);
     // if (
@@ -78,6 +88,13 @@ export const postApplication = async (req, res, next) => {
       role,
       jobID,
       employerID,
+      vacancies,
+      closingDate,
+      location,
+      country,
+      province,
+      jobTitle,
+      companyName,
     });
     res.status(200).json({
       success: true,
@@ -91,21 +108,22 @@ export const postApplication = async (req, res, next) => {
 };
 
 export const employerGetAllApplications = async (req, res, next) => {
+  const _id = req.user.id;
+
   try {
-    const { role } = req.user;
-    if (role === "Job Seeker") {
-      return next(
-        errorHandler(400, "Job Seeker not allowed to access this resource.")
-      );
+    if (!_id) {
+      return next(errorHandler(404, "User not Found."));
     }
-    const { _id } = req.user;
-    const applications = await Application.find({ "employerID.user": _id });
+    // const jobDetails = await Job.find({ employerID: _id });
+    const applications = await Application.find({ "employerID.userID": _id });
+
     res.status(200).json({
       success: true,
       applications,
     });
   } catch (error) {
     next(error);
+    console.log(error);
   }
 };
 

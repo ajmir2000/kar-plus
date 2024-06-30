@@ -17,6 +17,35 @@ const applicationSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  vacancies: {
+    type: Number,
+    required: true,
+  },
+  closingDate: {
+    type: Date,
+    required: true,
+  },
+  location: {
+    type: String,
+    required: [true, "Please provide location."],
+    minLength: [10, "Location must contain at least 10 characters!"],
+  },
+  country: {
+    type: String,
+    required: [true, "Please provide a country name."],
+  },
+  province: {
+    type: String,
+    required: [true, "Please provide a province name."],
+  },
+  jobTitle: {
+    type: String,
+    required: true,
+  },
+  companyName: {
+    type: String,
+    required: true,
+  },
   jobSeekerID: {
     userID: {
       type: mongoose.Schema.Types.ObjectId,
