@@ -11,8 +11,8 @@ import { verifyToken } from "../utils/verifyUser.js";
 const router = express.Router();
 
 router.post("/post", postApplication);
-router.delete("/delete/:id", jobseekerDeleteApplication);
 router.get("/employer/getall", verifyToken, employerGetAllApplications);
-router.get("/jobseeker/getall", jobseekerGetAllApplications);
+router.get("/jobseeker/getall", verifyToken, jobseekerGetAllApplications);
+router.delete("/delete/:id", verifyToken, jobseekerDeleteApplication);
 
 export default router;

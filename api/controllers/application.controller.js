@@ -61,9 +61,7 @@ export const postApplication = async (req, res, next) => {
       jobTitle,
       companyName,
     } = jobDetails;
-    // console.log(jobDetails);
-    // console.log(jobDetails);
-    // console.log(name, address, coverletter, resume, jobSeekerId, phone, role);
+
     // if (
     //   !name ||
     //   !email ||
@@ -128,15 +126,15 @@ export const employerGetAllApplications = async (req, res, next) => {
 };
 
 export const jobseekerGetAllApplications = async (req, res, next) => {
+  const _id = req.user.id;
+
   try {
-    const { role } = req.user;
-    if (role === "Employer") {
-      return next(
-        errorHandler(400, "Employer not allowed to access this resource.")
-      );
+    if (!_id) {
+      return next(errorHandler(400, "User not Found."));
     }
-    const { _id } = req.user;
-    const applications = await Application.find({ "applicantID.user": _id });
+
+    const applications = await Application.find({ "jobSeekerID.userID": _id });
+
     res.status(200).json({
       success: true,
       applications,
@@ -147,14 +145,13 @@ export const jobseekerGetAllApplications = async (req, res, next) => {
 };
 
 export const jobseekerDeleteApplication = async (req, res, next) => {
+  const userID = req.user.id;
+  const { id } = req.params;
+
   try {
-    const { role } = req.user;
-    if (role === "Employer") {
-      return next(
-        errorHandler(400, "Employer not allowed to access this resource.")
-      );
+    if (!userID) {
+      return next(errorHandler(400, "User Not Found."));
     }
-    const { id } = req.params;
     const application = await Application.findById(id);
     if (!application) {
       return next(errorHandler(404, "Application not found!"));

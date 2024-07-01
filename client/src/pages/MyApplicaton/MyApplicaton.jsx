@@ -48,7 +48,7 @@ const MyApplications = () => {
 
   const deleteApplication = async (id) => {
     try {
-      const response = await fetch(`application/delete/${id}`, {
+      const response = await fetch(`/api/application/delete/${id}`, {
         method: "DELETE",
         credentials: "include",
       });
@@ -59,6 +59,7 @@ const MyApplications = () => {
       );
     } catch (error) {
       toast.error(error.message);
+      console.log(error.message);
     }
   };
 
@@ -113,35 +114,94 @@ const MyApplications = () => {
 export default MyApplications;
 
 const JobSeekerCard = ({ element, deleteApplication, openModal }) => {
+  const getFileType = (url) => {
+    const extension = url.split("?")[0].split(".").pop();
+    return extension.toLowerCase();
+  };
+
+  const downloadFile = (url) => {
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = url.split("/").pop();
+    link.click();
+  };
+
+  const fileType = getFileType(element.resume);
   return (
     <div className="card mb-3">
       <div className="card-body">
         <div className="d-flex justify-content-between">
           <div className="detail">
+            <h3 className="text-info">Job Seeker Details</h3> {element.username}
+            <p></p>
             <p>
               <strong>Name:</strong> {element.username}
             </p>
             <p>
               <strong>Email:</strong> {element.jobSeekerID.email}
             </p>
+            <h3 className="text-danger">Job Details</h3>
             <p>
-              <strong>Phone:</strong> {element.phone}
+              <strong>Job Title:</strong> {element.jobTitle}
             </p>
             <p>
-              <strong>Address:</strong> {element.address}
+              <strong>Company Name:</strong> {element.companyName}
             </p>
             <p>
-              <strong>Cover Letter:</strong> {element.coverLetter}
+              <strong>Vacancies:</strong> {element.vacancies}
+            </p>
+            <p>
+              <strong>Address:</strong> {element.country}, {element.province},
+              {element.location}
+            </p>
+            <p>
+              <strong>Closing Date:</strong> {element.closingDate}
             </p>
           </div>
           <div className="resume">
-            <img
-              src={element.resume}
-              alt="resume"
-              className="img-thumbnail"
-              onClick={() => openModal(element.resume.url)}
-              style={{ cursor: "pointer", width: "150px" }}
-            />
+            {fileType === "jpg" || fileType === "jpeg" || fileType === "png" ? (
+              <img
+                src={element.resume}
+                alt="resume"
+                className="img-thumbnail"
+                onClick={() => openModal(element.resume)}
+                style={{ cursor: "pointer", width: "150px" }}
+              />
+            ) : fileType === "pdf" ? (
+              <div
+                onClick={() => downloadFile(element.resume)}
+                style={{
+                  cursor: "pointer",
+                  width: "150px",
+                  height: "150px",
+                  border: "1px solid #ccc",
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  flexDirection: "column",
+                }}>
+                <FaFilePdf size={48} color="red" />
+                <span>Download PDF File</span>
+              </div>
+            ) : fileType === "doc" || fileType === "docx" ? (
+              <div
+                onClick={() => downloadFile(element.resume)}
+                style={{
+                  cursor: "pointer",
+                  width: "150px",
+                  height: "150px",
+                  border: "1px solid #ccc",
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  flexDirection: "column",
+                }}>
+                <FaFileWord size={48} color="blue" />
+                <span>Download Word File</span>
+              </div>
+            ) : (
+              <span>Unsupported file type</span>
+            )}
           </div>
         </div>
         <div className="text-end">
@@ -156,7 +216,6 @@ const JobSeekerCard = ({ element, deleteApplication, openModal }) => {
   );
 };
 
-//   const getFileType = (url) => {
 //     const extension = url.split("?")[0].split(".").pop();
 //     return extension.toLowerCase();
 //   };
