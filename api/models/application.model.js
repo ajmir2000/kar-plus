@@ -12,6 +12,7 @@ const applicationSchema = new mongoose.Schema({
   resume: {
     type: String,
     required: [true, "Please upload your CV !"],
+    // required: true,
   },
   jobID: {
     type: String,

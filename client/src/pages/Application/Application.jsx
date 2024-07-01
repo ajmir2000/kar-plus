@@ -18,6 +18,7 @@ const Application = () => {
   const [file, setFile] = useState(undefined);
   const [filePerc, setFilePerc] = useState(0);
   const [fileUploadError, setFileUploadError] = useState(false);
+  const [isFileUploaded, setIsFileUploaded] = useState(false);
 
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
@@ -52,11 +53,12 @@ const Application = () => {
     ) {
       setFile(selectedFile);
       setFileUploadError(false); // Reset the error state if any
-      handleFileUpload(selectedFile);
     } else {
       setFile(null);
-      setFileUploadError(true); // Set error state if file is not an image
-      console.log("Please upload a valid image file (PDF,Word,PNG or JPEG).");
+      setFileUploadError(true); // Set error state if file is not valid
+      console.log(
+        "Please upload a valid image file (PDF, Word, PNG, or JPEG)."
+      );
     }
   };
 
@@ -82,24 +84,21 @@ const Application = () => {
         setFileUploadError(true);
       },
       () => {
-        getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) =>
-          setFormData((prev) => ({ ...prev, resume: downloadURL }))
-        );
+        getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+          setFormData((prev) => ({ ...prev, resume: downloadURL }));
+          setIsFileUploaded(true);
+        });
       }
     );
   };
 
-  // const handleChange = (e) => {
-  //   setFormData({
-  //     ...formData,
-  //     [e.target.id]: e.target.value,
-  //     email: currentUser.email, // Ensure email is always set
-  //     jobId: id, // Ensure jobId is always set
-  //   });
-  // };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (!isFileUploaded) {
+      alert("File is still uploading. Please wait.");
+      return;
+    }
 
     try {
       const res = await fetch("/api/application/post", {
@@ -151,7 +150,8 @@ const Application = () => {
             {`upload ${filePerc}% `}
             {fileUploadError && (
               <p className="text-danger">
-                Please upload a valid File or image file (PDF,Word,PNG or JPEG).
+                Please upload a valid File or image file (PDF, Word, PNG, or
+                JPEG).
               </p>
             )}
           </div>

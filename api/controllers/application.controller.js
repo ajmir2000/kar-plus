@@ -16,7 +16,7 @@ export const postApplication = async (req, res, next) => {
   } = await req.body;
   // console.log(jobID);
   // console.log(role)
-
+  console.log(resume);
   try {
     if (role === "Employer") {
       return next(
@@ -74,6 +74,7 @@ export const postApplication = async (req, res, next) => {
     // ) {
     //   return next(errorHandler(400, "Please fill all fields."));
     // }
+    console.log(resume);
     const application = await Application.create({
       username,
       emailJobSeeker,
@@ -101,7 +102,7 @@ export const postApplication = async (req, res, next) => {
     });
   } catch (error) {
     next(error);
-    // console.log(error);
+    console.log(error);
   }
 };
 

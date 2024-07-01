@@ -82,7 +82,7 @@ const CreateJob = () => {
       }
     );
   };
-
+  // console.log(formData);
   const onSubmit = async (data) => {
     data.skills = selectedOption;
     data.employerId = currentUser._id;
