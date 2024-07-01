@@ -6,7 +6,7 @@ import "react-pdf/dist/esm/Page/AnnotationLayer.css";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
-
+import { FaFilePdf, FaFileWord } from "react-icons/fa";
 const MyApplications = () => {
   const [applications, setApplications] = useState([]);
 
@@ -299,9 +299,7 @@ const EmployerCard = ({ element, openModal }) => {
                 onClick={() => openModal(element.resume)}
                 style={{ cursor: "pointer", width: "150px" }}
               />
-            ) : fileType === "pdf" ||
-              fileType === "doc" ||
-              fileType === "docx" ? (
+            ) : fileType === "pdf" ? (
               <div
                 onClick={() => downloadFile(element.resume)}
                 style={{
@@ -312,8 +310,26 @@ const EmployerCard = ({ element, openModal }) => {
                   display: "flex",
                   justifyContent: "center",
                   alignItems: "center",
+                  flexDirection: "column",
                 }}>
-                <span>Download {fileType.toUpperCase()} File</span>
+                <FaFilePdf size={48} color="red" />
+                <span>Download PDF File</span>
+              </div>
+            ) : fileType === "doc" || fileType === "docx" ? (
+              <div
+                onClick={() => downloadFile(element.resume)}
+                style={{
+                  cursor: "pointer",
+                  width: "150px",
+                  height: "150px",
+                  border: "1px solid #ccc",
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  flexDirection: "column",
+                }}>
+                <FaFileWord size={48} color="blue" />
+                <span>Download Word File</span>
               </div>
             ) : (
               <span>Unsupported file type</span>
