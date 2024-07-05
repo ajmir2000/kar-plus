@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import PageHeader from "../../components/PageHeader/PageHeader.jsx";
 import { Link, useParams } from "react-router-dom";
 import { FaBriefcase } from "react-icons/fa6";
+import { VscGitStashApply } from "react-icons/vsc";
 // import Swal from "sweetalert2";
 import { useLocation } from "react-router-dom";
 
@@ -62,32 +63,41 @@ const JobDetails = () => {
     <div className="container-fluid">
       <PageHeader title={"Job Details Page"} path={"Single Job"} />
 
-      <div className="mt-4">
-        <h3 className="font-weight-bold mb-2">Job ID: {parseInt(id)}</h3>
+      <div className="mt-4 p-5">
+        <h3 className="font-weight-bold mb-2 text-light">
+          Job ID: {parseInt(id)}
+        </h3>
 
-        <div className="my-4">
-          <h2 className="h2 text-primary">Job details</h2>
-          <p className="text-muted my-1">
-            Here's how the job details align with your job preferences. Manage
+        <div className="my-4 ">
+          <h2 className="h2 text-light">Job details</h2>
+          <p className="my-1 text-light">
+            Here is how the job details align with your job preferences. Manage
             job preferences anytime in your profile.
           </p>
         </div>
 
-        <div className="my-4">
-          <div className="d-flex align-items-center gap-2">
+        <div className="my-4 d-flex gap-3 flex-column ">
+          <div className="d-flex align-items-center gap-2 text-light ">
             <FaBriefcase />
-            <p className="h4 font-weight-medium mb-2">Job type</p>
+            <p className="h4 font-weight-medium ">Job type:</p>
+            <span className="h4 font-weight-medium">{employmentType}</span>
           </div>
-          <button className="btn btn-primary">{employmentType}</button>
           {/* <button className="btn btn-info ms-2" onClick={handleJobApply}>
             Apply Now
           </button> */}
-             <button type="button" className="btn-primary"> <Link to={`/apply-job/${id}`}>Apply</Link></button>+
+          <button type="button" className="btn btn-primary rounded-5  gap-5">
+            {" "}
+            <Link className="link" to={`/apply-job/${id}`}>
+              <VscGitStashApply className="fs-4" />
+              Apply Now
+            </Link>
+          </button>
+          +
         </div>
 
         {/* job details */}
-        <div className="d-flex flex-column flex-md-row justify-content-between gap-3 mt-4">
-          <div className="col-md-4">
+        <div className="d-flex flex-column flex-md-row justify-content-between gap-3 mt-4 ">
+          <div className="col-md-4 ">
             <h4 className="h4 font-weight-medium mb-3">Benefits</h4>
             <p className="text-muted mb-2">
               Pulled from the full job description

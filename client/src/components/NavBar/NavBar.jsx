@@ -40,6 +40,7 @@ function NavBar() {
                 className="rounded-5  w-50 "
                 src={currentUser.avatar}
                 alt="profile"
+                className="custom-image rounded-circle"
               />
             </Link>
           ) : (
