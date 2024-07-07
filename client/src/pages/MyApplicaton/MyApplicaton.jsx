@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 
-import { Document, Page } from "react-pdf";
-import "react-pdf/dist/esm/Page/AnnotationLayer.css";
+// import { Document, Page } from "react-pdf";
+// import "react-pdf/dist/esm/Page/AnnotationLayer.css";
 
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
