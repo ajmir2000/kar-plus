@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 
-import { Document, Page } from "react-pdf";
-import "react-pdf/dist/esm/Page/AnnotationLayer.css";
+//import { Document, Page } from "react-pdf";
+//import "react-pdf/dist/esm/Page/AnnotationLayer.css";
 
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
@@ -76,7 +76,7 @@ const MyApplications = () => {
     <section className="my-applications page container">
       {currentUser && currentUser.role === "Job Seeker" ? (
         <>
-          <h1>My Applications</h1>
+          <h1 className="text-light">My Applications</h1>
           {applications.length <= 0 ? (
             <h4>No Applications Found</h4>
           ) : (
@@ -92,7 +92,7 @@ const MyApplications = () => {
         </>
       ) : (
         <>
-          <h1>Applications From Job Seekers</h1>
+          <h1 className="text-white">Applications From Job Seekers</h1>
           {applications.length <= 0 ? (
             <h4>No Applications Found</h4>
           ) : (
@@ -128,12 +128,12 @@ const JobSeekerCard = ({ element, deleteApplication, openModal }) => {
 
   const fileType = getFileType(element.resume);
   return (
-    <div className="card mb-3">
+    <div className="card mb-3 shadow-sm rounded rounded-5 p-3">
       <div className="card-body">
         <div className="d-flex justify-content-between">
           <div className="detail">
-            <h3 className="text-info">Job Seeker Details</h3> {element.username}
-            <p></p>
+            <h3 className="text-info">Job Seeker Details</h3>
+            <p>{element.username}</p>
             <p>
               <strong>Name:</strong> {element.username}
             </p>
@@ -179,7 +179,8 @@ const JobSeekerCard = ({ element, deleteApplication, openModal }) => {
                   justifyContent: "center",
                   alignItems: "center",
                   flexDirection: "column",
-                }}>
+                }}
+              >
                 <FaFilePdf size={48} color="red" />
                 <span>Download PDF File</span>
               </div>
@@ -195,7 +196,8 @@ const JobSeekerCard = ({ element, deleteApplication, openModal }) => {
                   justifyContent: "center",
                   alignItems: "center",
                   flexDirection: "column",
-                }}>
+                }}
+              >
                 <FaFileWord size={48} color="blue" />
                 <span>Download Word File</span>
               </div>
@@ -204,10 +206,11 @@ const JobSeekerCard = ({ element, deleteApplication, openModal }) => {
             )}
           </div>
         </div>
-        <div className="text-end">
+        <div className="text-end mt-3">
           <button
             className="btn btn-danger"
-            onClick={() => deleteApplication(element._id)}>
+            onClick={() => deleteApplication(element._id)}
+          >
             Delete Application
           </button>
         </div>
@@ -319,7 +322,7 @@ const EmployerCard = ({ element, openModal }) => {
   const fileType = getFileType(element.resume);
 
   return (
-    <div className="card mb-3">
+    <div className="card mb-3 shadow-sm rounded rounded-5 p-3">
       <div className="card-body">
         <div className="d-flex justify-content-between">
           <div className="detail">
@@ -370,7 +373,8 @@ const EmployerCard = ({ element, openModal }) => {
                   justifyContent: "center",
                   alignItems: "center",
                   flexDirection: "column",
-                }}>
+                }}
+              >
                 <FaFilePdf size={48} color="red" />
                 <span>Download PDF File</span>
               </div>
@@ -386,7 +390,8 @@ const EmployerCard = ({ element, openModal }) => {
                   justifyContent: "center",
                   alignItems: "center",
                   flexDirection: "column",
-                }}>
+                }}
+              >
                 <FaFileWord size={48} color="blue" />
                 <span>Download Word File</span>
               </div>

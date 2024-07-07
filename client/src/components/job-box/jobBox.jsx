@@ -128,19 +128,23 @@ export default function JobBox({
       <Link
         to={`/job-detail/${_id}`}
         state={{ jobData }}
-        className="text-decoration-none">
+        className="text-decoration-none"
+      >
         <div>
-          <div className="custom-jobBox-pic-div">
-            <img src={companyLogo} alt="company logo" />
-          </div>
-          <div className="d-flex flex-column mx-5">
-            <div className="custom-jobBox-title-div">
+          <div className="d-flex gap-3">
+            {" "}
+            <div className="custom-jobBox-pic-div">
+              <img src={companyLogo} alt="company logo" />
+            </div>
+            <div className="custom-jobBox-title-div mt-3">
               <h3>
                 {jobTitle} <FaBookmark className="fs-4 text-success ms-5" />
               </h3>
               <p className="text-muted">{companyName}</p>
             </div>
+          </div>
 
+          <div className="d-flex flex-column mx-5">
             <div className="d-flex gap-3 custom-jobBox-btn-container">
               <div className="btn btn-sm rounded-pill">
                 <CiLocationOn className="text-success fs-5 me-2" />
@@ -174,7 +178,6 @@ export default function JobBox({
           </div>
         </div>
       </Link>
-   
     </div>
   );
 }

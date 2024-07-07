@@ -140,16 +140,14 @@ export default function SignIn() {
                 </button>
               </div>
               <p className="mt-3">--- or login with ---</p>
-              <div className="d-flex custom-buttons">
+              <div className="custom-buttons w-85">
                 <button type="button"
+                
                   disabled={formData.role ? false : true}
-                  className={formData.role ? "bg-success " : "bg-light"}>
-                  <OAuth role={formData.role} />
+                  className={`rounded rounded-3${formData.role ? "bg-success " : "bg-light"}`}>
+                  <OAuth role={formData.role} />89
                 </button>
-                <button className="btn btn-light ms-lg-5">
-                  <RiFacebookCircleFill className="text-primary" />
-                  facebook
-                </button>
+               
               </div>
               <p className="mt-2 lead custom-signin-suggestion">
                 don't have an acount?{" "}
