@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from "react";
 
+import { Document, Page } from "react-pdf";
+import "react-pdf/dist/esm/Page/AnnotationLayer.css";
+
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
-
+import { FaFilePdf, FaFileWord } from "react-icons/fa";
 const MyApplications = () => {
   const [applications, setApplications] = useState([]);
 
@@ -45,7 +48,7 @@ const MyApplications = () => {
 
   const deleteApplication = async (id) => {
     try {
-      const response = await fetch(`application/delete/${id}`, {
+      const response = await fetch(`/api/application/delete/${id}`, {
         method: "DELETE",
         credentials: "include",
       });
@@ -56,6 +59,7 @@ const MyApplications = () => {
       );
     } catch (error) {
       toast.error(error.message);
+      console.log(error.message);
     }
   };
 
@@ -110,35 +114,94 @@ const MyApplications = () => {
 export default MyApplications;
 
 const JobSeekerCard = ({ element, deleteApplication, openModal }) => {
+  const getFileType = (url) => {
+    const extension = url.split("?")[0].split(".").pop();
+    return extension.toLowerCase();
+  };
+
+  const downloadFile = (url) => {
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = url.split("/").pop();
+    link.click();
+  };
+
+  const fileType = getFileType(element.resume);
   return (
     <div className="card mb-3">
       <div className="card-body">
         <div className="d-flex justify-content-between">
           <div className="detail">
+            <h3 className="text-info">Job Seeker Details</h3> {element.username}
+            <p></p>
             <p>
               <strong>Name:</strong> {element.username}
             </p>
             <p>
               <strong>Email:</strong> {element.jobSeekerID.email}
             </p>
+            <h3 className="text-danger">Job Details</h3>
             <p>
-              <strong>Phone:</strong> {element.phone}
+              <strong>Job Title:</strong> {element.jobTitle}
             </p>
             <p>
-              <strong>Address:</strong> {element.address}
+              <strong>Company Name:</strong> {element.companyName}
             </p>
             <p>
-              <strong>Cover Letter:</strong> {element.coverLetter}
+              <strong>Vacancies:</strong> {element.vacancies}
+            </p>
+            <p>
+              <strong>Address:</strong> {element.country}, {element.province},
+              {element.location}
+            </p>
+            <p>
+              <strong>Closing Date:</strong> {element.closingDate}
             </p>
           </div>
           <div className="resume">
-            <img
-              src={element.resume.url}
-              alt="resume"
-              className="img-thumbnail"
-              onClick={() => openModal(element.resume.url)}
-              style={{ cursor: "pointer", width: "150px" }}
-            />
+            {fileType === "jpg" || fileType === "jpeg" || fileType === "png" ? (
+              <img
+                src={element.resume}
+                alt="resume"
+                className="img-thumbnail"
+                onClick={() => openModal(element.resume)}
+                style={{ cursor: "pointer", width: "150px" }}
+              />
+            ) : fileType === "pdf" ? (
+              <div
+                onClick={() => downloadFile(element.resume)}
+                style={{
+                  cursor: "pointer",
+                  width: "150px",
+                  height: "150px",
+                  border: "1px solid #ccc",
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  flexDirection: "column",
+                }}>
+                <FaFilePdf size={48} color="red" />
+                <span>Download PDF File</span>
+              </div>
+            ) : fileType === "doc" || fileType === "docx" ? (
+              <div
+                onClick={() => downloadFile(element.resume)}
+                style={{
+                  cursor: "pointer",
+                  width: "150px",
+                  height: "150px",
+                  border: "1px solid #ccc",
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  flexDirection: "column",
+                }}>
+                <FaFileWord size={48} color="blue" />
+                <span>Download Word File</span>
+              </div>
+            ) : (
+              <span>Unsupported file type</span>
+            )}
           </div>
         </div>
         <div className="text-end">
@@ -153,7 +216,108 @@ const JobSeekerCard = ({ element, deleteApplication, openModal }) => {
   );
 };
 
+//     const extension = url.split("?")[0].split(".").pop();
+//     return extension.toLowerCase();
+//   };
+//   console.log(element.resume);
+//   const fileType = getFileType(element.resume);
+//   console.log(fileType);
+
+//   return (
+//     <div className="card mb-3">
+//       <div className="card-body">
+//         <div className="d-flex justify-content-between">
+//           <div className="detail">
+//             <h3 className="text-info">Job Seeker Details</h3>
+//             <p>
+//               <strong>Name:</strong> {element.username}
+//             </p>
+//             <p>
+//               <strong>Email:</strong> {element.jobSeekerID.email}
+//             </p>
+//             <h3 className="text-danger">Job Details</h3>
+
+//             <p>
+//               <strong>Job Title:</strong> {element.jobTitle}
+//             </p>
+//             <p>
+//               <strong>Company Name:</strong> {element.companyName}
+//             </p>
+//             <p>
+//               <strong>Vacancies:</strong> {element.vacancies}
+//             </p>
+//             <p>
+//               <strong>Address:</strong> {element.country}, {element.province},
+//               {element.location}
+//             </p>
+//             <p>
+//               <strong>Closing Date:</strong> {element.closingDate}
+//             </p>
+//           </div>
+//           <div className="resume">
+//             {fileType === "jpg" || fileType === "jpeg" || fileType === "png" ? (
+//               <img
+//                 src={element.resume}
+//                 alt="resume"
+//                 className="img-thumbnail"
+//                 onClick={() => openModal(element.resume)}
+//                 style={{ cursor: "pointer", width: "150px" }}
+//               />
+//             ) : fileType === "pdf" ? (
+//               <div
+//                 onClick={() => openModal(element.resume)}
+//                 style={{
+//                   cursor: "pointer",
+//                   width: "150px",
+//                   height: "150px",
+//                   border: "1px solid #ccc",
+//                   display: "flex",
+//                   justifyContent: "center",
+//                   alignItems: "center",
+//                 }}>
+//                 <Document file={element.resume}>
+//                   <Page pageNumber={1} width={150} />
+//                 </Document>
+//               </div>
+//             ) : fileType === "doc" || fileType === "docx" ? (
+//               <div
+//                 onClick={() => openModal(element.resume)}
+//                 style={{
+//                   cursor: "pointer",
+//                   width: "150px",
+//                   height: "150px",
+//                   border: "1px solid #ccc",
+//                   display: "flex",
+//                   justifyContent: "center",
+//                   alignItems: "center",
+//                 }}>
+//                 <span>Word Document</span>
+//               </div>
+//             ) : (
+//               <span>Unsupported file type</span>
+//             )}
+//           </div>
+//         </div>
+//       </div>
+//     </div>
+//   );
+// };
+
 const EmployerCard = ({ element, openModal }) => {
+  const getFileType = (url) => {
+    const extension = url.split("?")[0].split(".").pop();
+    return extension.toLowerCase();
+  };
+
+  const downloadFile = (url) => {
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = url.split("/").pop();
+    link.click();
+  };
+
+  const fileType = getFileType(element.resume);
+
   return (
     <div className="card mb-3">
       <div className="card-body">
@@ -167,31 +331,68 @@ const EmployerCard = ({ element, openModal }) => {
               <strong>Email:</strong> {element.jobSeekerID.email}
             </p>
             <h3 className="text-danger">Job Details</h3>
-            {/*  vacancies: 2,
-      closingDate: '2024-06-27T00:00:00.000Z',
-      location: 'khir khana1234',
-      country: 'Afghanistan',
-      province: 'asdda',
-      jobTitle: 'HTC Rebrand',
-      companyName: 'HTC', */}
+
             <p>
               <strong>Job Title:</strong> {element.jobTitle}
             </p>
             <p>
-              <strong>Address:</strong> {element.location}
+              <strong>Company Name:</strong> {element.companyName}
             </p>
             <p>
-              <strong>Cover Letter:</strong> {element.coverLetter}
+              <strong>Vacancies:</strong> {element.vacancies}
+            </p>
+            <p>
+              <strong>Address:</strong> {element.country}, {element.province},
+              {element.location}
+            </p>
+            <p>
+              <strong>Closing Date:</strong> {element.closingDate}
             </p>
           </div>
           <div className="resume">
-            <img
-              src={element.resume.url}
-              alt="resume"
-              className="img-thumbnail"
-              onClick={() => openModal(element.resume.url)}
-              style={{ cursor: "pointer", width: "150px" }}
-            />
+            {fileType === "jpg" || fileType === "jpeg" || fileType === "png" ? (
+              <img
+                src={element.resume}
+                alt="resume"
+                className="img-thumbnail"
+                onClick={() => openModal(element.resume)}
+                style={{ cursor: "pointer", width: "150px" }}
+              />
+            ) : fileType === "pdf" ? (
+              <div
+                onClick={() => downloadFile(element.resume)}
+                style={{
+                  cursor: "pointer",
+                  width: "150px",
+                  height: "150px",
+                  border: "1px solid #ccc",
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  flexDirection: "column",
+                }}>
+                <FaFilePdf size={48} color="red" />
+                <span>Download PDF File</span>
+              </div>
+            ) : fileType === "doc" || fileType === "docx" ? (
+              <div
+                onClick={() => downloadFile(element.resume)}
+                style={{
+                  cursor: "pointer",
+                  width: "150px",
+                  height: "150px",
+                  border: "1px solid #ccc",
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  flexDirection: "column",
+                }}>
+                <FaFileWord size={48} color="blue" />
+                <span>Download Word File</span>
+              </div>
+            ) : (
+              <span>Unsupported file type</span>
+            )}
           </div>
         </div>
       </div>
