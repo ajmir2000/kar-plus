@@ -73,4 +73,5 @@ const GigSchema = new Schema(
   }
 );
 
-export default mongoose.model("Gig", GigSchema);
+const Gig = mongoose.model("Gig", GigSchema);
+export default Gig;
