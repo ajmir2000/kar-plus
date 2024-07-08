@@ -19,7 +19,7 @@ export const intent = async (req, res, next) => {
     gigId: gig._id,
     img: gig.cover,
     title: gig.title,
-    buyerId: req.userId,
+    buyerId: req.user.id,
     sellerId: gig.userId,
     price: gig.price,
     payment_intent: paymentIntent.id,
@@ -35,7 +35,9 @@ export const intent = async (req, res, next) => {
 export const getOrders = async (req, res, next) => {
   try {
     const orders = await Order.find({
-      ...(req.isSeller ? { sellerId: req.userId } : { buyerId: req.userId }),
+      ...(req.user.isSeller
+        ? { sellerId: req.user.id }
+        : { buyerId: req.user.id }),
       isCompleted: true,
     });
 

@@ -2,11 +2,11 @@ import Gig from "../models/gig.model.js";
 import { errorHandler } from "../utils/error.js";
 
 export const createGig = async (req, res, next) => {
-  if (!req.isSeller)
+  if (!req.user.isSeller)
     return next(errorHandler(403, "Only sellers can create a gig!"));
 
   const newGig = new Gig({
-    userId: req.userId,
+    userId: req.user.id,
     ...req.body,
   });
 
@@ -20,7 +20,7 @@ export const createGig = async (req, res, next) => {
 export const deleteGig = async (req, res, next) => {
   try {
     const gig = await Gig.findById(req.params.id);
-    if (gig.userId !== req.userId)
+    if (gig.userId !== req.user.id)
       return next(errorHandler(403, "You can delete only your gig!"));
 
     await Gig.findByIdAndDelete(req.params.id);

@@ -3,11 +3,13 @@ import Conversation from "../models/conversation.model.js";
 
 export const createConversation = async (req, res, next) => {
   const newConversation = new Conversation({
-    id: req.isSeller ? req.userId + req.body.to : req.body.to + req.userId,
-    sellerId: req.isSeller ? req.userId : req.body.to,
-    buyerId: req.isSeller ? req.body.to : req.userId,
-    readBySeller: req.isSeller,
-    readByBuyer: !req.isSeller,
+    id: req.user.isSeller
+      ? req.user.id + req.body.to
+      : req.body.to + req.user.id,
+    sellerId: req.user.isSeller ? req.user.id : req.body.to,
+    buyerId: req.user.isSeller ? req.body.to : req.user.id,
+    readBySeller: req.user.isSeller,
+    readByBuyer: !req.user.isSeller,
   });
 
   try {
@@ -26,7 +28,9 @@ export const updateConversation = async (req, res, next) => {
         $set: {
           // readBySeller: true,
           // readByBuyer: true,
-          ...(req.isSeller ? { readBySeller: true } : { readByBuyer: true }),
+          ...(req.user.isSeller
+            ? { readBySeller: true }
+            : { readByBuyer: true }),
         },
       },
       { new: true }
@@ -51,7 +55,7 @@ export const getSingleConversation = async (req, res, next) => {
 export const getConversations = async (req, res, next) => {
   try {
     const conversations = await Conversation.find(
-      req.isSeller ? { sellerId: req.userId } : { buyerId: req.userId }
+      req.user.isSeller ? { sellerId: req.user.id } : { buyerId: req.user.id }
     ).sort({ updatedAt: -1 });
     res.status(200).send(conversations);
   } catch (err) {

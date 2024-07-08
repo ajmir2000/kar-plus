@@ -5,7 +5,7 @@ import Conversation from "../models/conversation.model.js";
 export const createMessage = async (req, res, next) => {
   const newMessage = new Message({
     conversationId: req.body.conversationId,
-    userId: req.userId,
+    userId: req.user.id,
     desc: req.body.desc,
   });
   try {
@@ -14,8 +14,8 @@ export const createMessage = async (req, res, next) => {
       { id: req.body.conversationId },
       {
         $set: {
-          readBySeller: req.isSeller,
-          readByBuyer: !req.isSeller,
+          readBySeller: req.user.isSeller,
+          readByBuyer: !req.user.isSeller,
           lastMessage: req.body.desc,
         },
       },
