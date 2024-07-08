@@ -1,4 +1,4 @@
-import createError from "../utils/createError.js";
+import { errorHandler } from "../utils/error.js";
 import Message from "../models/message.model.js";
 import Conversation from "../models/conversation.model.js";
 

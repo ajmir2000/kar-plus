@@ -5,6 +5,12 @@ import userRouter from "./routes/user.route.js";
 import authRouter from "./routes/auth.route.js";
 import jobRouter from "./routes/job.route.js";
 import applicationRouter from "./routes/application.route.js";
+//Talent Part
+import messageRoute from "./routes/message.route.js";
+import reviewRoute from "./routes/review.route.js";
+import gigRoute from "./routes/gig.route.js";
+import orderRoute from "./routes/order.route.js";
+import conversationRoute from "./routes/conversation.route.js";
 
 import cookieParser from "cookie-parser";
 dotenv.config();
@@ -32,6 +38,12 @@ app.use("/api/user", userRouter);
 app.use("/api/auth", authRouter);
 app.use("/api/job", jobRouter);
 app.use("/api/application", applicationRouter);
+// Talent part
+app.use("/api/gigs", gigRoute);
+app.use("/api/orders", orderRoute);
+app.use("/api/conversations", conversationRoute);
+app.use("/api/messages", messageRoute);
+app.use("/api/reviews", reviewRoute);
 
 app.use((err, req, res, next) => {
   const statusCode = err.statusCode || 500;
