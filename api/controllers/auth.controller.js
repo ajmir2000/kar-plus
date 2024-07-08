@@ -49,7 +49,10 @@ export const singin = async (req, res, next) => {
       );
     }
 
-    const token = jwt.sign({ id: validUser._id }, process.env.JWT_SECRET);
+    const token = jwt.sign(
+      { id: validUser._id, isSeller: validUser.isSeller },
+      process.env.JWT_SECRET
+    );
     // by this method we can remove password for the client he or she can not see the password on respose, it is a secure point.
     const { password: pass, ...rest } = validUser._doc;
     res
@@ -65,7 +68,10 @@ export const google = async (req, res, next) => {
   try {
     const user = await User.findOne({ email: req.body.email });
     if (user) {
-      const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET);
+      const token = jwt.sign(
+        { id: user._id, isSeller: user.isSeller },
+        process.env.JWT_SECRET
+      );
       const { password: pass, ...rest } = user._doc;
       res
         .cookie("access_token", token, { httpOnly: true })
@@ -86,7 +92,10 @@ export const google = async (req, res, next) => {
         role: req.body.role,
       });
       await newUser.save();
-      const token = jwt.sign({ id: newUser._id }, process.env.JWT_SECRET);
+      const token = jwt.sign(
+        { id: newUser._id, isSeller: newUser.isSeller },
+        process.env.JWT_SECRET
+      );
       const { password: pass, ...rest } = newUser._doc;
       res
         .cookie("access_token", token, { httpOnly: true }) // when httpOnly use it means it must secure
