@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import "./Gigs.scss";
-import GigCard from "../../components/gigCard/GigCard";
+import GigCard from "../../../components/TalentComponents/gigCard/GigCard";
 import { useQuery } from "@tanstack/react-query";
 import newRequest from "../../utils/newRequest";
 import { useLocation } from "react-router-dom";
@@ -43,7 +43,7 @@ function Gigs() {
   return (
     <div className="gigs">
       <div className="container">
-        <span className="breadcrumbs">Liverr > Graphics & Design ></span>
+        <span className="breadcrumbs">Liverr Graphics & Design </span>
         <h1>AI Artists</h1>
         <p>
           Explore the boundaries of art and technology with Liverr's AI artists

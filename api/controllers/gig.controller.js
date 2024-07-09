@@ -13,8 +13,8 @@ export const createGig = async (req, res, next) => {
   try {
     const savedGig = await newGig.save();
     res.status(201).json(savedGig);
-  } catch (err) {
-    next(err);
+  } catch (error) {
+    next(error);
   }
 };
 export const deleteGig = async (req, res, next) => {
@@ -25,8 +25,8 @@ export const deleteGig = async (req, res, next) => {
 
     await Gig.findByIdAndDelete(req.params.id);
     res.status(200).send("Gig has been deleted!");
-  } catch (err) {
-    next(err);
+  } catch (error) {
+    next(error);
   }
 };
 export const getGig = async (req, res, next) => {
@@ -34,12 +34,13 @@ export const getGig = async (req, res, next) => {
     const gig = await Gig.findById(req.params.id);
     if (!gig) next(errorHandler(404, "Gig not found!"));
     res.status(200).send(gig);
-  } catch (err) {
-    next(err);
+  } catch (error) {
+    next(error);
   }
 };
 export const getGigs = async (req, res, next) => {
   const q = req.query;
+  // attention on userId may it not work please fix it
   const filters = {
     ...(q.userId && { userId: q.userId }),
     ...(q.cat && { cat: q.cat }),
@@ -54,7 +55,7 @@ export const getGigs = async (req, res, next) => {
   try {
     const gigs = await Gig.find(filters).sort({ [q.sort]: -1 });
     res.status(200).send(gigs);
-  } catch (err) {
-    next(err);
+  } catch (error) {
+    next(error);
   }
 };
