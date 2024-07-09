@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import newRequest from "../../utils/newRequest";
-
+import newRequest from "../../../utils/newRequest.js";
 const Success = () => {
   const { search } = useLocation();
   const navigate = useNavigate();

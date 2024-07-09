@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import upload from "../../utils/upload";
 import "./Register.scss";
-import newRequest from "../../utils/newRequest";
+import newRequest from "../../../utils/newRequest.js";
 import { useNavigate } from "react-router-dom";
 
 function Register() {
@@ -38,7 +38,7 @@ function Register() {
         ...user,
         img: url,
       });
-      navigate("/")
+      navigate("/");
     } catch (err) {
       console.log(err);
     }
@@ -98,8 +98,7 @@ function Register() {
             id=""
             cols="30"
             rows="10"
-            onChange={handleChange}
-          ></textarea>
+            onChange={handleChange}></textarea>
         </div>
       </form>
     </div>

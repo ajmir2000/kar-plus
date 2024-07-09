@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./Login.scss";
-import newRequest from "../../utils/newRequest";
+import newRequest from "../../../utils/newRequest.js";
 import { useNavigate } from "react-router-dom";
 
 function Login() {
@@ -15,7 +15,7 @@ function Login() {
     try {
       const res = await newRequest.post("/auth/login", { username, password });
       localStorage.setItem("currentUser", JSON.stringify(res.data));
-      navigate("/")
+      navigate("/");
     } catch (err) {
       setError(err.response.data);
     }

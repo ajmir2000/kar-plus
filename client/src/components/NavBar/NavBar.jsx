@@ -20,7 +20,10 @@ function NavBar() {
             <Link to="/find-work" className="nav-link text-light  ms-3 active">
               Find Work
             </Link>
-            <Link to="/find-talent" className="nav-link  ms-3   text-light">
+            {/* <Link to="/find-talent" className="nav-link  ms-3   text-light">
+              Find Talent
+            </Link> */}
+            <Link to="/gigs" className="nav-link  ms-3   text-light">
               Find Talent
             </Link>
 

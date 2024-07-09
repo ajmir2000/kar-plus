@@ -1,7 +1,7 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import React from "react";
 import { Link } from "react-router-dom";
-import newRequest from "../../utils/newRequest";
+import newRequest from "../../../utils/newRequest.js";
 import "./Messages.scss";
 import moment from "moment";
 
@@ -56,8 +56,7 @@ const Messages = () => {
                     (!currentUser.isSeller && !c.readByBuyer)) &&
                   "active"
                 }
-                key={c.id}
-              >
+                key={c.id}>
                 <td>{currentUser.isSeller ? c.buyerId : c.sellerId}</td>
                 <td>
                   <Link to={`/message/${c.id}`} className="link">

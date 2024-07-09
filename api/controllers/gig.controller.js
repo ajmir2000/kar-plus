@@ -17,6 +17,7 @@ export const createGig = async (req, res, next) => {
     next(error);
   }
 };
+
 export const deleteGig = async (req, res, next) => {
   try {
     const gig = await Gig.findById(req.params.id);
@@ -29,6 +30,7 @@ export const deleteGig = async (req, res, next) => {
     next(error);
   }
 };
+
 export const getGig = async (req, res, next) => {
   try {
     const gig = await Gig.findById(req.params.id);
@@ -38,8 +40,12 @@ export const getGig = async (req, res, next) => {
     next(error);
   }
 };
+
 export const getGigs = async (req, res, next) => {
+  console.log("here");
   const q = req.query;
+
+  console.log(q);
   // attention on userId may it not work please fix it
   const filters = {
     ...(q.userId && { userId: q.userId }),
@@ -55,7 +61,9 @@ export const getGigs = async (req, res, next) => {
   try {
     const gigs = await Gig.find(filters).sort({ [q.sort]: -1 });
     res.status(200).send(gigs);
+    console.log(gigs);
   } catch (error) {
     next(error);
+    console.log(error);
   }
 };

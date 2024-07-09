@@ -2,8 +2,7 @@ import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "./Orders.scss";
 import { useQuery } from "@tanstack/react-query";
-import newRequest from "../../utils/newRequest";
-
+import newRequest from "../../../utils/newRequest.js";
 const Orders = () => {
   const currentUser = JSON.parse(localStorage.getItem("currentUser"));
 

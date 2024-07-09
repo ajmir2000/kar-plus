@@ -1,10 +1,13 @@
 import React from "react";
-import "./GigCard.scss";
+import "./GigCard.css";
 import { Link } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
-import newRequest from "../../utils/newRequest";
+import newRequest from "../../../utils/newRequest.js";
+// import { useSelector } from "react-redux";
 
 const GigCard = ({ item }) => {
+  // const { currentUser } = useSelector((state) => state.user);
+  // console.log(currentUser._id)
   const { isLoading, error, data } = useQuery({
     queryKey: [item.userId],
     queryFn: () =>
@@ -12,23 +15,28 @@ const GigCard = ({ item }) => {
         return res.data;
       }),
   });
+
   return (
     <Link to={`/gig/${item._id}`} className="link">
-      <div className="gigCard">
-        <img src={item.cover} alt="" />
-        <div className="info">
+      <div className="gigCard card mb-4">
+        <img src={item.cover} className="card-img-top" alt="" />
+        <div className="card-body">
           {isLoading ? (
-            "loading"
+            <div>Loading...</div>
           ) : error ? (
-            "Something went wrong!"
+            <div>Something went wrong!</div>
           ) : (
-            <div className="user">
-              <img src={data.img || "/img/noavatar.jpg"} alt="" />
+            <div className="user d-flex align-items-center gap-2 mb-3">
+              <img
+                src={data.img || "/img/noavatar.jpg"}
+                className="rounded-circle"
+                alt=""
+              />
               <span>{data.username}</span>
             </div>
           )}
-          <p>{item.desc}</p>
-          <div className="star">
+          <p className="card-text">{item.desc}</p>
+          <div className="star d-flex align-items-center gap-2">
             <img src="./img/star.png" alt="" />
             <span>
               {!isNaN(item.totalStars / item.starNumber) &&
@@ -37,11 +45,11 @@ const GigCard = ({ item }) => {
           </div>
         </div>
         <hr />
-        <div className="detail">
-          <img src="./img/heart.png" alt="" />
-          <div className="price">
-            <span>STARTING AT</span>
-            <h2>$ {item.price}</h2>
+        <div className="card-body d-flex align-items-center justify-content-between">
+          <img src="./img/heart.png" className="gigCard-icon" alt="" />
+          <div className="price text-end">
+            <span className="text-muted">STARTING AT</span>
+            <h2 className="mb-0">$ {item.price}</h2>
           </div>
         </div>
       </div>

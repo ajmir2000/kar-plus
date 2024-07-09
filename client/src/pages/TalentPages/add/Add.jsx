@@ -3,7 +3,7 @@ import "./Add.scss";
 import { gigReducer, INITIAL_STATE } from "../../reducers/gigReducer";
 import upload from "../../utils/upload";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import newRequest from "../../utils/newRequest";
+import newRequest from "../../../utils/newRequest.js";
 import { useNavigate } from "react-router-dom";
 
 const Add = () => {
@@ -110,8 +110,7 @@ const Add = () => {
               placeholder="Brief descriptions to introduce your service to customers"
               cols="0"
               rows="16"
-              onChange={handleChange}
-            ></textarea>
+              onChange={handleChange}></textarea>
             <button onClick={handleSubmit}>Create</button>
           </div>
           <div className="details">
@@ -129,8 +128,7 @@ const Add = () => {
               id=""
               placeholder="Short description of your service"
               cols="30"
-              rows="10"
-            ></textarea>
+              rows="10"></textarea>
             <label htmlFor="">Delivery Time (e.g. 3 days)</label>
             <input type="number" name="deliveryTime" onChange={handleChange} />
             <label htmlFor="">Revision Number</label>
@@ -150,8 +148,7 @@ const Add = () => {
                   <button
                     onClick={() =>
                       dispatch({ type: "REMOVE_FEATURE", payload: f })
-                    }
-                  >
+                    }>
                     {f}
                     <span>X</span>
                   </button>
