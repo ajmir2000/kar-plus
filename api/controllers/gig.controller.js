@@ -1,6 +1,10 @@
 import Gig from "../models/gig.model.js";
 import { errorHandler } from "../utils/error.js";
 
+export const test = (req, res) => {
+  res.json({ message: "api route is working" });
+};
+
 export const createGig = async (req, res, next) => {
   if (!req.user.isSeller)
     return next(errorHandler(403, "Only sellers can create a gig!"));
@@ -42,7 +46,7 @@ export const getGig = async (req, res, next) => {
 };
 
 export const getGigs = async (req, res, next) => {
-  console.log("here");
+  console.log("here I AJmir");
   const q = req.query;
 
   console.log(q);

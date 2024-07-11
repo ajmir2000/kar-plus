@@ -13,6 +13,8 @@ import gigRoute from "./routes/gig.route.js";
 import conversationRoute from "./routes/conversation.route.js";
 
 import cookieParser from "cookie-parser";
+import cors from "cors";
+
 dotenv.config();
 
 mongoose
@@ -24,7 +26,11 @@ mongoose
     console.log(err);
   });
 
-const app = express();
+  
+  const app = express();
+
+  app.use(cors({ origin: "http://localhost:5173", credentials: true })); 
+  // app.use(cors());
 
 app.use(express.json());
 // this package get the cookie from local PC of user
