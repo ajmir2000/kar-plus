@@ -110,6 +110,7 @@ export default function FindWork() {
 
   const { startIndex, endIndex } = calculatePageRange();
   result = result.slice(startIndex, endIndex);
+  console.log(result)
 
   return (
     <Container fluid className="bg-white ">
