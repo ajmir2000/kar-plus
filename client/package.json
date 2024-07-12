@@ -25,6 +25,7 @@
     "axios": "^1.7.2",
     "bootstrap": "^5.3.3",
     "firebase": "^10.12.2",
+    "infinite-react-carousel": "^1.2.11",
     "lucide-react": "^0.383.0",
     "react": "^18.2.0",
     "react-bootstrap": "^2.10.2",

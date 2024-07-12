@@ -19,7 +19,10 @@ import EditJob from "./pages/EditJob/EditJob.jsx";
 import JobDetails from "./pages/JobDetails/JobDetails.jsx";
 import Application from "./pages/Application/Application.jsx";
 import MyApplications from "./pages/MyApplicaton/MyApplicaton.jsx";
+// talent part
 import Gigs from "./pages/TalentPages/gigs/Gigs.jsx";
+import AddGigs from "./pages/TalentPages/add/Add.jsx";
+import Gig from "./pages/TalentPages/gig/Gig.jsx";
 
 function App() {
   return (
@@ -39,6 +42,8 @@ function App() {
             <Route path="/companies/:id" element={<CompanyDetails />} />
             {/* Talent Part  */}
             <Route path="/gigs" element={<Gigs />} />
+            <Route path="/add-gig" element={<AddGigs />} />
+            <Route path="/gig" element={<Gig />} />
 
             <Route element={<PrivateRoute />}>
               <Route path="/profile" element={<Profile />} />

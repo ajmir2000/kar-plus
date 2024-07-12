@@ -2,7 +2,7 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import React from "react";
 import newRequest from "../../../utils/newRequest.js";
 import Review from "../review/Review";
-import "./Reviews.scss";
+import "./Reviews.css";
 const Reviews = ({ gigId }) => {
   const queryClient = useQueryClient();
   const { isLoading, error, data } = useQuery({

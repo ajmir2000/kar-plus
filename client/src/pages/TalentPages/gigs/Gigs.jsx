@@ -24,9 +24,9 @@ function Gigs() {
           return res.data;
         }),
   });
-// console.log(minRef.current.value)
-// console.log(maxRef.current.value)
-  console.log(search)
+  // console.log(minRef.current.value)
+  // console.log(maxRef.current.value)
+  console.log(search);
   console.log(data);
 
   const reSort = (type) => {
@@ -43,7 +43,7 @@ function Gigs() {
   };
 
   return (
-    <div className="gigs">
+    <div className="gigs bg-white">
       <div className="container">
         <span className="breadcrumbs">Liverr Graphics & Design </span>
         <h1>AI Artists</h1>
@@ -80,7 +80,7 @@ function Gigs() {
             ? "loading"
             : error
             ? "Something went wrong!"
-            :  data.map((gig) => <GigCard key={gig._id} item={gig} />)}
+            : data.map((gig) => <GigCard key={gig._id} item={gig} />)}
         </div>
       </div>
     </div>

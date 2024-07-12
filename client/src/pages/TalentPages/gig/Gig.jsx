@@ -1,10 +1,10 @@
 import React from "react";
-import "./Gig.scss";
+import "./Gig.css";
 import { Slider } from "infinite-react-carousel/lib";
 import { Link, useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import newRequest from "../../../utils/newRequest.js";
-import Reviews from "../../components/reviews/Reviews";
+import Reviews from "../../../components/TalentComponents/reviews/Reviews.jsx";
 
 function Gig() {
   const { id } = useParams();
@@ -33,7 +33,7 @@ function Gig() {
   });
 
   return (
-    <div className="gig">
+    <div className="gig bg-white">
       {isLoading ? (
         "loading"
       ) : error ? (
