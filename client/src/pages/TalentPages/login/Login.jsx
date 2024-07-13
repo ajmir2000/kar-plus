@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./Login.scss";
+import "./Login.css";
 import newRequest from "../../../utils/newRequest.js";
 import { useNavigate } from "react-router-dom";
 

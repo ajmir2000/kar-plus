@@ -1,0 +1,61 @@
+.messages {
+    display: flex;
+    justify-content: center;
+  }
+  
+  .messages .container {
+    width: 1400px;
+    padding: 50px 0px;
+  }
+  
+  .messages .container .title {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .messages .container .title button {
+    background-color: #1dbf73;
+    color: white;
+    font-weight: 500;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+  }
+  
+  .messages .container table {
+    width: 100%;
+  }
+  
+  .messages .container table tr {
+    height: 100px;
+  }
+  
+  .messages .container table tr th {
+    text-align: left;
+  }
+  
+  .messages .container table tr td {
+    padding: 10px;
+  }
+  
+  .messages .container table tr td:first-child {
+    font-weight: 500;
+  }
+  
+  .messages .container table tr td:nth-child(2),
+  .messages .container table tr td:nth-child(3) {
+    color: gray;
+  }
+  
+  .messages .container table tr button {
+    background-color: #1dbf73;
+    color: white;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .messages .container table tr.active {
+    background-color: #1dbf730f;
+  }
+  

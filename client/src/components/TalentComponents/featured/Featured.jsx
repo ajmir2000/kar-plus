@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./Featured.scss";
+import "./Featured.css";
 import { useNavigate } from "react-router-dom";
 
 function Featured() {

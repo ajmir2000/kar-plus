@@ -2,7 +2,7 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import React from "react";
 import { Link, useParams } from "react-router-dom";
 import newRequest from "../../../utils/newRequest.js";
-import "./Message.scss";
+import "./Message.css";
 
 const Message = () => {
   const { id } = useParams();
@@ -40,7 +40,7 @@ const Message = () => {
     <div className="message">
       <div className="container">
         <span className="breadcrumbs">
-          <Link to="/messages">Messages</Link> > John Doe >
+          <Link to="/messages">Messages</Link>John Doe 
         </span>
         {isLoading ? (
           "loading"

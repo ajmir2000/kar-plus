@@ -19,7 +19,6 @@ const Add = () => {
       payload: { name: e.target.name, value: e.target.value },
     });
   };
-
   const handleFeature = (e) => {
     e.preventDefault();
     dispatch({
@@ -67,132 +66,86 @@ const Add = () => {
   };
 
   return (
-    <div className="add d-flex justify-content-center bg-white">
-      <div className="container py-5">
-        <h1 className="mb-4 text-secondary fw-light">Add New Gig</h1>
-        <div className="sections d-flex justify-content-between gap-5">
-          <div className="info d-flex flex-column gap-3">
-            <label htmlFor="" className="text-secondary fs-5">
-              Title
-            </label>
+    <div className="add bg-white">
+      <div className="container">
+        <h1>Add New Gig</h1>
+        <div className="sections">
+          <div className="info">
+            <label htmlFor="">Title</label>
             <input
               type="text"
               name="title"
-              className="form-control"
               placeholder="e.g. I will do something I'm really good at"
               onChange={handleChange}
             />
-            <label htmlFor="" className="text-secondary fs-5">
-              Category
-            </label>
-            <select
-              name="cat"
-              id="cat"
-              className="form-select"
-              onChange={handleChange}>
+            <label htmlFor="">Category</label>
+            <select name="cat" id="cat" onChange={handleChange}>
               <option value="design">Design</option>
               <option value="web">Web Development</option>
               <option value="animation">Animation</option>
-              <option value="music">Music</option>
+              <option value="Graphic Design">Graphic Design</option>
             </select>
-            <div className="images d-flex align-items-center gap-3">
-              <div className="imagesInputs d-flex flex-column gap-3">
-                <label htmlFor="" className="text-secondary fs-5">
-                  Cover Image
-                </label>
+            <div className="images">
+              <div className="imagesInputs">
+                <label htmlFor="">Cover Image</label>
                 <input
                   type="file"
-                  className="form-control"
                   onChange={(e) => setSingleFile(e.target.files[0])}
                 />
-                <label htmlFor="" className="text-secondary fs-5">
-                  Upload Images
-                </label>
+                <label htmlFor="">Upload Images</label>
                 <input
                   type="file"
                   multiple
-                  className="form-control"
                   onChange={(e) => setFiles(e.target.files)}
                 />
               </div>
-              <button className="btn btn-success" onClick={handleUpload}>
-                {uploading ? "Uploading" : "Upload"}
+              <button onClick={handleUpload}>
+                {uploading ? "uploading" : "Upload"}
               </button>
             </div>
-            <label htmlFor="" className="text-secondary fs-5">
-              Description
-            </label>
+            <label htmlFor="">Description</label>
             <textarea
               name="desc"
-              className="form-control"
+              id=""
               placeholder="Brief descriptions to introduce your service to customers"
               cols="0"
               rows="16"
               onChange={handleChange}></textarea>
-            <button className="btn btn-success mt-3" onClick={handleSubmit}>
-              Create
-            </button>
+            <button onClick={handleSubmit}>Create</button>
           </div>
-          <div className="details d-flex flex-column gap-3">
-            <label htmlFor="" className="text-secondary fs-5">
-              Service Title
-            </label>
+          <div className="details">
+            <label htmlFor="">Service Title</label>
             <input
               type="text"
               name="shortTitle"
-              className="form-control"
               placeholder="e.g. One-page web design"
               onChange={handleChange}
             />
-            <label htmlFor="" className="text-secondary fs-5">
-              Short Description
-            </label>
+            <label htmlFor="">Short Description</label>
             <textarea
               name="shortDesc"
-              className="form-control"
               onChange={handleChange}
+              id=""
               placeholder="Short description of your service"
               cols="30"
               rows="10"></textarea>
-            <label htmlFor="" className="text-secondary fs-5">
-              Delivery Time (e.g. 3 days)
-            </label>
-            <input
-              type="number"
-              name="deliveryTime"
-              className="form-control"
-              onChange={handleChange}
-            />
-            <label htmlFor="" className="text-secondary fs-5">
-              Revision Number
-            </label>
+            <label htmlFor="">Delivery Time (e.g. 3 days)</label>
+            <input type="number" name="deliveryTime" onChange={handleChange} />
+            <label htmlFor="">Revision Number</label>
             <input
               type="number"
               name="revisionNumber"
-              className="form-control"
               onChange={handleChange}
             />
-            <label htmlFor="" className="text-secondary fs-5">
-              Add Features
-            </label>
-            <form
-              action=""
-              className="add d-flex justify-content-between"
-              onSubmit={handleFeature}>
-              <input
-                type="text"
-                className="form-control"
-                placeholder="e.g. page design"
-              />
-              <button type="submit" className="btn btn-outline-secondary ms-2">
-                Add
-              </button>
+            <label htmlFor="">Add Features</label>
+            <form action="" className="add" onSubmit={handleFeature}>
+              <input type="text" placeholder="e.g. page design" />
+              <button type="submit">add</button>
             </form>
-            <div className="addedFeatures d-flex gap-2 mt-3">
+            <div className="addedFeatures">
               {state?.features?.map((f) => (
                 <div className="item" key={f}>
                   <button
-                    className="btn btn-outline-danger d-flex align-items-center gap-2"
                     onClick={() =>
                       dispatch({ type: "REMOVE_FEATURE", payload: f })
                     }>
@@ -202,15 +155,8 @@ const Add = () => {
                 </div>
               ))}
             </div>
-            <label htmlFor="" className="text-secondary fs-5">
-              Price
-            </label>
-            <input
-              type="number"
-              className="form-control"
-              onChange={handleChange}
-              name="price"
-            />
+            <label htmlFor="">Price</label>
+            <input type="number" onChange={handleChange} name="price" />
           </div>
         </div>
       </div>

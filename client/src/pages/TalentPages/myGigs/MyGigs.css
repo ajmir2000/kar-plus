@@ -1,0 +1,55 @@
+.myGigs {
+  display: flex;
+  justify-content: center;
+  color: #555;
+}
+
+.myGigs .container {
+  width: 1400px;
+  padding: 50px 0px;
+}
+
+.myGigs .container .title {
+  display: flex;
+  justify-content: space-between;
+}
+
+.myGigs .container .title button {
+  background-color: #1dbf73;
+  color: white;
+  font-weight: 500;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.myGigs .container table {
+  width: 100%;
+}
+
+.myGigs .container table tr {
+  height: 50px;
+}
+
+.myGigs .container table tr th {
+  text-align: left;
+}
+
+.myGigs .container table tr td sup {
+  font-size: 12px;
+}
+
+.myGigs .container table tr td .image {
+  width: 50px;
+  height: 25px;
+  object-fit: cover;
+}
+
+.myGigs .container table tr td .delete {
+  width: 20px;
+  cursor: pointer;
+}
+
+.myGigs .container table tr:nth-child(even) {
+  background-color: #1dbf730f;
+}

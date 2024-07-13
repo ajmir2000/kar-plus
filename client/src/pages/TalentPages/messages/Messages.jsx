@@ -2,7 +2,7 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import React from "react";
 import { Link } from "react-router-dom";
 import newRequest from "../../../utils/newRequest.js";
-import "./Messages.scss";
+import "./Messages.css";
 import moment from "moment";
 
 const Messages = () => {
