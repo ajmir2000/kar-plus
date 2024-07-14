@@ -16,7 +16,8 @@ export const createGig = async (req, res, next) => {
 
   try {
     const savedGig = await newGig.save();
-    res.status(201).json(savedGig);
+    // res.status(201).json(savedGig);
+    res.status(201).json({ acknowledged: true });
   } catch (error) {
     next(error);
   }

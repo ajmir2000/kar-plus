@@ -1,9 +1,5 @@
 import React, { useEffect, useReducer, useState } from "react";
 import "./Add.css";
-import { gigReducer, INITIAL_STATE } from "../../../reducers/gigReducer.js";
-// import upload from "../../utils/upload";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import newRequest from "../../../utils/newRequest.js";
 import { useNavigate } from "react-router-dom";
 import {
   getDownloadURL,
@@ -14,27 +10,33 @@ import {
 import { app } from "../../../firebase.js";
 import { useForm } from "react-hook-form";
 import CreatableSelect from "react-select/creatable";
+import { useSelector } from "react-redux";
 
 const Add = () => {
   // start upload image states on firebase
   const [file, setFile] = useState(undefined);
   const [filePerc, setFilePerc] = useState(0);
   const [fileUploadError, setFileUploadError] = useState(false);
-  const [formData, setFormData] = useState({});
+  const [formData, setFormData] = useState({ images: [] });
   const [features, setFeatures] = useState([]);
+
+  const [selectedOption, setSelectedOption] = useState(null);
+  // start upload image states on firebase
+  const [singleFile, setSingleFile] = useState(undefined);
+  const [files, setFiles] = useState([]);
+  const [uploading, setUploading] = useState(false);
+  const [imageUploadError, setImageUploadError] = useState(false);
+  const [error, setError] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const { currentUser } = useSelector((state) => state.user);
+
+  // end upload image function
   const {
     register,
     handleSubmit,
     formState: { errors },
     reset,
   } = useForm();
-  const [selectedOption, setSelectedOption] = useState(null);
-  // end upload image states on firebase
-  const [singleFile, setSingleFile] = useState(undefined);
-  const [files, setFiles] = useState([]);
-  const [uploading, setUploading] = useState(false);
-
-  // start upload image function
   useEffect(() => {
     if (file) {
       handleFileUpload(file);
@@ -81,7 +83,7 @@ const Add = () => {
       },
       () => {
         getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) =>
-          setFormData({ cover: downloadURL })
+          setFormData({ ...formData, cover: downloadURL })
         );
       }
     );
@@ -89,64 +91,69 @@ const Add = () => {
 
   const navigate = useNavigate();
 
-  const queryClient = useQueryClient();
+  // start Portfolio Images
+  console.log(formData);
+  console.log(formData.images.length);
+  const handleImageSubmit = (e) => {
+    if (files.length > 0 && files.length + formData.images.length < 7) {
+      setUploading(true);
+      setImageUploadError(false);
+      const promises = [];
 
-  const mutation = useMutation({
-    mutationFn: (gig) => {
-      console.log(gig);
-      return newRequest.post("/gigs", gig);
-    },
-    onSuccess: () => {
-      queryClient.invalidateQueries(["myGigs"]);
-    },
-  });
-
-  console.log(mutation);
-
-  const onSubmit = async (data) => {
-    data.preventDefault();
-    data.skills = selectedOption;
-    data.employerId = currentUser._id;
-    data.companyLogo = formData.companyLogo;
-    data.employerEmail = currentUser.email;
-    data.employerID = currentUser._id;
-    data.salaryType = salaryType;
-
-    if (salaryType === "As per Company Scale") {
-      data.salaryFrom = "";
-      data.salaryTo = "";
-      data.companySalary = "As per Company Scale";
-    } else {
-      data.salaryType === "Fixed";
-      data.salaryFrom = salaryFrom;
-      data.salaryTo = salaryTo;
-      data.companySalary = "Not Specified";
-    }
-    console.log(data);
-
-    setLoading(true);
-    try {
-      const res = await fetch("/api/job/create-job", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
-      });
-      const result = await res.json();
-      if (result.acknowledged) {
-        alert("Job Posted Successfully!!");
-        navigate("/find-work");
-        reset();
-        setSelectedOption(null);
-      } else {
-        setError(result.message);
-        alert(result.message);
+      for (let i = 0; i < files.length; i++) {
+        promises.push(storeImage(files[i]));
       }
-      setLoading(false);
-    } catch (error) {
-      setLoading(false);
-      setError(error.message);
+      Promise.all(promises)
+        .then((urls) => {
+          setFormData({
+            ...formData,
+            images: formData.images.concat(urls),
+          });
+          setImageUploadError(false);
+          setUploading(false);
+        })
+        .catch((err) => {
+          setImageUploadError("Image upload failed (2 mb max per image)");
+          setUploading(false);
+        });
+    } else {
+      setImageUploadError("You can only upload 6 images per listing");
+      setUploading(false);
     }
   };
+
+  const storeImage = async (file) => {
+    return new Promise((resolve, reject) => {
+      const storage = getStorage(app);
+      const fileName = new Date().getTime() + file.name;
+      const storageRef = ref(storage, `TalentImages/portflio/${fileName}`);
+      const uploadTask = uploadBytesResumable(storageRef, file);
+      uploadTask.on(
+        "state_changed",
+        (snapshot) => {
+          const progress =
+            (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+          console.log(`Upload is ${progress}% done`);
+        },
+        (error) => {
+          reject(error);
+        },
+        () => {
+          getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+            resolve(downloadURL);
+          });
+        }
+      );
+    });
+  };
+  const handleRemoveImage = (index) => {
+    setFormData({
+      ...formData,
+      images: formData.images.filter((_, i) => i !== index),
+    });
+  };
+  // console.log(formData);
+  // end Portfolio Images
 
   const options = [
     { value: "JavaScript", label: "JavaScript" },
@@ -158,6 +165,43 @@ const Add = () => {
     { value: "MongoDB", label: "MongoDB" },
     { value: "Redux", label: "Redux" },
   ];
+
+  console.log(formData);
+  const onSubmit = async (data) => {
+    data.features = selectedOption;
+    data.userId = currentUser._id;
+    data.images = formData.images;
+    data.cover = formData.cover;
+
+    console.log(data);
+    // data.preventDefault();
+
+    setLoading(true);
+    try {
+      const res = await fetch("/api/gigs", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
+      const result = await res.json();
+      if (result.acknowledged) {
+        alert("Gig Posted Successfully!!");
+        // navigate("/find-work");
+        reset();
+        setSelectedOption(null);
+        formData.images = [];
+        formData.cover = null;
+        setSelectedOption(null);
+      } else {
+        setError(result.message);
+        alert(result.message);
+      }
+      setLoading(false);
+    } catch (error) {
+      setLoading(false);
+      setError(error.message);
+    }
+  };
 
   return (
     <div className="add bg-white">
@@ -211,15 +255,50 @@ const Add = () => {
                 </div>
               )}
             </div>
-            <div className="col-md-6 mt-3">
-              <label htmlFor="images">Upload Images</label>
+
+            {/*start Portfolio Images  */}
+            <div className="d-flex gap-4">
               <input
-                type="file"
-                className="form-control"
-                multiple
                 onChange={(e) => setFiles(e.target.files)}
+                className="p-3 border border-secondary rounded w-100"
+                type="file"
+                id="images"
+                accept="image/*"
+                multiple
               />
+              <button
+                type="button"
+                disabled={uploading}
+                onClick={handleImageSubmit}
+                className={`p-3 text-success border border-success rounded text-uppercase ${
+                  uploading ? "opacity-80" : "hover-shadow-lg"
+                }`}>
+                {uploading ? "Uploading..." : "Upload"}
+              </button>
             </div>
+            <p className="text-danger small">
+              {imageUploadError && imageUploadError}
+            </p>
+            {formData.images?.length > 0 &&
+              formData.images.map((url, index) => (
+                <div
+                  key={url}
+                  className="d-flex justify-content-between  border align-items-center">
+                  <img
+                    src={url}
+                    alt="listing image"
+                    className="w-25  h-25 object-contain rounded-lg"
+                  />
+                  <button
+                    type="button"
+                    onClick={() => handleRemoveImage(index)}
+                    className="p-3 text-danger rounded text-uppercase hover-opacity-75">
+                    Delete
+                  </button>
+                </div>
+              ))}
+
+            {/*end Portfolio Images  */}
             <div className="col-12 mt-3">
               <label className="form-label mb-2">Description</label>
               <textarea
@@ -311,31 +390,6 @@ const Add = () => {
               )}
             </div>
 
-            {/* <div className="col-12 mt-3">
-              <label htmlFor="features">Add Features</label>
-              <form className="input-group mb-3" >
-                <input
-                  type="text"
-                  className="form-control"
-                  placeholder="e.g. page design"
-                />
-                <button type="submit" className="btn btn-outline-secondary">
-                  Add
-                </button>
-              </form>
-              <div className="addedFeatures">
-                {state?.features?.map((f) => (
-                  <div className="badge bg-secondary me-2" key={f}>
-                    {f}
-                    <button
-                      type="button"
-                      className="btn-close btn-close-white ms-2"
-                      aria-label="Close"
-                      ></button>
-                  </div>
-                ))}
-              </div>
-            </div> */}
             <div className="col-12 mt-3">
               <label htmlFor="features">Add Features</label>
               <label className="form-label mb-2">Features:</label>
