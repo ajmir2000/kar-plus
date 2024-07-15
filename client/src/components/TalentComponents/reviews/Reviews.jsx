@@ -12,6 +12,7 @@ const Reviews = ({ gigId }) => {
         return res.data;
       }),
   });
+      console.log(data)
 
   const mutation = useMutation({
     mutationFn: (review) => {

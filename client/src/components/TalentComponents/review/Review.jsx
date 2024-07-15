@@ -6,11 +6,11 @@ const Review = ({ review }) => {
   const { isLoading, error, data } = useQuery({
     queryKey: [review.userId],
     queryFn: () =>
-      newRequest.get(`/users/${review.userId}`).then((res) => {
+      newRequest.get(`/user/${review.userId}`).then((res) => {
         return res.data;
       }),
   });
-
+  // console.log(data)
   return (
     <div className="review">
       {isLoading ? (
@@ -37,13 +37,13 @@ const Review = ({ review }) => {
         <span>{review.star}</span>
       </div>
       <p>{review.desc}</p>
-      <div className="helpful">
+      {/* <div className="helpful">
         <span>Helpful?</span>
         <img src="/img/like.png" alt="" />
         <span>Yes</span>
         <img src="/img/dislike.png" alt="" />
         <span>No</span>
-      </div>
+      </div> */}
     </div>
   );
 };
