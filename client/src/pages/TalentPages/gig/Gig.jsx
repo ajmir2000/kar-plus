@@ -33,7 +33,10 @@ function Gig() {
   });
 
   return (
-    <div className="gig bg-white">
+    <div className="gig bg-white
+    
+    
+    ">
       {isLoading ? (
         "loading"
       ) : error ? (

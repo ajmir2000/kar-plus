@@ -49,3 +49,10 @@ export const deleteUser = async (req, res, next) => {
     next(error);
   }
 };
+
+
+export const getUser = async (req, res, next) => {
+  const user = await User.findById(req.params.id);
+
+  res.status(200).send(user);
+};

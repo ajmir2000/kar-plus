@@ -3,18 +3,18 @@ import "./GigCard.css";
 import { Link } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import newRequest from "../../../utils/newRequest.js";
-// import { useSelector } from "react-redux";
 
 const GigCard = ({ item }) => {
-  // const { currentUser } = useSelector((state) => state.user);
-  // console.log(currentUser._id)
+  console.log(item);
   const { isLoading, error, data } = useQuery({
     queryKey: [item.userId],
     queryFn: () =>
-      newRequest.get(`/users/${item.userId}`).then((res) => {
+      newRequest.get(`/user/${item.userId}`).then((res) => {
         return res.data;
       }),
   });
+
+  console.log(data);
 
   return (
     <Link to={`/gig/${item._id}`} className="link">
