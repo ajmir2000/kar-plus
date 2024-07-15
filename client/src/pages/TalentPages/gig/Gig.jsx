@@ -8,6 +8,7 @@ import Reviews from "../../../components/TalentComponents/reviews/Reviews.jsx";
 
 function Gig() {
   const { id } = useParams();
+  console.log(id);
 
   const { isLoading, error, data } = useQuery({
     queryKey: ["gig"],
@@ -18,6 +19,7 @@ function Gig() {
   });
 
   const userId = data?.userId;
+  console.log(data);
 
   const {
     isLoading: isLoadingUser,
@@ -26,17 +28,16 @@ function Gig() {
   } = useQuery({
     queryKey: ["user"],
     queryFn: () =>
-      newRequest.get(`/users/${userId}`).then((res) => {
+      newRequest.get(`/user/${userId}`).then((res) => {
         return res.data;
       }),
     enabled: !!userId,
   });
 
+  console.log(data);
+
   return (
-    <div className="gig bg-white
-    
-    
-    ">
+    <div className="gig bg-white">
       {isLoading ? (
         "loading"
       ) : error ? (
@@ -73,8 +74,8 @@ function Gig() {
               </div>
             )}
             <Slider slidesToShow={1} arrowsScroll={1} className="slider">
-              {data.images.map((img) => (
-                <img key={img} src={img} alt="" />
+              {data.images.map((img, index) => (
+                <img key={index} src={img} alt="" />
               ))}
             </Slider>
             <h2>About This Gig</h2>
@@ -152,10 +153,11 @@ function Gig() {
               </div>
             </div>
             <div className="features">
-              {data.features.map((feature) => (
-                <div className="item" key={feature}>
+              {data.features.map((feature, index) => (
+                <div className="item" key={index}>
                   <img src="/img/greencheck.png" alt="" />
-                  <span>{feature}</span>
+                  <span>{feature.label}</span>{" "}
+                  {/* Updated to render feature.label */}
                 </div>
               ))}
             </div>

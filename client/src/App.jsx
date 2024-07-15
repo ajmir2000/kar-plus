@@ -43,7 +43,7 @@ function App() {
             {/* Talent Part  */}
             <Route path="/gigs" element={<Gigs />} />
             <Route path="/add-gig" element={<AddGigs />} />
-            <Route path="/gig" element={<Gig />} />
+            <Route path="/gig/:id" element={<Gig />} />
 
             <Route element={<PrivateRoute />}>
               <Route path="/profile" element={<Profile />} />
