@@ -3,19 +3,16 @@ import Container from "react-bootstrap/Container";
 import Form from "react-bootstrap/Form";
 import Nav from "react-bootstrap/Nav";
 import { Navbar } from "react-bootstrap";
-import { Link,NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import "./NavBar.css";
 import { useSelector } from "react-redux";
 function NavBar() {
   const { currentUser } = useSelector((state) => state.user);
 
-const linkClass = ({ isActive }) =>
-  isActive
-    ? "nav-link text-dark rounded-2  ms-3 bg-white"
-    : "nav-link text-light  ms-3 ";
-
-
-
+  const linkClass = ({ isActive }) =>
+    isActive
+      ? "nav-link text-dark rounded-2  ms-3 bg-white"
+      : "nav-link text-light  ms-3 ";
 
   return (
     <Navbar expand="lg" className="bg-transparent p-5">
@@ -26,14 +23,8 @@ const linkClass = ({ isActive }) =>
         <Navbar.Toggle aria-controls="navbarScroll" />
         <Navbar.Collapse id="navbarScroll">
           <Nav className="me-auto my-2 my-lg-0 nav-container" navbarScroll>
-            <NavLink to="/find-work" className={linkClass}>
+            <NavLink to="/gigs" className={linkClass}>
               Find Work
-            </Link>
-            {/* <Link to="/find-talent" className="nav-link  ms-3   text-light">
-              Find Talent
-            </Link> */}
-            <Link to="/gigs" className="nav-link  ms-3   text-light">
-              Find Talent
             </NavLink>
 
             <NavLink to="/companies" className={linkClass}>
@@ -49,7 +40,6 @@ const linkClass = ({ isActive }) =>
           {currentUser ? (
             <Link to="/profile">
               <img
-                className="rounded-5  w-50 "
                 src={currentUser.avatar}
                 alt="profile"
                 className="custom-image rounded-circle"
