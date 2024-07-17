@@ -28,8 +28,11 @@ const linkClass = ({ isActive }) =>
           <Nav className="me-auto my-2 my-lg-0 nav-container" navbarScroll>
             <NavLink to="/find-work" className={linkClass}>
               Find Work
-            </NavLink>
-            <NavLink to="/find-talent" className={linkClass}>
+            </Link>
+            {/* <Link to="/find-talent" className="nav-link  ms-3   text-light">
+              Find Talent
+            </Link> */}
+            <Link to="/gigs" className="nav-link  ms-3   text-light">
               Find Talent
             </NavLink>
 

@@ -1,0 +1,119 @@
+.register {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.register form {
+  width: 960px;
+  padding: 100px 0px;
+  display: flex;
+  gap: 120px;
+}
+
+.register form h1 {
+  color: gray;
+  margin-bottom: 20px;
+}
+
+.register form .left,
+.register form .right {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  justify-content: space-between;
+}
+
+.register form .left label,
+.register form .right label {
+  color: gray;
+  font-size: 18px;
+}
+
+.register form .left input,
+.register form .right input,
+.register form .left textarea,
+.register form .right textarea {
+  padding: 20px;
+  border: 1px solid rgb(216, 214, 214);
+}
+
+.register form .left button,
+.register form .right button {
+  border: none;
+  padding: 20px;
+  color: white;
+  font-weight: 500;
+  font-size: 18px;
+  background-color: #1dbf73;
+  cursor: pointer;
+}
+
+.register form .left .toggle,
+.register form .right .toggle {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.register form .left .toggle .switch,
+.register form .right .toggle .switch {
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 24px;
+}
+
+/* Hide default HTML checkbox */
+.register form .left .toggle .switch input,
+.register form .right .toggle .switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.register form .left .toggle .switch .slider,
+.register form .right .toggle .switch .slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+  border-radius: 24px;
+}
+
+.register form .left .toggle .switch .slider:before,
+.register form .right .toggle .switch .slider:before {
+  position: absolute;
+  content: "";
+  height: 16px;
+  width: 16px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+  border-radius: 50%;
+}
+
+.register form .left .toggle .switch input:checked + .slider,
+.register form .right .toggle .switch input:checked + .slider {
+  background-color: #2196f3;
+}
+
+.register form .left .toggle .switch input:focus + .slider,
+.register form .right .toggle .switch input:focus + .slider {
+  box-shadow: 0 0 1px #2196f3;
+}
+
+.register form .left .toggle .switch input:checked + .slider:before,
+.register form .right .toggle .switch input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
