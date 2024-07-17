@@ -23,6 +23,7 @@ import MyApplications from "./pages/MyApplicaton/MyApplicaton.jsx";
 import Gigs from "./pages/TalentPages/gigs/Gigs.jsx";
 import AddGigs from "./pages/TalentPages/add/Add.jsx";
 import Gig from "./pages/TalentPages/gig/Gig.jsx";
+// import Pay from "./pages/TalentPages/pay/Pay.jsx";
 
 function App() {
   return (
@@ -44,6 +45,7 @@ function App() {
             <Route path="/gigs" element={<Gigs />} />
             <Route path="/add-gig" element={<AddGigs />} />
             <Route path="/gig/:id" element={<Gig />} />
+            {/* <Route path="/pay/:id" element={<Pay />} /> */}
 
             <Route element={<PrivateRoute />}>
               <Route path="/profile" element={<Profile />} />

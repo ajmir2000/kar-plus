@@ -136,7 +136,7 @@ function Gig() {
             )}
             <Reviews gigId={id} />
           </div>
-          <div className="right">
+          <div className="right w-25">
             <div className="price">
               <h3>{data.shortTitle}</h3>
               <h2>$ {data.price}</h2>
