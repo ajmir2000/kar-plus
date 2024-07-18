@@ -23,8 +23,11 @@ function NavBar() {
         <Navbar.Toggle aria-controls="navbarScroll" />
         <Navbar.Collapse id="navbarScroll">
           <Nav className="me-auto my-2 my-lg-0 nav-container" navbarScroll>
-            <NavLink to="/gigs" className={linkClass}>
+            <NavLink to="/find-work" className={linkClass}>
               Find Work
+            </NavLink>
+            <NavLink to="/gigs" className={linkClass}>
+              Find Talents
             </NavLink>
 
             <NavLink to="/companies" className={linkClass}>
