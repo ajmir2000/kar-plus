@@ -3,8 +3,9 @@ import { Link, useNavigate } from "react-router-dom";
 import "./Orders.css";
 import { useQuery } from "@tanstack/react-query";
 import newRequest from "../../../utils/newRequest.js";
+import { useSelector } from "react-redux";
 const Orders = () => {
-  const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+  const { currentUser } = useSelector((state) => state.user);
 
   const navigate = useNavigate();
   const { isLoading, error, data } = useQuery({
@@ -14,6 +15,9 @@ const Orders = () => {
         return res.data;
       }),
   });
+
+  console.log(data);
+  console.log(error);
 
   const handleContact = async (order) => {
     const sellerId = order.sellerId;
@@ -33,7 +37,7 @@ const Orders = () => {
     }
   };
   return (
-    <div className="orders">
+    <div className="orders bg-white">
       {isLoading ? (
         "loading"
       ) : error ? (

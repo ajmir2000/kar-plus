@@ -93,10 +93,10 @@ const MyApplications = () => {
       ) : (
         <>
           <h1 className="text-white">Applications From Job Seekers</h1>
-          {applications.length <= 0 ? (
+          {applications && applications.length <= 0 ? (
             <h4>No Applications Found</h4>
           ) : (
-            applications.map((element) => (
+            applications && applications.map((element) => (
               <EmployerCard
                 element={element}
                 key={element._id}
@@ -179,8 +179,7 @@ const JobSeekerCard = ({ element, deleteApplication, openModal }) => {
                   justifyContent: "center",
                   alignItems: "center",
                   flexDirection: "column",
-                }}
-              >
+                }}>
                 <FaFilePdf size={48} color="red" />
                 <span>Download PDF File</span>
               </div>
@@ -196,8 +195,7 @@ const JobSeekerCard = ({ element, deleteApplication, openModal }) => {
                   justifyContent: "center",
                   alignItems: "center",
                   flexDirection: "column",
-                }}
-              >
+                }}>
                 <FaFileWord size={48} color="blue" />
                 <span>Download Word File</span>
               </div>
@@ -209,8 +207,7 @@ const JobSeekerCard = ({ element, deleteApplication, openModal }) => {
         <div className="text-end mt-3">
           <button
             className="btn btn-danger"
-            onClick={() => deleteApplication(element._id)}
-          >
+            onClick={() => deleteApplication(element._id)}>
             Delete Application
           </button>
         </div>
@@ -373,8 +370,7 @@ const EmployerCard = ({ element, openModal }) => {
                   justifyContent: "center",
                   alignItems: "center",
                   flexDirection: "column",
-                }}
-              >
+                }}>
                 <FaFilePdf size={48} color="red" />
                 <span>Download PDF File</span>
               </div>
@@ -390,8 +386,7 @@ const EmployerCard = ({ element, openModal }) => {
                   justifyContent: "center",
                   alignItems: "center",
                   flexDirection: "column",
-                }}
-              >
+                }}>
                 <FaFileWord size={48} color="blue" />
                 <span>Download Word File</span>
               </div>
