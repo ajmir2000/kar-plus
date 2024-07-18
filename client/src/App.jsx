@@ -23,10 +23,12 @@ import MyApplications from "./pages/MyApplicaton/MyApplicaton.jsx";
 import Gigs from "./pages/TalentPages/gigs/Gigs.jsx";
 import AddGigs from "./pages/TalentPages/add/Add.jsx";
 import Gig from "./pages/TalentPages/gig/Gig.jsx";
+import MyGigs from "./pages/TalentPages/myGigs/MyGigs.jsx";
 import Orders from "./pages/TalentPages/orders/Orders.jsx";
 import Messages from "./pages/TalentPages/messages/Messages.jsx";
 import Message from "./pages/TalentPages/message/Message.jsx";
-// import Pay from "./pages/TalentPages/pay/Pay.jsx";
+import Success from "./pages/TalentPages/success/Success.jsx";
+import Pay from "./pages/TalentPages/pay/Pay.jsx";
 
 function App() {
   return (
@@ -48,11 +50,12 @@ function App() {
             <Route path="/gigs" element={<Gigs />} />
             <Route path="/add-gig" element={<AddGigs />} />
             <Route path="/gig/:id" element={<Gig />} />
+            <Route path="/my-gigs" element={<MyGigs />} />
             <Route path="/orders" element={<Orders />} />
             <Route path="/messages" element={<Messages />} />
             <Route path="/message/:id" element={<Message />} />
-
-            {/* <Route path="/pay/:id" element={<Pay />} /> */}
+            <Route path="/success" element={<Success />} />
+            <Route path="/pay/:id" element={<Pay />} />
 
             <Route element={<PrivateRoute />}>
               <Route path="/profile" element={<Profile />} />

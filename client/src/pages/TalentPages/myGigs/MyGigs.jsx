@@ -1,11 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "./MyGigs.css";
-import getCurrentUser from "../../utils/getCurrentUser";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import newRequest from "../../../utils/newRequest.js";
+import { useSelector } from "react-redux";
 function MyGigs() {
-  const currentUser = getCurrentUser();
+  const { currentUser } = useSelector((state) => state.user);
 
   const queryClient = useQueryClient();
 
@@ -31,7 +31,7 @@ function MyGigs() {
   };
 
   return (
-    <div className="myGigs">
+    <div className="myGigs bg-white">
       {isLoading ? (
         "loading"
       ) : error ? (
