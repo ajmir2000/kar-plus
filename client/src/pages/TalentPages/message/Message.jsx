@@ -3,10 +3,11 @@ import React from "react";
 import { Link, useParams } from "react-router-dom";
 import newRequest from "../../../utils/newRequest.js";
 import "./Message.css";
+import { useSelector } from "react-redux";
 
 const Message = () => {
   const { id } = useParams();
-  const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+  const { currentUser } = useSelector((state) => state.user);
 
   const queryClient = useQueryClient();
 
@@ -40,7 +41,7 @@ const Message = () => {
     <div className="message">
       <div className="container">
         <span className="breadcrumbs">
-          <Link to="/messages">Messages</Link>John Doe 
+          <Link to="/messages">Messages</Link>John Doe
         </span>
         {isLoading ? (
           "loading"

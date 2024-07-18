@@ -4,9 +4,9 @@ import { Link } from "react-router-dom";
 import newRequest from "../../../utils/newRequest.js";
 import "./Messages.css";
 import moment from "moment";
-
+import { useSelector } from "react-redux";
 const Messages = () => {
-  const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+  const { currentUser } = useSelector((state) => state.user);
 
   const queryClient = useQueryClient();
 
@@ -32,7 +32,7 @@ const Messages = () => {
   };
 
   return (
-    <div className="messages">
+    <div className="messages bg-white">
       {isLoading ? (
         "loading"
       ) : error ? (
