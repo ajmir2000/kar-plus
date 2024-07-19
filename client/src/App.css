@@ -1,9 +1,10 @@
 .App {
   font-family: "Poppins-Medium";
+  
 }
 .proBackground {
   /* global 94%+ browsers support */
-  background: linear-gradient(122deg, #25CA86, #19AC90 77%);
+  background: linear-gradient(122deg, #86E6A1, #86E6A1 100%);
 }
 
 .link{
