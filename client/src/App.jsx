@@ -29,6 +29,7 @@ import Messages from "./pages/TalentPages/messages/Messages.jsx";
 import Message from "./pages/TalentPages/message/Message.jsx";
 import Success from "./pages/TalentPages/success/Success.jsx";
 import Pay from "./pages/TalentPages/pay/Pay.jsx";
+import CreateOrder from "./pages/CreateOrder/CreateOrder.jsx";
 
 function App() {
   return (
@@ -55,6 +56,7 @@ function App() {
             <Route path="/messages" element={<Messages />} />
             <Route path="/message/:id" element={<Message />} />
             <Route path="/success" element={<Success />} />
+            <Route path="/create-order/:id" element={<CreateOrder />} />
             <Route path="/pay/:id" element={<Pay />} />
 
             <Route element={<PrivateRoute />}>

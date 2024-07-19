@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import './CreateJob.css'
+import "./CreateJob.css";
 import { useForm } from "react-hook-form";
 import CreatableSelect from "react-select/creatable";
 import { useSelector } from "react-redux";
@@ -144,8 +144,7 @@ const CreateJob = () => {
       <div className="cudtom-form py-3 py-lg-5 px-3 px-lg-5">
         <form
           onSubmit={handleSubmit(onSubmit)}
-          className="space-y-3 space-y-lg-4"
-        >
+          className="space-y-3 space-y-lg-4">
           <div className="row align-items-center justify-content-between g-4">
             <div className="col-lg-6">
               <label className="form-label mb-2">Company Name</label>
@@ -191,8 +190,7 @@ const CreateJob = () => {
                 className={`form-control ${
                   errors.salaryFrom ? "is-invalid" : ""
                 }`}
-                onChange={(e) => setSalaryType(e.target.value)}
-              >
+                onChange={(e) => setSalaryType(e.target.value)}>
                 <option value="">Select salary type</option>
                 <option value="Fixed">Fixed Salary</option>
                 <option value="As per Company Scale">
@@ -380,8 +378,7 @@ const CreateJob = () => {
                 {...register("employmentType", {
                   required: "Employment Type is required",
                 })}
-                className="form-control"
-              >
+                className="form-control">
                 <option value="">Select your job type</option>
                 <option value="Full-time">Full-time</option>
                 <option value="Part-time">Part-time</option>
@@ -418,8 +415,7 @@ const CreateJob = () => {
                 {...register("contractType", {
                   required: "Contract Type is required",
                 })}
-                className="form-control"
-              >
+                className="form-control">
                 <option value="">Select your contract type</option>
                 <option value="Permanent">Permanent</option>
                 <option value="Temporary">Temporary</option>
@@ -457,8 +453,7 @@ const CreateJob = () => {
                 {...register("contractExtensible", {
                   required: "Contract Extensible is required",
                 })}
-                className="form-control"
-              >
+                className="form-control">
                 <option value="">Is contract extensible?</option>
                 <option value="Yes">Yes</option>
                 <option value="No">No</option>
@@ -479,8 +474,7 @@ const CreateJob = () => {
                 {...register("minimumEducation", {
                   required: "Minimum Education is required",
                 })}
-                className="form-control"
-              >
+                className="form-control">
                 <option value="">Select Minimum Education</option>
                 <option value="Graduated From High School">
                   Graduated From High School
@@ -499,9 +493,9 @@ const CreateJob = () => {
               <label className="form-label mb-2">Gender</label>
               <select
                 {...register("gender", { required: "Gender is required" })}
-                className="form-control"
-              >
+                className="form-control">
                 <option value="">Select gender</option>
+                <option value="Any">Any</option>
                 <option value="Male">Male</option>
                 <option value="Female">Female</option>
               </select>
