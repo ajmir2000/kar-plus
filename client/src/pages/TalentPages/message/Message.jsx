@@ -38,7 +38,7 @@ const Message = () => {
   };
 
   return (
-    <div className="message">
+    <div className="message bg-white">
       <div className="container">
         <span className="breadcrumbs">
           <Link to="/messages">Messages</Link>John Doe

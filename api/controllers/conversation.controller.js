@@ -58,6 +58,7 @@ export const getConversations = async (req, res, next) => {
       req.user.isSeller ? { sellerId: req.user.id } : { buyerId: req.user.id }
     ).sort({ updatedAt: -1 });
     res.status(200).send(conversations);
+    // console.log(conversations);
   } catch (err) {
     next(err);
   }

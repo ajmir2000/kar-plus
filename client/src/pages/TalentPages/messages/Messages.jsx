@@ -17,6 +17,7 @@ const Messages = () => {
         return res.data;
       }),
   });
+  console.log(data)
 
   const mutation = useMutation({
     mutationFn: (id) => {

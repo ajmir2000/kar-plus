@@ -3,9 +3,10 @@ import "./CreateOrder.css";
 import { useForm } from "react-hook-form";
 import { useSelector } from "react-redux";
 import newRequest from "../../utils/newRequest";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 function CreateOrder() {
+  const navigate = useNavigate();
   const { currentUser } = useSelector((state) => state.user);
   const {
     register,
@@ -29,8 +30,8 @@ function CreateOrder() {
       console.log(result);
       if (result.acknowledged) {
         alert("Submit Order Successfully!!");
-        //   navigate("/find-talent");
-        // reset();
+        navigate("/find-talent");
+        reset();
       } else {
         alert(result.message);
       }
