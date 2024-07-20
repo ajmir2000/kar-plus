@@ -32,11 +32,10 @@ export const createOrder = async (req, res, next) => {
     });
 
     await newOrder.save();
-    
+
     res.status(201).json({ acknowledged: true });
   } catch (err) {
     next(err);
-    
   }
 };
 
@@ -72,10 +71,6 @@ export const createOrder = async (req, res, next) => {
 
 export const getOrders = async (req, res, next) => {
   try {
-
-    console.log(req.user.isSeller)
-    console.log(req.user.id)
-
     // console.log(req.user.isSeller)
     // const orders = await Order.find({
     //   ...(req.user.isSeller
@@ -83,21 +78,18 @@ export const getOrders = async (req, res, next) => {
     //     : { buyerId: req.user.id }),
     //     isCompleted: true,
     //   });
-      const orders = await Order.find({
-        ...(req.user.isSeller
-          ? { sellerId: req.user.id }
-          : { buyerId: req.user.id }),
-          isCompleted: true,
-        });
-      console.log("getOrders");
-      console.log(orders)
+    const orders = await Order.find({
+      ...(req.user.isSeller
+        ? { sellerId: req.user.id }
+        : { buyerId: req.user.id }),
+      isCompleted: false,
+    });
 
     res.status(200).send(orders);
   } catch (err) {
     next(err);
   }
 };
-
 
 export const confirm = async (req, res, next) => {
   try {

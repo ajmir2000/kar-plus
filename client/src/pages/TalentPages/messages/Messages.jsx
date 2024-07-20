@@ -7,7 +7,7 @@ import moment from "moment";
 import { useSelector } from "react-redux";
 const Messages = () => {
   const { currentUser } = useSelector((state) => state.user);
-
+console.log(currentUser._id)
   const queryClient = useQueryClient();
 
   const { isLoading, error, data } = useQuery({

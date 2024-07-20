@@ -23,14 +23,18 @@ const Orders = () => {
     const sellerId = order.sellerId;
     const buyerId = order.buyerId;
     const id = sellerId + buyerId;
-
+    console.log(order.sellerId);
+    console.log(order.buyerId);
+    console.log(currentUser.isSeller);
     try {
       const res = await newRequest.get(`/conversations/single/${id}`);
       navigate(`/message/${res.data.id}`);
     } catch (err) {
       if (err.response.status === 404) {
         const res = await newRequest.post(`/conversations/`, {
-          to: currentUser.seller ? buyerId : sellerId,
+          to: currentUser._id === sellerId ? buyerId : sellerId,
+          showIsSellerOrBuyer:
+            currentUser._id === sellerId ? "seller" : "buyer",
         });
         navigate(`/message/${res.data.id}`);
       }

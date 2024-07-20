@@ -47,7 +47,7 @@ export const getGig = async (req, res, next) => {
 };
 
 export const getGigs = async (req, res, next) => {
-  console.log("here I AJmir");
+  
   const q = req.query;
 
   console.log(q);
@@ -66,7 +66,7 @@ export const getGigs = async (req, res, next) => {
   try {
     const gigs = await Gig.find(filters).sort({ [q.sort]: -1 });
     res.status(200).send(gigs);
-    console.log(gigs);
+ 
   } catch (error) {
     next(error);
     console.log(error);
