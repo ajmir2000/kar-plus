@@ -10,7 +10,7 @@ import { useNavigate } from "react-router-dom";
 export default function OAuth({ role }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  console.log(role);
+  // console.log(role);
   const handleGoogleClick = async () => {
     try {
       const provider = new GoogleAuthProvider();
