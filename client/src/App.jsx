@@ -30,6 +30,7 @@ import Message from "./pages/TalentPages/message/Message.jsx";
 import Success from "./pages/TalentPages/success/Success.jsx";
 import Pay from "./pages/TalentPages/pay/Pay.jsx";
 import CreateOrder from "./pages/CreateOrder/CreateOrder.jsx";
+import Featured from "./components/TalentComponents/featured/Featured.jsx";
 
 function App() {
   return (
@@ -58,6 +59,8 @@ function App() {
             <Route path="/success" element={<Success />} />
             <Route path="/create-order/:id" element={<CreateOrder />} />
             <Route path="/pay/:id" element={<Pay />} />
+            <Route path="/featured" element={<Featured />} />
+            <Route path="/mygigs" element={<MyGigs />} />
 
             <Route element={<PrivateRoute />}>
               <Route path="/profile" element={<Profile />} />

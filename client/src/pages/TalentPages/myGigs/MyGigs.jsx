@@ -12,7 +12,7 @@ function MyGigs() {
   const { isLoading, error, data } = useQuery({
     queryKey: ["myGigs"],
     queryFn: () =>
-      newRequest.get(`/gigs?userId=${currentUser.id}`).then((res) => {
+      newRequest.get(`/gigs?userId=${currentUser._id}`).then((res) => {
         return res.data;
       }),
   });
@@ -41,7 +41,7 @@ function MyGigs() {
           <div className="title">
             <h1>Gigs</h1>
             {currentUser.isSeller && (
-              <Link to="/add">
+              <Link to="/add-gig">
                 <button>Add New Gig</button>
               </Link>
             )}
