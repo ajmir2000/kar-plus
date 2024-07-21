@@ -163,7 +163,7 @@
 //   );
 // }
 
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import { Container } from "react-bootstrap";
@@ -171,6 +171,7 @@ import { MdAlternateEmail, MdOutlinePerson } from "react-icons/md";
 import { RiLockPasswordLine } from "react-icons/ri";
 import { FaRegUser } from "react-icons/fa";
 import OAuth from "../../components/OAuth/OAuth";
+import { FcGoogle } from "react-icons/fc";
 
 import "./signUp.css";
 
@@ -184,6 +185,7 @@ export default function SignUp() {
   const navigate = useNavigate();
   const [error, setError] = React.useState(null);
   const [loading, setLoading] = React.useState(false);
+  const [authError, setAuthError] = useState(null);
 
   const role = watch("role");
 
@@ -213,6 +215,12 @@ export default function SignUp() {
     }
   };
 
+  const handleAuthClick = () => {
+    if (!role) {
+      setAuthError("Please select your role first.");
+      setTimeout(() => setAuthError(null), 3000);
+    }
+  };
   return (
     <Container className="px-3 px-md-5 py-4 text-center">
       <div className="d-flex flex-md-row gap-3 bg-white text-align-center justify-content-center mx-auto custom-signup-scale">
@@ -341,13 +349,27 @@ export default function SignUp() {
             </div>
 
             <p className="mt-3">--- or login with ---</p>
-            <div>
-              <button
-                type="button"
-                disabled={!role}
-                className={!role ? "bg-light" : "bg-success"}>
-                <OAuth role={role} />
-              </button>
+            <div className="custom-buttons w-85">
+              {!role ? (
+                <button
+                  type="button"
+                  onClick={handleAuthClick}
+                  className={`rounded rounded-3 ${"bg-light"}`}>
+                  <FcGoogle />
+                  Continue with google
+                </button>
+              ) : (
+                <button
+                  type="button"
+                  disabled={!role}
+                  className={`rounded rounded-3 ${
+                    role ? "bg-success" : "bg-light"
+                  }`}>
+                  <OAuth role={role} />
+                </button>
+              )}
+
+              {authError && <p className="text-danger mt-2">{authError}</p>}
             </div>
           </form>
           <p className="mt-2 lead custom-signup-suggestion">
