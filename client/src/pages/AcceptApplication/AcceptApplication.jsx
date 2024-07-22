@@ -125,25 +125,26 @@ const AcceptApplication = () => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(data),
-      });
-      const responseData = await res.json();
-      console.log(responseData);
-      if (responseData.success === false) {
+    });
+    const responseData = await res.json();
+    console.log(responseData);
+    if (responseData.success === false) {
         setError(responseData.message);
         console.log("here");
         alert(responseData.message);
         return;
-      }
-      setSuccess(responseData.message);
-      alert(responseData.message);
+    }
+    setSuccess(responseData.message);
+    alert(responseData.message);
+    // navigateTo("/my-application");
     } catch (error) {
       setError(error.message);
       console.log(error);
     }
   };
-  //   if (!currentUser || (currentUser && currentUser.role === "Employer")) {
-  //     navigateTo("/");
-  //   }
+//   if (!currentUser || (currentUser && currentUser.role === "Employer")) {
+//     navigateTo("/");
+//   }
 
   return (
     <section className="application">

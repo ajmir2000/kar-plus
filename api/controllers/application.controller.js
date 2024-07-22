@@ -2,7 +2,10 @@ import { errorHandler } from "../utils/error.js";
 import Application from "../models/application.model.js";
 import acceptApplication from "../models/acceptapplication.model.js";
 import Job from "../models/job.model.js";
+import nodemailer from "nodemailer";
+import dotenv from "dotenv";
 
+dotenv.config();
 export const postApplication = async (req, res, next) => {
   const {
     username,
@@ -172,7 +175,6 @@ export const AcceptApplication = async (req, res, next) => {
     //   jobSeekerID,
     //   employerID,
     // });
-    
 
     // if (existingAcceptApp) {
     //   return next(
@@ -188,6 +190,49 @@ export const AcceptApplication = async (req, res, next) => {
       message: "Accept Application Submitted!",
       acceptApp,
     });
+
+    // Start nodemailer
+    const transporter = nodemailer.createTransport({
+      service: "gmail",
+      host: "smtp.gmail.com",
+      // port: 587,
+      port: 456,
+      secure: true, // Use `true` for port 465, `false` for all other ports
+      auth: {
+        user: process.env.USER, // Sender gmail address
+        pass: process.env.APP_PASSWORD, // App passwoed from Gmail Account
+      },
+    });
+
+    const mailOptions = {
+      from: { name: "KarPlus", address: process.env.USER }, // sender address
+      to: "ajmerfaqiri14.af@gmail.com", // list of receivers
+      subject: "Congratulations You Select of this Job", // Subject line
+      text: "Hello world? Congratulations You Select of this Job Congratulations You Select of this Job", // plain text body
+      html: "<b>Hello world?Congratulations You Select of this JobCongratulations You Select of this JobCongratulations You Select of this Job</b>", // html body
+      attachments: [
+        {
+          filename: "test1.pdf",
+          path: "https://firebasestorage.googleapis.com/v0/b/karplus-b0704.appspot.com/o/acceptApplicationFiles%2F1721669051511Motor-Vehicle-Repair-Garage-License.pdf?alt=media&token=490d1c64-e849-40d6-9f6b-f402836248d7",
+          contentType: "application/pdf",
+        },
+        // {
+        //   filename: "test1.doc",
+        //   path: "https://firebasestorage.googleapis.com/v0/b/karplus-b0704.appspot.com/o/acceptApplicationFiles%2F1721669051511Motor-Vehicle-Repair-Garage-License.pdf?alt=media&token=490d1c64-e849-40d6-9f6b-f402836248d7",contentType:"application/pdf"
+        // },
+      ],
+    };
+
+    const sendMail = async (transporter, mailOptions) => {
+      try {
+        await transporter.sendMail(mailOptions);
+        console.log("Email has been sent");
+      } catch (error) {
+        console.log(error);
+        console.error(error);
+      }
+    };
+    sendMail(transporter, mailOptions);
   } catch (error) {
     next(error);
   }
