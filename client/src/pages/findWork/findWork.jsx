@@ -122,7 +122,7 @@ export default function FindWork() {
       />
       <div className="container pt-5">
         <JobTalentSwitch />
-        <Row className="d-flex  ">
+        <Row className="d-flex">
           <div className="col-3">
             <div className="mt-5  border-end pe-3">
               <Accordion>
