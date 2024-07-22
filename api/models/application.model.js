@@ -2,6 +2,14 @@ import mongoose from "mongoose";
 import validator from "validator";
 
 const applicationSchema = new mongoose.Schema({
+  accept: {
+    type: Boolean,
+    default: false,
+  },
+  reject: {
+    type: Boolean,
+    default: false,
+  },
   username: {
     type: String,
     required: [true, "Please enter your Name!"],

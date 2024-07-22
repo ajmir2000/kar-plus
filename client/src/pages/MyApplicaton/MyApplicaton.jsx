@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 // import "react-pdf/dist/esm/Page/AnnotationLayer.css";
 
 import toast from "react-hot-toast";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { FaFilePdf, FaFileWord } from "react-icons/fa";
 const MyApplications = () => {
@@ -96,7 +96,8 @@ const MyApplications = () => {
           {applications && applications.length <= 0 ? (
             <h4>No Applications Found</h4>
           ) : (
-            applications && applications.map((element) => (
+            applications &&
+            applications.map((element) => (
               <EmployerCard
                 element={element}
                 key={element._id}
@@ -216,93 +217,6 @@ const JobSeekerCard = ({ element, deleteApplication, openModal }) => {
   );
 };
 
-//     const extension = url.split("?")[0].split(".").pop();
-//     return extension.toLowerCase();
-//   };
-//   console.log(element.resume);
-//   const fileType = getFileType(element.resume);
-//   console.log(fileType);
-
-//   return (
-//     <div className="card mb-3">
-//       <div className="card-body">
-//         <div className="d-flex justify-content-between">
-//           <div className="detail">
-//             <h3 className="text-info">Job Seeker Details</h3>
-//             <p>
-//               <strong>Name:</strong> {element.username}
-//             </p>
-//             <p>
-//               <strong>Email:</strong> {element.jobSeekerID.email}
-//             </p>
-//             <h3 className="text-danger">Job Details</h3>
-
-//             <p>
-//               <strong>Job Title:</strong> {element.jobTitle}
-//             </p>
-//             <p>
-//               <strong>Company Name:</strong> {element.companyName}
-//             </p>
-//             <p>
-//               <strong>Vacancies:</strong> {element.vacancies}
-//             </p>
-//             <p>
-//               <strong>Address:</strong> {element.country}, {element.province},
-//               {element.location}
-//             </p>
-//             <p>
-//               <strong>Closing Date:</strong> {element.closingDate}
-//             </p>
-//           </div>
-//           <div className="resume">
-//             {fileType === "jpg" || fileType === "jpeg" || fileType === "png" ? (
-//               <img
-//                 src={element.resume}
-//                 alt="resume"
-//                 className="img-thumbnail"
-//                 onClick={() => openModal(element.resume)}
-//                 style={{ cursor: "pointer", width: "150px" }}
-//               />
-//             ) : fileType === "pdf" ? (
-//               <div
-//                 onClick={() => openModal(element.resume)}
-//                 style={{
-//                   cursor: "pointer",
-//                   width: "150px",
-//                   height: "150px",
-//                   border: "1px solid #ccc",
-//                   display: "flex",
-//                   justifyContent: "center",
-//                   alignItems: "center",
-//                 }}>
-//                 <Document file={element.resume}>
-//                   <Page pageNumber={1} width={150} />
-//                 </Document>
-//               </div>
-//             ) : fileType === "doc" || fileType === "docx" ? (
-//               <div
-//                 onClick={() => openModal(element.resume)}
-//                 style={{
-//                   cursor: "pointer",
-//                   width: "150px",
-//                   height: "150px",
-//                   border: "1px solid #ccc",
-//                   display: "flex",
-//                   justifyContent: "center",
-//                   alignItems: "center",
-//                 }}>
-//                 <span>Word Document</span>
-//               </div>
-//             ) : (
-//               <span>Unsupported file type</span>
-//             )}
-//           </div>
-//         </div>
-//       </div>
-//     </div>
-//   );
-// };
-
 const EmployerCard = ({ element, openModal }) => {
   const getFileType = (url) => {
     const extension = url.split("?")[0].split(".").pop();
@@ -395,6 +309,12 @@ const EmployerCard = ({ element, openModal }) => {
             )}
           </div>
         </div>
+      </div>
+      <div className="d-flex justify-content-around">
+        <Link to={`/accept-application/${element._id}`} state={{ element }}>
+          <button className="btn btn-success">Accept</button>
+        </Link>
+        <button className="btn btn-danger">Reject</button>
       </div>
     </div>
   );

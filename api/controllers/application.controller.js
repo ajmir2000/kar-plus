@@ -1,5 +1,6 @@
 import { errorHandler } from "../utils/error.js";
 import Application from "../models/application.model.js";
+import acceptApplication from "../models/acceptapplication.model.js";
 import Job from "../models/job.model.js";
 
 export const postApplication = async (req, res, next) => {
@@ -62,19 +63,6 @@ export const postApplication = async (req, res, next) => {
       companyName,
     } = jobDetails;
 
-    // if (
-    //   !name ||
-    //   !email ||
-    //   !coverLetter ||
-    //   !phone ||
-    //   !address ||
-    //   !applicantID ||
-    //   !employerID ||
-    //   !resume
-    // ) {
-    //   return next(errorHandler(400, "Please fill all fields."));
-    // }
-    console.log(resume);
     const application = await Application.create({
       username,
       emailJobSeeker,
@@ -166,3 +154,64 @@ export const jobseekerDeleteApplication = async (req, res, next) => {
     next(error);
   }
 };
+
+// Start Accept Application Process
+
+export const AcceptApplication = async (req, res, next) => {
+  const userID = req.user.id;
+  const { jobID, jobSeekerID, employerID } = req.body;
+  const data = req.body;
+  // console.log(data);
+
+  try {
+    if (!userID) {
+      return next(errorHandler(400, "User Not Found."));
+    }
+    // const existingAcceptApp = await acceptApplication.findOne({
+    //   jobID,
+    //   jobSeekerID,
+    //   employerID,
+    // });
+    
+
+    // if (existingAcceptApp) {
+    //   return next(
+    //     errorHandler(
+    //       400,
+    //       "You have already send accept application for this Job Seeker."
+    //     )
+    //   );
+    // }
+    const acceptApp = await acceptApplication.create({ ...data });
+    res.status(200).json({
+      success: true,
+      message: "Accept Application Submitted!",
+      acceptApp,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
+export const RejcetApplication = async (req, res, next) => {
+  const userID = req.user.id;
+  const { id } = req.params;
+
+  try {
+    if (!userID) {
+      return next(errorHandler(400, "User Not Found."));
+    }
+    const application = await Application.findById(id);
+    if (!application) {
+      return next(errorHandler(404, "Application not found!"));
+    }
+    await application.deleteOne();
+    res.status(200).json({
+      success: true,
+      message: "Application Deleted!",
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+// End Accept Application Process

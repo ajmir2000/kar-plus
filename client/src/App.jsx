@@ -19,6 +19,7 @@ import EditJob from "./pages/EditJob/EditJob.jsx";
 import JobDetails from "./pages/JobDetails/JobDetails.jsx";
 import Application from "./pages/Application/Application.jsx";
 import MyApplications from "./pages/MyApplicaton/MyApplicaton.jsx";
+import AcceptApplication from "./pages/AcceptApplication/AcceptApplication.jsx";
 // talent part
 import Gigs from "./pages/TalentPages/gigs/Gigs.jsx";
 import AddGigs from "./pages/TalentPages/add/Add.jsx";
@@ -48,6 +49,7 @@ function App() {
             <Route path="/signup" element={<SignUp />} />
             <Route path="/companies" element={<Companies />} />
             <Route path="/companies/:id" element={<CompanyDetails />} />
+            <Route path="/accept-application/:id" element={<AcceptApplication />} />
             {/* Talent Part  */}
             <Route path="/gigs" element={<Gigs />} />
             <Route path="/add-gig" element={<AddGigs />} />
