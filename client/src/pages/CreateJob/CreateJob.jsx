@@ -138,7 +138,7 @@ const CreateJob = () => {
     { value: "MongoDB", label: "MongoDB" },
     { value: "Redux", label: "Redux" },
   ];
-
+  // we have optional input
   return (
     <div className="container-xxl mx-auto px-4 px-lg-5">
       <div className="cudtom-form py-3 py-lg-5 px-3 px-lg-5">
@@ -149,7 +149,7 @@ const CreateJob = () => {
             <div className="col-lg-6">
               <label className="form-label mb-2">Company Name</label>
               <input
-                placeholder="Ex: Roshan"
+                placeholder="Roshan"
                 {...register("companyName", {
                   required: "Company Name is required",
                 })}
@@ -258,7 +258,7 @@ const CreateJob = () => {
             <div className="col-lg-6">
               <label className="form-label mb-2">Country</label>
               <input
-                placeholder="Ex: Afghanistan"
+                placeholder="Afghanistan"
                 {...register("country", { required: "Country is required" })}
                 className={`form-control ${errors.country ? "is-invalid" : ""}`}
               />
@@ -269,7 +269,7 @@ const CreateJob = () => {
             <div className="col-lg-6">
               <label className="form-label mb-2">Province</label>
               <input
-                placeholder="Ex: Kabul"
+                placeholder="Kabul"
                 {...register("province", { required: "Province is required" })}
                 className={`form-control ${
                   errors.province ? "is-invalid" : ""
@@ -284,7 +284,7 @@ const CreateJob = () => {
             <div className="col-lg-6">
               <label className="form-label mb-2">Job Location</label>
               <input
-                placeholder="Ex: Wazri Mohammad Akbar khan, street 17"
+                placeholder="Wazri Mohammad Akbar khan, street 17"
                 {...register("location", {
                   required: "Job Location is required",
                 })}
@@ -302,8 +302,9 @@ const CreateJob = () => {
               <label className="form-label mb-2">Years of Experience</label>
               <input
                 type="number"
+                placeholder="2 (optional)"
                 {...register("yearsOfExperience", {
-                  required: "Years of Experience is required",
+                  // required: "Years of Experience is required",
                 })}
                 className={`form-control ${
                   errors.yearsOfExperience ? "is-invalid" : ""
@@ -335,7 +336,7 @@ const CreateJob = () => {
               )}
             </div>
             <div className="col-lg-6">
-              <label className="form-label mb-2">Closing Date</label>
+              <label className="form-label mb-2">Job Closing Date</label>
               <input
                 type="date"
                 {...register("closingDate", {
@@ -396,8 +397,9 @@ const CreateJob = () => {
               <label className="form-label mb-2">Probation Period</label>
               <input
                 type="text"
+                placeholder="3 Month (optional)"
                 {...register("probationPeriod", {
-                  required: "Probation Period is required",
+                  // required: "Probation Period is required",
                 })}
                 className={`form-control ${
                   errors.probationPeriod ? "is-invalid" : ""
@@ -410,10 +412,12 @@ const CreateJob = () => {
               )}
             </div>
             <div className="col-lg-6">
-              <label className="form-label mb-2">Contract Type</label>
+              <label className="form-label mb-2">
+                Contract Type (optional)
+              </label>
               <select
                 {...register("contractType", {
-                  required: "Contract Type is required",
+                  // required: "Contract Type is required",
                 })}
                 className="form-control">
                 <option value="">Select your contract type</option>
@@ -434,8 +438,9 @@ const CreateJob = () => {
               <label className="form-label mb-2">Contract Duration</label>
               <input
                 type="text"
+                placeholder="1 Year (optional)"
                 {...register("contractDuration", {
-                  required: "Contract Duration is required",
+                  // required: "Contract Duration is required",
                 })}
                 className={`form-control ${
                   errors.contractDuration ? "is-invalid" : ""
@@ -509,6 +514,7 @@ const CreateJob = () => {
             <div className="col-lg-6">
               <label className="form-label mb-2">About Company</label>
               <textarea
+                placeholder="Write about your Company"
                 {...register("aboutCompany", {
                   required: "About Company is required",
                 })}
@@ -525,6 +531,7 @@ const CreateJob = () => {
             <div className="col-lg-6">
               <label className="form-label mb-2">Vacancies</label>
               <input
+                placeholder="2"
                 type="number"
                 {...register("vacancies", {
                   required: "Vacancies are required",
@@ -551,7 +558,7 @@ const CreateJob = () => {
               {...register("jobSummary", {
                 required: "Job Summary is required",
               })}
-              placeholder="Job summary"
+              placeholder="Write job summary and main points"
             />
             {errors.jobSummary && (
               <div className="invalid-feedback">
@@ -572,7 +579,7 @@ const CreateJob = () => {
               {...register("dutiesResponsibilities", {
                 required: "Duties and Responsibilities are required",
               })}
-              placeholder="Duties and responsibilities"
+              placeholder="Write about duties and responsibilities a job seeker observe "
             />
             {errors.dutiesResponsibilities && (
               <div className="invalid-feedback">
@@ -591,7 +598,7 @@ const CreateJob = () => {
               {...register("jobRequirements", {
                 required: "Job Requirements are required",
               })}
-              placeholder="Job requirements"
+              placeholder="Write job requirements a job seeker must have"
             />
             {errors.jobRequirements && (
               <div className="invalid-feedback">
@@ -600,7 +607,7 @@ const CreateJob = () => {
             )}
           </div>
 
-          <div className="w-100" mt-3>
+          <div className="w-100 mt-3" mt-3>
             <label className="form-label mb-2">Required Skill Sets:</label>
             <CreatableSelect
               className="form-control py-4"
@@ -615,8 +622,9 @@ const CreateJob = () => {
             <div className="col-lg-6">
               <label className="form-label mb-2">Physical Requirements</label>
               <textarea
+                placeholder="Write physical and health requirements (optional)"
                 {...register("physicalRequirements", {
-                  required: "Physical Requirements are required",
+                  // required: "Physical Requirements are required",
                 })}
                 className={`form-control ${
                   errors.physicalRequirements ? "is-invalid" : ""
@@ -631,8 +639,9 @@ const CreateJob = () => {
             <div className="col-lg-6  mt-3">
               <label className="form-label mb-2">Working Conditions</label>
               <textarea
+                placeholder="Write about Principles and Conditions a job seeker observe on work environment (optional)"
                 {...register("workingConditions", {
-                  required: "Working Conditions are required",
+                  // required: "Working Conditions are required",
                 })}
                 className={`form-control ${
                   errors.workingConditions ? "is-invalid" : ""
