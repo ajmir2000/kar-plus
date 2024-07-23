@@ -217,7 +217,10 @@ export const AcceptApplication = async (req, res, next) => {
           ]
         : fileType === "docx"
         ? [
+        : fileType === "docx"
+        ? [
             {
+              filename: `attachment.docx`,
               filename: `attachment.docx`,
               path: urlAttachment,
               contentType:
