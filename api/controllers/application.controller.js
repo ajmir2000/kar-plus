@@ -170,12 +170,11 @@ export const AcceptApplication = async (req, res, next) => {
     desc,
     jobTitle,
     companyName,
-    attachment,
+    applicationID,
   } = req.body;
   const data = req.body;
   // console.log(data);
   const urlAttachment = req.body.attachment;
-
 
   try {
     if (!userID) {
@@ -216,14 +215,40 @@ export const AcceptApplication = async (req, res, next) => {
               contentType: "application/pdf",
             },
           ]
-        : [
+        : fileType === "docx"
+        ? [
             {
-              filename: `'attachment.docx'`,
+              filename: `attachment.docx`,
               path: urlAttachment,
               contentType:
                 "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
             },
-          ];
+          ]
+        : fileType === "doc"
+        ? [
+            {
+              filename: `attachment.doc`,
+              path: urlAttachment,
+              contentType: "application/msword",
+            },
+          ]
+        : [];
+    const acceptTrue = async () => {
+      try {
+        const updateApplicationID = await Application.findByIdAndUpdate(
+          applicationID,
+          {
+            $set: {
+              accept: true,
+            },
+          },
+          { new: true }
+        );
+        // console.log(updateApplicationID);
+      } catch (error) {
+        console.log(error);
+      }
+    };
 
     // Start nodemailer
     const transporter = nodemailer.createTransport({
@@ -251,6 +276,7 @@ export const AcceptApplication = async (req, res, next) => {
     const sendMail = async (transporter, mailOptions) => {
       try {
         await transporter.sendMail(mailOptions);
+        acceptTrue();
         console.log("Email has been sent");
       } catch (error) {
         console.log(error);
@@ -265,21 +291,116 @@ export const AcceptApplication = async (req, res, next) => {
 
 export const RejcetApplication = async (req, res, next) => {
   const userID = req.user.id;
-  const { id } = req.params;
+  const {
+    jobID,
+    jobSeekerID,
+    employerID,
+    jobSeekerEmail,
+    desc,
+    jobTitle,
+    companyName,
+    applicationID,
+  } = req.body;
+  const data = req.body;
+  // console.log(data);
+  
 
   try {
     if (!userID) {
       return next(errorHandler(400, "User Not Found."));
     }
-    const application = await Application.findById(id);
-    if (!application) {
-      return next(errorHandler(404, "Application not found!"));
-    }
-    await application.deleteOne();
+    // const existingAcceptApp = await acceptApplication.findOne({
+    //   jobID,
+    //   jobSeekerID,
+    //   employerID,
+    // });
+
+    // if (existingAcceptApp) {
+    //   return next(
+    //     errorHandler(
+    //       400,
+    //       "You have already send accept application for this Job Seeker."
+    //     )
+    //   );
+    // }
+    const acceptApp = await acceptApplication.create({ ...data });
     res.status(200).json({
       success: true,
-      message: "Application Deleted!",
+      message: "Accept Application Submitted!",
+      acceptApp,
     });
+
+    const acceptTrue = async () => {
+      try {
+        const updateApplicationID = await Application.findByIdAndUpdate(
+          applicationID,
+          {
+            $set: {
+              reject: true,
+            },
+          },
+          { new: true }
+        );
+        // console.log(updateApplicationID);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    // Start nodemailer
+    const transporter = nodemailer.createTransport({
+      service: "gmail",
+      host: "smtp.gmail.com",
+      // port: 587,
+      port: 456,
+      secure: true, // Use `true` for port 465, `false` for all other ports
+      auth: {
+        user: process.env.USER, // Sender gmail address
+        pass: process.env.APP_PASSWORD, // App passwoed from Gmail Account
+      },
+    });
+
+    // console.log(desc);
+    const mailOptions = {
+      from: { name: "KarPlus", address: process.env.USER }, // sender address
+      to: jobSeekerEmail, // list of receivers
+      subject: `Unfortunately, You did NOT select as ${jobTitle} in ${companyName} Company.`, // Subject line
+      text: `Dear Applicant,
+
+We regret to inform you that your application for the position of ${jobTitle} at ${companyName} has not been selected for further consideration at this time.
+
+While your qualifications were reviewed carefully, we have decided to move forward with candidates whose backgrounds more closely align with the specific requirements of this role.
+
+We appreciate your interest in our company and wish you the best in your future job search endeavors.
+
+Sincerely,
+The HR Team
+${companyName}`, // plain text body
+      html: `<b>Dear Applicant,
+
+We regret to inform you that your application for the position of ${jobTitle} at ${companyName} has not been selected for further consideration at this time.
+
+While your qualifications were reviewed carefully, we have decided to move forward with candidates whose backgrounds more closely align with the specific requirements of this role.
+
+We appreciate your interest in our company and wish you the best in your future job search endeavors.
+
+Sincerely,
+The HR Team
+${companyName}</b>`, // html body
+      attachments: arra,
+    };
+
+    const sendMail = async (transporter, mailOptions) => {
+      try {
+        await transporter.sendMail(mailOptions);
+        acceptTrue();
+        console.log("Email has been sent");
+      } catch (error) {
+        console.log(error);
+        console.error(error);
+      }
+    };
+    sendMail(transporter, mailOptions);
   } catch (error) {
     next(error);
   }

@@ -218,6 +218,49 @@ const JobSeekerCard = ({ element, deleteApplication, openModal }) => {
 };
 
 const EmployerCard = ({ element, openModal }) => {
+
+  const rejectHandler = async (data) => {
+    console.log(data);
+    data.attachment = "null";
+    data.applicationID = element._id;
+    data.jobID = element.jobID;
+    data.jobTitle = element.jobTitle;
+    data.companyName = element.companyName;
+    data.jobSeekerID = element.jobSeekerID.userID;
+    data.jobSeekerEmail = element.jobSeekerID.email;
+    data.employerID = element.employerID.userID;
+    data.employerEmail = element.employerID.email;
+    data.allDataApplication = element;
+
+    console.log(data);
+
+
+
+    try {
+      const res = await fetch("/api/application/reject", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+      const responseData = await res.json();
+      console.log(responseData);
+      if (responseData.success === false) {
+        setError(responseData.message);
+        console.log("here");
+        alert(responseData.message);
+        return;
+      }
+      setSuccess(responseData.message);
+      alert(responseData.message);
+      // navigateTo("/my-application");
+    } catch (error) {
+      setError(error.message);
+      console.log(error);
+    }
+  };
+
   const getFileType = (url) => {
     const extension = url.split("?")[0].split(".").pop();
     return extension.toLowerCase();
@@ -314,7 +357,11 @@ const EmployerCard = ({ element, openModal }) => {
         <Link to={`/accept-application/${element._id}`} state={{ element }}>
           <button className="btn btn-success">Accept</button>
         </Link>
-        <button className="btn btn-danger">Reject</button>
+        <button
+          className="btn btn-danger"
+          onClick={() => rejectHandler(element)}>
+          Reject
+        </button>
       </div>
     </div>
   );
