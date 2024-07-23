@@ -133,10 +133,10 @@ const AcceptApplication = () => {
         console.log("here");
         alert(responseData.message);
         return;
-    }
-    setSuccess(responseData.message);
-    alert(responseData.message);
-    // navigateTo("/my-application");
+      }
+      setSuccess(responseData.message);
+      alert(responseData.message);
+      navigateTo("/my-application");
     } catch (error) {
       setError(error.message);
       console.log(error);
