@@ -223,6 +223,7 @@ const EmployerCard = ({ element, openModal }) => {
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
   // console.log(currentUser);
+
   const rejectHandler = async (data) => {
     const jobSeekerEmail = data.jobSeekerID.email;
     const jobTitle = data.jobTitle;

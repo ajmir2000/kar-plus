@@ -62,7 +62,7 @@ function App() {
             <Route path="/create-order/:id" element={<CreateOrder />} />
             <Route path="/pay/:id" element={<Pay />} />
             <Route path="/featured" element={<Featured />} />
-            <Route path="/mygigs" element={<MyGigs />} />
+            
 
             <Route element={<PrivateRoute />}>
               <Route path="/profile" element={<Profile />} />
