@@ -293,11 +293,7 @@ export const AcceptApplication = async (req, res, next) => {
 export const RejcetApplication = async (req, res, next) => {
   const userID = req.user.id;
   const {
-    jobID,
-    jobSeekerID,
-    employerID,
     jobSeekerEmail,
-    desc,
     jobTitle,
     companyName,
     applicationID,
@@ -323,14 +319,8 @@ export const RejcetApplication = async (req, res, next) => {
     //     )
     //   );
     // }
-    const acceptApp = await acceptApplication.create({ ...data });
-    res.status(200).json({
-      success: true,
-      message: "Accept Application Submitted!",
-      acceptApp,
-    });
 
-    const acceptTrue = async () => {
+    const rejectTrue = async () => {
       try {
         const updateApplicationID = await Application.findByIdAndUpdate(
           applicationID,
@@ -376,7 +366,7 @@ We appreciate your interest in our company and wish you the best in your future 
 Sincerely,
 The HR Team
 ${companyName}`, // plain text body
-      html: `<b>Dear Applicant,
+      html: `<b><p>Dear Applicant, </p>
 
 We regret to inform you that your application for the position of ${jobTitle} at ${companyName} has not been selected for further consideration at this time.
 
@@ -384,16 +374,17 @@ While your qualifications were reviewed carefully, we have decided to move forwa
 
 We appreciate your interest in our company and wish you the best in your future job search endeavors.
 
-Sincerely,
-The HR Team
-${companyName}</b>`, // html body
-      attachments: arra,
+ <p>Sincerely,</p>
+<p>The HR Team</p>
+<p>${companyName}</p>
+</b>`, // html body
+    
     };
 
     const sendMail = async (transporter, mailOptions) => {
       try {
         await transporter.sendMail(mailOptions);
-        acceptTrue();
+        rejectTrue();
         console.log("Email has been sent");
       } catch (error) {
         console.log(error);

@@ -7,12 +7,13 @@ import toast from "react-hot-toast";
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { FaFilePdf, FaFileWord } from "react-icons/fa";
+
 const MyApplications = () => {
   const [applications, setApplications] = useState([]);
 
   const [modalOpen, setModalOpen] = useState(false);
   const [ResumeUrl, setResumeUrl] = useState("");
-  const { currentUser, loading, error } = useSelector((state) => state.user);
+  const { currentUser } = useSelector((state) => state.user);
   // console.log(currentUser);
 
   // const { user } = useContext(Context);
@@ -218,23 +219,15 @@ const JobSeekerCard = ({ element, deleteApplication, openModal }) => {
 };
 
 const EmployerCard = ({ element, openModal }) => {
-
+  const { currentUser } = useSelector((state) => state.user);
+  const [error, setError] = useState(null);
+  const [success, setSuccess] = useState(null);
+  // console.log(currentUser);
   const rejectHandler = async (data) => {
-    console.log(data);
-    data.attachment = "null";
-    data.applicationID = element._id;
-    data.jobID = element.jobID;
-    data.jobTitle = element.jobTitle;
-    data.companyName = element.companyName;
-    data.jobSeekerID = element.jobSeekerID.userID;
-    data.jobSeekerEmail = element.jobSeekerID.email;
-    data.employerID = element.employerID.userID;
-    data.employerEmail = element.employerID.email;
-    data.allDataApplication = element;
-
-    console.log(data);
-
-
+    const jobSeekerEmail = data.jobSeekerID.email;
+    const jobTitle = data.jobTitle;
+    const companyName = data.companyName;
+    const applicationID = data._id;
 
     try {
       const res = await fetch("/api/application/reject", {
@@ -242,7 +235,12 @@ const EmployerCard = ({ element, openModal }) => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(data),
+        body: JSON.stringify({
+          jobSeekerEmail,
+          jobTitle,
+          companyName,
+          applicationID,
+        }),
       });
       const responseData = await res.json();
       console.log(responseData);
