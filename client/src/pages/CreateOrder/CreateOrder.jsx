@@ -30,7 +30,7 @@ function CreateOrder() {
       console.log(result);
       if (result.acknowledged) {
         alert("Submit Order Successfully!!");
-        navigate("/find-talent");
+        navigate("/gigs");
         reset();
       } else {
         alert(result.message);

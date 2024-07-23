@@ -9,7 +9,8 @@ export const createOrder = async (req, res, next) => {
 
     // I will add a condition to prevent send order more than one time
     // const orders = await Order.find(buyerId: req.user.id);
-
+    console.log(req.user.id);
+    console.log(gig.userId);
     if (req.user.id === gig.userId) {
       return next(
         errorHandler(401, "You Are Owner Of Gig, You Can't Orederd ")

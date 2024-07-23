@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import toast from "react-hot-toast";
-import { useNavigate, useParams } from "react-router-dom";
+import { Navigate, useNavigate, useParams } from "react-router-dom";
 // import { Context } from "../../main";
 import { useSelector } from "react-redux";
 import "./Application.css";
@@ -116,6 +116,7 @@ const Application = () => {
         return;
       }
       setSuccess(data.message);
+      navigateTo("/find-work");
       alert(data.message);
     } catch (error) {
       setError(error.message);

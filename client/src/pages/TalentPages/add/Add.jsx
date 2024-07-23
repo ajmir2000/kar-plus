@@ -186,7 +186,7 @@ const Add = () => {
       const result = await res.json();
       if (result.acknowledged) {
         alert("Gig Posted Successfully!!");
-        // navigate("/find-work");
+        navigate("/gigs");
         reset();
         setSelectedOption(null);
         formData.images = [];
