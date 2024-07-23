@@ -176,7 +176,6 @@ export const AcceptApplication = async (req, res, next) => {
   // console.log(data);
   const urlAttachment = req.body.attachment;
 
-
   try {
     if (!userID) {
       return next(errorHandler(400, "User Not Found."));
@@ -216,14 +215,24 @@ export const AcceptApplication = async (req, res, next) => {
               contentType: "application/pdf",
             },
           ]
-        : [
+        : fileType === "docx"
+        ? [
             {
-              filename: `'attachment.docx'`,
+              filename: `attachment.docx`,
               path: urlAttachment,
               contentType:
                 "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
             },
-          ];
+          ]
+        : fileType === "doc"
+        ? [
+            {
+              filename: `attachment.doc`,
+              path: urlAttachment,
+              contentType: "application/msword",
+            },
+          ]
+        : [];
 
     // Start nodemailer
     const transporter = nodemailer.createTransport({
