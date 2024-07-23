@@ -162,9 +162,20 @@ export const jobseekerDeleteApplication = async (req, res, next) => {
 
 export const AcceptApplication = async (req, res, next) => {
   const userID = req.user.id;
-  const { jobID, jobSeekerID, employerID } = req.body;
+  const {
+    jobID,
+    jobSeekerID,
+    employerID,
+    jobSeekerEmail,
+    desc,
+    jobTitle,
+    companyName,
+    attachment,
+  } = req.body;
   const data = req.body;
   // console.log(data);
+  const urlAttachment = req.body.attachment;
+
 
   try {
     if (!userID) {
@@ -191,6 +202,29 @@ export const AcceptApplication = async (req, res, next) => {
       acceptApp,
     });
 
+    const getFileType = (url) => {
+      const extension = url.split("?")[0].split(".").pop();
+      return extension.toLowerCase();
+    };
+    const fileType = getFileType(urlAttachment);
+    const arra =
+      fileType === "pdf"
+        ? [
+            {
+              filename: `attachment.pdf`,
+              path: urlAttachment,
+              contentType: "application/pdf",
+            },
+          ]
+        : [
+            {
+              filename: `'attachment.docx'`,
+              path: urlAttachment,
+              contentType:
+                "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+            },
+          ];
+
     // Start nodemailer
     const transporter = nodemailer.createTransport({
       service: "gmail",
@@ -204,23 +238,14 @@ export const AcceptApplication = async (req, res, next) => {
       },
     });
 
+    // console.log(desc);
     const mailOptions = {
       from: { name: "KarPlus", address: process.env.USER }, // sender address
-      to: "ajmerfaqiri14.af@gmail.com", // list of receivers
-      subject: "Congratulations You Select of this Job", // Subject line
-      text: "Hello world? Congratulations You Select of this Job Congratulations You Select of this Job", // plain text body
-      html: "<b>Hello world?Congratulations You Select of this JobCongratulations You Select of this JobCongratulations You Select of this Job</b>", // html body
-      attachments: [
-        {
-          filename: "test1.pdf",
-          path: "https://firebasestorage.googleapis.com/v0/b/karplus-b0704.appspot.com/o/acceptApplicationFiles%2F1721669051511Motor-Vehicle-Repair-Garage-License.pdf?alt=media&token=490d1c64-e849-40d6-9f6b-f402836248d7",
-          contentType: "application/pdf",
-        },
-        // {
-        //   filename: "test1.doc",
-        //   path: "https://firebasestorage.googleapis.com/v0/b/karplus-b0704.appspot.com/o/acceptApplicationFiles%2F1721669051511Motor-Vehicle-Repair-Garage-License.pdf?alt=media&token=490d1c64-e849-40d6-9f6b-f402836248d7",contentType:"application/pdf"
-        // },
-      ],
+      to: jobSeekerEmail, // list of receivers
+      subject: `Congratulations You Select as ${jobTitle} in ${companyName} Company`, // Subject line
+      text: desc, // plain text body
+      html: `<b>${desc}</b>`, // html body
+      attachments: arra,
     };
 
     const sendMail = async (transporter, mailOptions) => {
