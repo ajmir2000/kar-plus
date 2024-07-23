@@ -217,8 +217,6 @@ export const AcceptApplication = async (req, res, next) => {
           ]
         : fileType === "docx"
         ? [
-        : fileType === "docx"
-        ? [
             {
               filename: `attachment.docx`,
               filename: `attachment.docx`,
@@ -306,7 +304,6 @@ export const RejcetApplication = async (req, res, next) => {
   } = req.body;
   const data = req.body;
   // console.log(data);
-  
 
   try {
     if (!userID) {
