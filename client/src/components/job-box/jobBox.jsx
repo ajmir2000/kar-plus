@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import "./jobBox.css";
 import { FaBookmark } from "react-icons/fa";
 import { CiLocationOn } from "react-icons/ci";
@@ -9,88 +9,131 @@ import { FiInfo } from "react-icons/fi";
 import { Link } from "react-router-dom";
 
 export default function JobBox({
+
+  _id, companyName,
+  aboutCompany,
   jobTitle,
-  location,
   companyLogo,
-  companyName,
+  jobLocation,
+  salaryFrom,
+  salaryTo,
+  companySalary,
+  salaryType,
+  postingDate,
   employmentType,
+  jobSummary,
+  dutiesResponsibilities,
+  jobRequirements,
+  skills,
+  country,
+  province,
+  location,
+  closingDate,
+  vacancies,
+  yearsOfExperience,
+  probationPeriod,
+  contractDuration,
+  contractType,
+  contractExtensible,
+  minimumEducation,
+  gender,
+  physicalRequirements,
+  workingConditions,
   minPrice,
   maxPrice,
-  postingDate,
+  employerId,
 
-  jobSummary,
-  _id,
-  salaryType,
-  skills,
-  postedBy,
 }) {
   const formattedPostingDate = postingDate ? postingDate.slice(0, 10) : "N/A";
+  
 
   const jobData = {
-    jobTitle,
-    location,
-    companyLogo,
-    companyName,
-    employmentType,
-    minPrice,
-    maxPrice,
-    postingDate,
-
-    jobSummary,
-    _id,
-    salaryType,
-    skills,
-    postedBy,
+   
+  _id, companyName,
+  aboutCompany,
+  jobTitle,
+  companyLogo,
+  jobLocation,
+  salaryFrom,
+  salaryTo,
+  companySalary,
+  salaryType,
+  postingDate,
+  employmentType,
+  jobSummary,
+  dutiesResponsibilities,
+  jobRequirements,
+  skills,
+  country,
+  province,
+  location,
+  closingDate,
+  vacancies,
+  yearsOfExperience,
+  probationPeriod,
+  contractDuration,
+  contractType,
+  contractExtensible,
+  minimumEducation,
+  gender,
+  physicalRequirements,
+  workingConditions,
+  minPrice,
+  maxPrice,
+  employerId,
   };
+
   return (
-    <div className="col-9 d-flex custom-jobBox-container mt-5 w-100 p-4">
-      <Link to={`/job-detail/${_id}`} state={{ jobData }}>
-        <div>
-          <div className="custom-jobBox-pic-div">
-            <img src={jobData.companyLogo} alt="picture" />
-          </div>
-          <div className="d-flex flex-column mx-5">
-            <div className="custom-jobBox-title-div">
-              <h3>
-                {jobTitle} <FaBookmark className="fs-4 text-success ms-5" />
-              </h3>
-              <p className="text-muted">{jobData.companyName}</p>
+    <div className="col-md-9 mb-4">
+      <Link
+        to={`/job-detail/${_id}`}
+        state={{ jobData }}
+        className="text-decoration-none">
+        <div className="card shadow-sm border-0">
+          <div className="row g-0">
+            <div className="col-md-2 d-flex align-items-center justify-content-center">
+              <img
+                src={jobData.companyLogo}
+                alt="Company Logo"
+                className="img-fluid p-3"
+              />
             </div>
-
-            <div className="d-flex gap-3 custom-jobBox-btn-container">
-              <div className="btn btn-sm rounded-pill">
-                <CiLocationOn className="text-success fs-5 me-2" />
-                {jobData.location}
+            <div className="col-md-10">
+              <div className="card-body">
+                <div className="d-flex justify-content-between">
+                  <h5 className="card-title mb-1">{jobTitle}</h5>
+                  <FaBookmark className="fs-4 text-success" />
+                </div>
+                <p className="text-muted mb-1">{jobData.companyName}</p>
+                <div className="d-flex flex-wrap gap-2 my-2">
+                  <span className="badge bg-light text-dark d-flex align-items-center">
+                    <CiLocationOn className="text-success fs-5 me-1" />{" "}
+                    {location}
+                  </span>
+                  <span className="badge bg-light text-dark d-flex align-items-center">
+                    <FaRegClock className="text-success fs-5 me-1" />{" "}
+                    {employmentType}
+                  </span>
+                  <span className="badge bg-light text-dark d-flex align-items-center">
+                    <TbCurrencyAfghani className="text-success fs-5 me-1" />{" "}
+                    {minPrice}-{maxPrice}k
+                  </span>
+                  <span className="badge bg-light text-dark d-flex align-items-center">
+                    <GoDiscussionOutdated className="text-success fs-5 me-1" />{" "}
+                    {formattedPostingDate}
+                  </span>
+                </div>
+                <p className="card-text mt-3 text-muted">
+                  {jobData.jobSummary}
+                </p>
+                <button className="btn btn-outline-success btn-sm mt-2">
+                  <FiInfo className="me-1" /> Details
+                </button>
               </div>
-
-              <div className="btn btn-sm rounded-pill">
-                <FaRegClock className="text-success fs-5 me-2" />
-                {jobData.employmentType}
-              </div>
-
-              <div className="btn btn-sm rounded-pill">
-                <TbCurrencyAfghani className="text-success fs-5 me-2" />
-                {jobData.minPrice}-{jobData.maxPrice}k
-              </div>
-
-              <div className="btn btn-sm rounded-pill">
-                <GoDiscussionOutdated className="text-success fs-5 me-2" />
-                {formattedPostingDate}
-              </div>
-
-              <button className="btn btn-sm rounded-pill">
-                <FiInfo className="text-success fs-5 me-2" />
-                Details
-              </button>
-            </div>
-
-            <div className="mt-4">
-              <p>{jobData.description}</p>
             </div>
           </div>
         </div>
       </Link>
-      
     </div>
   );
 }

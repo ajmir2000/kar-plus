@@ -106,7 +106,7 @@ export default function FindWork() {
 
   const jobsAmount = result.length;
 
-  
+ 
 
   const { startIndex, endIndex } = calculatePageRange();
   result = result.slice(startIndex, endIndex);
@@ -121,7 +121,7 @@ export default function FindWork() {
         inputHandleChange={inputHandleChange}
       />
       <div className="container pt-5">
-        <JobTalentSwitch />
+        {/* <JobTalentSwitch /> */}
         <Row className="d-flex">
           <div className="col-3">
             <div className="mt-5  border-end pe-3">

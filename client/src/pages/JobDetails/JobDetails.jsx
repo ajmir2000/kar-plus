@@ -9,55 +9,48 @@ import { useLocation } from "react-router-dom";
 const JobDetails = () => {
   const { id } = useParams();
   console.log(id);
-  const location = useLocation();
-  const { jobData } = location.state || {};
+  const locationURL = useLocation();
+  const { jobData } = locationURL.state || {};
 
   if (!jobData) {
     return <div>No job data available</div>;
   }
 
   const {
-    jobTitle,
-    jobLocation,
-    companyLogo,
     companyName,
+    aboutCompany,
+    jobTitle,
+    companyLogo,
+    jobLocation,
+    salaryFrom,
+    salaryTo,
+    companySalary,
+    salaryType,
+    postingDate,
     employmentType,
+    jobSummary,
+    dutiesResponsibilities,
+    jobRequirements,
+    skills,
+    country,
+    province,
+    location,
+    closingDate,
+    vacancies,
+    yearsOfExperience,
+    probationPeriod,
+    contractDuration,
+    contractType,
+    contractExtensible,
+    minimumEducation,
+    gender,
+    physicalRequirements,
+    workingConditions,
     minPrice,
     maxPrice,
-    postingDate,
-    description,
-    salaryType,
-    skills,
-    postedBy,
+    employerId,
   } = jobData;
 
-
-
-  //   const [job, setJob] = useState([]);
-  //   useEffect(() => {
-  //     // fetch(`http://localhost:5000/all-jobs/${id}`)
-  //     //   .then((res) => res.json())
-  //     //   .then((data) => setJob(data));
-  //   }, []);
-
-  //   const handleJobApply = async () => {
-  //     // console.log("btn clicked")
-  //     const { value: url } = await Swal.fire({
-  //       input: "url",
-  //       inputLabel: "CV or Resume URL address",
-  //       inputPlaceholder: "Enter the URL",
-  //     });
-  //     if (url) {
-  //       Swal.fire(`Entered URL: ${url}`).then((result) => {
-  //         /* Read more about isConfirmed, isDenied below */
-  //         if (result.isConfirmed) {
-  //           Swal.fire("Application Submitted Successfully!", "", "success");
-  //         } else if (result.isDenied) {
-  //           Swal.fire("Changes are not saved", "", "info");
-  //         }
-  //       });
-  //     }
-  //   };
 
   return (
     <div className="container-fluid">
@@ -82,9 +75,6 @@ const JobDetails = () => {
             <p className="h4 font-weight-medium ">Job type:</p>
             <span className="h4 font-weight-medium">{employmentType}</span>
           </div>
-          {/* <button className="btn btn-info ms-2" onClick={handleJobApply}>
-            Apply Now
-          </button> */}
           <button type="button" className="btn btn-primary rounded-5  gap-5">
             {" "}
             <Link className="link" to={`/apply-job/${id}`}>
@@ -190,3 +180,4 @@ const JobDetails = () => {
 };
 
 export default JobDetails;
+

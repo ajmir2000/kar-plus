@@ -22,7 +22,7 @@ export default function FindTalent() {
     <Container fluid className="bg-white ">
       <SearchBox placeholder="find talent..."/>
       <div className="container pt-5">
-        <JobTalentSwitch />
+        {/* <JobTalentSwitch /> */}
 
         <Row className="d-flex  ">
           <div className="col-3">
