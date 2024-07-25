@@ -1,5 +1,19 @@
+.custom-image {
+  height: 50px;
+  width: 50px;
+}
+.navbar .dropdown-toggle::after {
+  border-top-color: white; /* Change the arrow color to white */
+}
+/* Custom styles for active state */
+.nav-dropdown-item a:active,
+.nav-dropdown-item a.active {
+  background-color: #19ac90 !important; /* Bootstrap success color */
+  color: white !important;
+}
 
-.custom-image{
-    height: 50px;
-    width: 50px;
+.nav-dropdown-item:active,
+.nav-dropdown-item.active {
+  background-color: #19ac90 !important; /* Bootstrap success color */
+  color: white !important;
 }
