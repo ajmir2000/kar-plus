@@ -49,7 +49,7 @@ const GigCard = ({ item }) => {
           <img src="./img/heart.png" className="gigCard-icon" alt="" />
           <div className="price text-end">
             <span className="text-muted">STARTING AT</span>
-            <h2 className="mb-0">$ {item.price}</h2>
+            <h2 className="mb-0"> {item.price} &#1547;</h2>
           </div>
         </div>
       </div>
