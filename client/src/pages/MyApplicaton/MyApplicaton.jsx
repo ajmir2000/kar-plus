@@ -74,14 +74,14 @@ const MyApplications = () => {
   };
 
   return (
-    <section className="my-applications page container">
+    <section>
       {currentUser && currentUser.role === "Job Seeker" ? (
         <>
           <h1 className="text-light">My Applications</h1>
-          {applications.length <= 0 ? (
+          {applications?.length <= 0 ? (
             <h4>No Applications Found</h4>
           ) : (
-            applications.map((element) => (
+            applications?.map((element) => (
               <JobSeekerCard
                 element={element}
                 key={element._id}
@@ -93,19 +93,23 @@ const MyApplications = () => {
         </>
       ) : (
         <>
-          <h1 className="text-white">Applications From Job Seekers</h1>
-          {applications && applications.length <= 0 ? (
-            <h4>No Applications Found</h4>
-          ) : (
-            applications &&
-            applications.map((element) => (
-              <EmployerCard
-                element={element}
-                key={element._id}
-                openModal={openModal}
-              />
-            ))
-          )}
+          <h1 className="text-white text-center mb-5 ">
+            Applications From Job Seekers
+          </h1>
+          <div className="row">
+            {applications && applications.length <= 0 ? (
+              <h4>No Applications Found</h4>
+            ) : (
+              applications &&
+              applications.map((element) => (
+                <EmployerCard
+                  element={element}
+                  key={element._id}
+                  openModal={openModal}
+                />
+              ))
+            )}
+          </div>
         </>
       )}
       {modalOpen && <ResumeModal imageUrl={ResumeUrl} onClose={closeModal} />}
@@ -218,11 +222,249 @@ const JobSeekerCard = ({ element, deleteApplication, openModal }) => {
   );
 };
 
+
+//   const { currentUser } = useSelector((state) => state.user);
+//   const [error, setError] = useState(null);
+//   const [success, setSuccess] = useState(null);
+//   // console.log(currentUser);
+
+//   const rejectHandler = async (data) => {
+//     const jobSeekerEmail = data.jobSeekerID.email;
+//     const jobTitle = data.jobTitle;
+//     const companyName = data.companyName;
+//     const applicationID = data._id;
+
+//     try {
+//       const res = await fetch("/api/application/reject", {
+//         method: "POST",
+//         headers: {
+//           "Content-Type": "application/json",
+//         },
+//         body: JSON.stringify({
+//           jobSeekerEmail,
+//           jobTitle,
+//           companyName,
+//           applicationID,
+//         }),
+//       });
+//       const responseData = await res.json();
+//       console.log(responseData);
+//       if (responseData.success === false) {
+//         setError(responseData.message);
+//         console.log("here");
+//         alert(responseData.message);
+//         return;
+//       }
+//       setSuccess(responseData.message);
+//       alert(responseData.message);
+//       // navigateTo("/my-application");
+//     } catch (error) {
+//       setError(error.message);
+//       console.log(error);
+//     }
+//   };
+
+//   const getFileType = (url) => {
+//     const extension = url.split("?")[0].split(".").pop();
+//     return extension.toLowerCase();
+//   };
+
+//   const downloadFile = (url) => {
+//     const link = document.createElement("a");
+//     link.href = url;
+//     link.download = url.split("/").pop();
+//     link.click();
+//   };
+
+//   const fileType = getFileType(element.resume);
+//   console.log(element);
+
+//   return (
+//     <>
+//       {!element.accept && !element.reject ? (
+//         <div className="card mb-3 shadow-sm rounded rounded-5 p-3">
+//           <div className="card-body">
+//             <div className="d-flex justify-content-between">
+//               <div className="detail">
+//                 <h3 className="text-info">Job Seeker Details</h3>
+//                 <p>
+//                   <strong>Name:</strong> {element.username}
+//                 </p>
+//                 <p>
+//                   <strong>Email:</strong> {element.jobSeekerID.email}
+//                 </p>
+//                 <h3 className="text-danger">Job Details</h3>
+
+//                 <p>
+//                   <strong>Job Title:</strong> {element.jobTitle}
+//                 </p>
+//                 <p>
+//                   <strong>Company Name:</strong> {element.companyName}
+//                 </p>
+//                 <p>
+//                   <strong>Vacancies:</strong> {element.vacancies}
+//                 </p>
+//                 <p>
+//                   <strong>Address:</strong> {element.country},{" "}
+//                   {element.province},{element.location}
+//                 </p>
+//                 <p>
+//                   <strong>Closing Date:</strong> {element.closingDate}
+//                 </p>
+//               </div>
+//               <div className="resume">
+//                 {fileType === "jpg" ||
+//                 fileType === "jpeg" ||
+//                 fileType === "png" ? (
+//                   <img
+//                     src={element.resume}
+//                     alt="resume"
+//                     className="img-thumbnail"
+//                     onClick={() => openModal(element.resume)}
+//                     style={{ cursor: "pointer", width: "150px" }}
+//                   />
+//                 ) : fileType === "pdf" ? (
+//                   <div
+//                     onClick={() => downloadFile(element.resume)}
+//                     style={{
+//                       cursor: "pointer",
+//                       width: "150px",
+//                       height: "150px",
+//                       border: "1px solid #ccc",
+//                       display: "flex",
+//                       justifyContent: "center",
+//                       alignItems: "center",
+//                       flexDirection: "column",
+//                     }}>
+//                     <FaFilePdf size={48} color="red" />
+//                     <span>Download PDF File</span>
+//                   </div>
+//                 ) : fileType === "doc" || fileType === "docx" ? (
+//                   <div
+//                     onClick={() => downloadFile(element.resume)}
+//                     style={{
+//                       cursor: "pointer",
+//                       width: "150px",
+//                       height: "150px",
+//                       border: "1px solid #ccc",
+//                       display: "flex",
+//                       justifyContent: "center",
+//                       alignItems: "center",
+//                       flexDirection: "column",
+//                     }}>
+//                     <FaFileWord size={48} color="blue" />
+//                     <span>Download Word File</span>
+//                   </div>
+//                 ) : (
+//                   <span>Unsupported file type</span>
+//                 )}
+//               </div>
+//             </div>
+//           </div>
+//           <div className="d-flex justify-content-around">
+//             <Link to={`/accept-application/${element._id}`} state={{ element }}>
+//               <button className="btn btn-success">Accept</button>
+//             </Link>
+//             <button
+//               className="btn btn-danger"
+//               onClick={() => rejectHandler(element)}>
+//               Reject
+//             </button>
+//           </div>
+//         </div>
+//       ) : element.accept ? (
+//         <div className="card mb-3 shadow-sm rounded rounded-5 p-3">
+//           <div className="card-body">
+//             <div className="d-flex justify-content-between">
+//               <div className="detail">
+//                 <h3 className="text-info">Job Seeker Details</h3>
+//                 <p>
+//                   <strong>Name:</strong> {element.username}
+//                 </p>
+//                 <p>
+//                   <strong>Email:</strong> {element.jobSeekerID.email}
+//                 </p>
+//                 <h3 className="text-danger">Job Details</h3>
+
+//                 <p>
+//                   <strong>Job Title:</strong> {element.jobTitle}
+//                 </p>
+//                 <p>
+//                   <strong>Company Name:</strong> {element.companyName}
+//                 </p>
+//                 <p>
+//                   <strong>Vacancies:</strong> {element.vacancies}
+//                 </p>
+//                 <p>
+//                   <strong>Address:</strong> {element.country},{" "}
+//                   {element.province},{element.location}
+//                 </p>
+//                 <p>
+//                   <strong>Closing Date:</strong> {element.closingDate}
+//                 </p>
+//               </div>
+//               <div className="resume">
+//                 {fileType === "jpg" ||
+//                 fileType === "jpeg" ||
+//                 fileType === "png" ? (
+//                   <img
+//                     src={element.resume}
+//                     alt="resume"
+//                     className="img-thumbnail"
+//                     onClick={() => openModal(element.resume)}
+//                     style={{ cursor: "pointer", width: "150px" }}
+//                   />
+//                 ) : fileType === "pdf" ? (
+//                   <div
+//                     onClick={() => downloadFile(element.resume)}
+//                     style={{
+//                       cursor: "pointer",
+//                       width: "150px",
+//                       height: "150px",
+//                       border: "1px solid #ccc",
+//                       display: "flex",
+//                       justifyContent: "center",
+//                       alignItems: "center",
+//                       flexDirection: "column",
+//                     }}>
+//                     <FaFilePdf size={48} color="red" />
+//                     <span>Download PDF File</span>
+//                   </div>
+//                 ) : fileType === "doc" || fileType === "docx" ? (
+//                   <div
+//                     onClick={() => downloadFile(element.resume)}
+//                     style={{
+//                       cursor: "pointer",
+//                       width: "150px",
+//                       height: "150px",
+//                       border: "1px solid #ccc",
+//                       display: "flex",
+//                       justifyContent: "center",
+//                       alignItems: "center",
+//                       flexDirection: "column",
+//                     }}>
+//                     <FaFileWord size={48} color="blue" />
+//                     <span>Download Word File</span>
+//                   </div>
+//                 ) : (
+//                   <span>Unsupported file type</span>
+//                 )}
+//               </div>
+//             </div>
+//           </div>
+//           <div className=" d-flex justify-content-center">
+//             <button className="btn btn-success">Sent Accept Email</button>
+//           </div>
+//         </div>
+//       ) : element.reject ? null : null}
+//     </>
+//   );
+// };
+
 const EmployerCard = ({ element, openModal }) => {
   const { currentUser } = useSelector((state) => state.user);
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
-  // console.log(currentUser);
 
   const rejectHandler = async (data) => {
     const jobSeekerEmail = data.jobSeekerID.email;
@@ -244,19 +486,15 @@ const EmployerCard = ({ element, openModal }) => {
         }),
       });
       const responseData = await res.json();
-      console.log(responseData);
       if (responseData.success === false) {
         setError(responseData.message);
-        console.log("here");
         alert(responseData.message);
         return;
       }
       setSuccess(responseData.message);
       alert(responseData.message);
-      // navigateTo("/my-application");
     } catch (error) {
       setError(error.message);
-      console.log(error);
     }
   };
 
@@ -273,15 +511,14 @@ const EmployerCard = ({ element, openModal }) => {
   };
 
   const fileType = getFileType(element.resume);
-  console.log(element);
 
   return (
-    <>
+    <div className="col-md-6 col-lg-3  m-lg-auto d-flex justify-content-center">
       {!element.accept && !element.reject ? (
-        <div className="card mb-3 shadow-sm rounded rounded-5 p-3">
+        <div className="card mb-3 shadow-sm rounded p-3">
           <div className="card-body">
-            <div className="d-flex justify-content-between">
-              <div className="detail">
+            <div className="d-flex flex-column flex-md-row justify-content-between">
+              <div className="detail mb-3 mb-md-0">
                 <h3 className="text-info">Job Seeker Details</h3>
                 <p>
                   <strong>Name:</strong> {element.username}
@@ -290,7 +527,6 @@ const EmployerCard = ({ element, openModal }) => {
                   <strong>Email:</strong> {element.jobSeekerID.email}
                 </p>
                 <h3 className="text-danger">Job Details</h3>
-
                 <p>
                   <strong>Job Title:</strong> {element.jobTitle}
                 </p>
@@ -302,7 +538,7 @@ const EmployerCard = ({ element, openModal }) => {
                 </p>
                 <p>
                   <strong>Address:</strong> {element.country},{" "}
-                  {element.province},{element.location}
+                  {element.province}, {element.location}
                 </p>
                 <p>
                   <strong>Closing Date:</strong> {element.closingDate}
@@ -322,34 +558,26 @@ const EmployerCard = ({ element, openModal }) => {
                 ) : fileType === "pdf" ? (
                   <div
                     onClick={() => downloadFile(element.resume)}
+                    className="d-flex flex-column align-items-center justify-content-center"
                     style={{
                       cursor: "pointer",
-                      width: "150px",
-                      height: "150px",
-                      border: "1px solid #ccc",
-                      display: "flex",
-                      justifyContent: "center",
-                      alignItems: "center",
-                      flexDirection: "column",
+                      width: "100px",
+                      height: "100px",
                     }}>
                     <FaFilePdf size={48} color="red" />
-                    <span>Download PDF File</span>
+                    <span className="text-center">Download PDF</span>
                   </div>
                 ) : fileType === "doc" || fileType === "docx" ? (
                   <div
                     onClick={() => downloadFile(element.resume)}
+                    className="d-flex flex-column align-items-center justify-content-center"
                     style={{
                       cursor: "pointer",
-                      width: "150px",
-                      height: "150px",
-                      border: "1px solid #ccc",
-                      display: "flex",
-                      justifyContent: "center",
-                      alignItems: "center",
-                      flexDirection: "column",
+                      width: "100px",
+                      height: "100px",
                     }}>
                     <FaFileWord size={48} color="blue" />
-                    <span>Download Word File</span>
+                    <span className="text-center">Download Word</span>
                   </div>
                 ) : (
                   <span>Unsupported file type</span>
@@ -369,10 +597,10 @@ const EmployerCard = ({ element, openModal }) => {
           </div>
         </div>
       ) : element.accept ? (
-        <div className="card mb-3 shadow-sm rounded rounded-5 p-3">
+        <div className="card mb-3 shadow-sm rounded p-3">
           <div className="card-body">
-            <div className="d-flex justify-content-between">
-              <div className="detail">
+            <div className="d-flex flex-column flex-md-row justify-content-between">
+              <div className="detail mb-3 mb-md-0">
                 <h3 className="text-info">Job Seeker Details</h3>
                 <p>
                   <strong>Name:</strong> {element.username}
@@ -381,7 +609,6 @@ const EmployerCard = ({ element, openModal }) => {
                   <strong>Email:</strong> {element.jobSeekerID.email}
                 </p>
                 <h3 className="text-danger">Job Details</h3>
-
                 <p>
                   <strong>Job Title:</strong> {element.jobTitle}
                 </p>
@@ -393,7 +620,7 @@ const EmployerCard = ({ element, openModal }) => {
                 </p>
                 <p>
                   <strong>Address:</strong> {element.country},{" "}
-                  {element.province},{element.location}
+                  {element.province}, {element.location}
                 </p>
                 <p>
                   <strong>Closing Date:</strong> {element.closingDate}
@@ -413,34 +640,26 @@ const EmployerCard = ({ element, openModal }) => {
                 ) : fileType === "pdf" ? (
                   <div
                     onClick={() => downloadFile(element.resume)}
+                    className="d-flex flex-column align-items-center justify-content-center"
                     style={{
                       cursor: "pointer",
-                      width: "150px",
-                      height: "150px",
-                      border: "1px solid #ccc",
-                      display: "flex",
-                      justifyContent: "center",
-                      alignItems: "center",
-                      flexDirection: "column",
+                      width: "100px",
+                      height: "100px",
                     }}>
                     <FaFilePdf size={48} color="red" />
-                    <span>Download PDF File</span>
+                    <span className="text-center">Download PDF</span>
                   </div>
                 ) : fileType === "doc" || fileType === "docx" ? (
                   <div
                     onClick={() => downloadFile(element.resume)}
+                    className="d-flex flex-column align-items-center justify-content-center"
                     style={{
                       cursor: "pointer",
-                      width: "150px",
-                      height: "150px",
-                      border: "1px solid #ccc",
-                      display: "flex",
-                      justifyContent: "center",
-                      alignItems: "center",
-                      flexDirection: "column",
+                      width: "100px",
+                      height: "100px",
                     }}>
                     <FaFileWord size={48} color="blue" />
-                    <span>Download Word File</span>
+                    <span className="text-center">Download Word</span>
                   </div>
                 ) : (
                   <span>Unsupported file type</span>
@@ -448,12 +667,12 @@ const EmployerCard = ({ element, openModal }) => {
               </div>
             </div>
           </div>
-          <div className=" d-flex justify-content-center">
+          <div className="d-flex justify-content-center">
             <button className="btn btn-success">Sent Accept Email</button>
           </div>
         </div>
-      ) : element.reject ? null : null}
-    </>
+      ) : null}
+    </div>
   );
 };
 
