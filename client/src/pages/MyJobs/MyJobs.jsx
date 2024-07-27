@@ -66,96 +66,99 @@ const MyJobs = () => {
   };
 
   return (
-    <div className="container mx-auto">
-      <div className="my-jobs-container">
-        <h1 className="text-center p-4">ALL My Jobs</h1>
-        <div className="text-center mb-2">
-          <input
-            onChange={(e) => setSearchText(e.target.value)}
-            value={searchText}
-            type="text"
-            className="form-control mb-2"
-            placeholder="Search jobs"
-          />
-          <button onClick={() => setSearchText("")} className="btn btn-primary">
-            Clear
-          </button>
-        </div>
-
-        {isLoading ? (
-          <div className="d-flex justify-content-center align-items-center h-20">
-            <p>Loading...</p>
+    <div class="container-fluid p-4">
+      <div class="row justify-content-center">
+        <div class="col-12 col-md-10 col-lg-8">
+          <h1 class="text-center text-white py-4">All My Jobs</h1>
+          <div class="text-center mb-3 d-flex flex-column flex-md-row justify-content-center align-items-center">
+            <input
+              onChange={(e) => setSearchText(e.target.value)}
+              value={searchText}
+              type="text"
+              class="form-control mb-2 mb-md-0 me-md-3 p-2"
+              placeholder="Search jobs"
+            />
+            <button
+              onClick={() => setSearchText("")}
+              class="btn btn-outline-light py-2">
+              Clear
+            </button>
           </div>
-        ) : (
-          <section>
-            <div className="mx-auto mt-5">
-              <div className="card shadow-lg">
-                <div className="card-header d-flex justify-content-between">
-                  <h3 className="card-title">All Jobs</h3>
-                  <Link
-                    to="/create-job"
-                    className="btn btn-dark text-white text-xs font-bold">
-                    Post A New Job
-                  </Link>
-                </div>
 
-                <div className="table-responsive">
-                  <table className="table">
-                    <thead>
-                      <tr>
-                        <th>No.</th>
-                        <th>Title</th>
-                        <th>Company Name</th>
-                        <th>Salary</th>
-                        <th>Edit</th>
-                        <th>Delete</th>
+          {isLoading ? (
+            <div class="d-flex justify-content-center align-items-center min-vh-50">
+              <p>Loading...</p>
+            </div>
+          ) : (
+            <div class="card shadow-lg">
+              <div class="card-header d-flex justify-content-between align-items-center flex-wrap">
+                <h3 class="card-title mb-0">All Jobs</h3>
+                <Link
+                  to="/create-job"
+                  class="btn btn-outline-dark mt-2 mt-md-0">
+                  Post A New Job
+                </Link>
+              </div>
+
+              <div class="table-responsive">
+                <table class="table table-striped table-hover">
+                  <thead class="thead-dark">
+                    <tr>
+                      <th>No.</th>
+                      <th>Title</th>
+                      <th>Company Name</th>
+                      <th>Salary</th>
+                      <th>Edit</th>
+                      <th>Delete</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {currentJobs.map((job, index) => (
+                      <tr key={job._id}>
+                        <td>{indexOfFirstItem + index + 1}</td>
+                        <td>{job.jobTitle}</td>
+                        <td>{job.companyName}</td>
+                        {job.salaryType === "As per Company Scale" ? (
+                          <td>{job.companySalary}</td>
+                        ) : (
+                          <td>
+                            {job.salaryFrom} - {job.salaryTo}
+                          </td>
+                        )}
+                        <td>
+                          <Link
+                            to={`/edit-job/${job._id}`}
+                            class="btn btn-outline-primary btn-sm">
+                            Edit
+                          </Link>
+                        </td>
+                        <td>
+                          <button
+                            class="btn btn-outline-danger btn-sm"
+                            onClick={() => handleDelete(job._id)}>
+                            Delete
+                          </button>
+                        </td>
                       </tr>
-                    </thead>
-                    <tbody>
-                      {currentJobs.map((job, index) => (
-                        <tr key={job._id}>
-                          <td>{indexOfFirstItem + index + 1}</td>
-                          <td>{job.jobTitle}</td>
-                          <td>{job.companyName}</td>
-                          {job.salaryType === "As per Company Scale" ? (
-                            <td>{job.companySalary}</td>
-                          ) : (
-                            <td>
-                              {job.salaryFrom} - {job.salaryTo}
-                            </td>
-                          )}
-
-                          <td>
-                            <Link to={`/edit-job/${job._id}`}>Edit</Link>
-                          </td>
-                          <td>
-                            <button
-                              className="btn btn-danger"
-                              onClick={() => handleDelete(job._id)}>
-                              Delete
-                            </button>
-                          </td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
-                </div>
+                    ))}
+                  </tbody>
+                </table>
               </div>
             </div>
+          )}
+        </div>
+      </div>
 
-            <div className="d-flex justify-content-center mt-3">
-              {currentPage > 1 && (
-                <button onClick={prevPage} className="btn btn-secondary mx-2">
-                  Previous
-                </button>
-              )}
-              {indexOfLastItem < filteredJobs.length && (
-                <button onClick={nextPage} className="btn btn-secondary mx-2">
-                  Next
-                </button>
-              )}
-            </div>
-          </section>
+      <div class="d-flex justify-content-center mt-4">
+        {currentPage > 1 && (
+          <button onClick={prevPage} class="btn btn-secondary mx-2">
+            Previous
+          </button>
+        )}
+        {indexOfLastItem < filteredJobs.length && (
+          <button onClick={nextPage} class="btn btn-secondary mx-2">
+            Next
+          </button>
         )}
       </div>
     </div>
