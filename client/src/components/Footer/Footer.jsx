@@ -93,8 +93,8 @@ export default function Footer() {
         </div>
       </Container> */}
 
-      <Container className="py-5">
-        <Row className="pb-5 align-items-center">
+      <Container className="py-5 d-block">
+        {/* <Row className="pb-5 align-items-center">
           <Col xs={12} md={2} className="text-center text-md-start">
             <Link to="/" className="navbar-brand text-white">
               <h4>Kar+</h4>
@@ -153,10 +153,10 @@ export default function Footer() {
               </Link>
             </div>
           </Col>
-        </Row>
+        </Row> */}
 
-        <Row className="align-items-center">
-          <Col xs={12} md={6} className="mb-3 mb-md-0">
+        <div className="row align-items-center">
+          <div className="col-12 col-md-6 ">
             <div className="custom-mail-icon">
               <div className="d-flex align-items-center">
                 <span className="bg-white px-3 py-1 rounded me-3">
@@ -172,21 +172,21 @@ export default function Footer() {
                 </div>
               </div>
             </div>
-          </Col>
-          <Col xs={12} md={6}>
-            <Form className="d-flex justify-content-center justify-content-md-end">
-              <Form.Control
+          </div>
+          <div className="col-12 col-md-6">
+            <form className="d-flex justify-content-center justify-content-md-end">
+              <input
                 type="email"
                 placeholder="Enter your email"
-                className="me-2 bg-transparent rounded-3 custom-placeholder my-2 px-3 me-3"
+                className="form-control me-2 bg-transparent rounded-3 custom-placeholder my-2 px-3 me-3"
                 aria-label="Search"
               />
-              <Button className="bg-white border-0 custom-button-color my-2 px-4 rounded-3">
+              <button className="btn bg-white border-0 custom-button-color my-2 px-4 rounded-3">
                 Subscribe
-              </Button>
-            </Form>
-          </Col>
-        </Row>
+              </button>
+            </form>
+          </div>
+        </div>
 
         <div className="custom-footer-line bg-white w-100 mt-4"></div>
         <div className="d-flex justify-content-center text-white mt-3">
