@@ -42,14 +42,14 @@ const GigCard = ({ item }) => {
               {!isNaN(item.totalStars / item.starNumber) &&
                 Math.round(item.totalStars / item.starNumber)}
             </span>
-          </div>
-        </div>
-        <hr />
-        <div className="card-body d-flex align-items-center justify-content-between">
-          <img src="./img/heart.png" className="gigCard-icon" alt="" />
-          <div className="price text-end">
-            <span className="text-muted">STARTING AT</span>
-            <h2 className="mb-0"> {item.price} &#1547;</h2>
+            <hr />
+            <div className="card-body d-flex align-items-center justify-content-between">
+              <img src="./img/heart.png" className="gigCard-icon" alt="" />
+              <div className="price text-end">
+                <span className="text-muted">STARTING AT</span>
+                <h2 > {item.price} &#1547;</h2>
+              </div>
+            </div>
           </div>
         </div>
       </div>
