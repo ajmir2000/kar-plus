@@ -20,7 +20,7 @@ const GigCard = ({ item }) => {
     <Link to={`/gig/${item._id}`} className="link">
       <div className="gigCard card mb-4">
         <img src={item.cover} className="card-img-top" alt="" />
-        <div className="card-body">
+        <div className="card-body d-flex flex-column justify-content-between">
           {isLoading ? (
             <div>Loading...</div>
           ) : error ? (
@@ -45,11 +45,9 @@ const GigCard = ({ item }) => {
               </span>
             </div>
 
-            <div className="card-body">
-              <div className="price text-end">
-                <span className="text-muted">STARTING AT</span>
-                <h2> {item.price} &#1547;</h2>
-              </div>
+            <div className="price text-end">
+              <span className="text-muted px-2">STARTING AT</span>
+              <h2 className="mt-2"> {item.price} &#1547;</h2>
             </div>
           </div>
         </div>
