@@ -197,6 +197,7 @@ export default function FindWork() {
                       defaultValue=""
                       name="province"
                       onChange={handleChange}
+                      defaultChecked
                     />
 
                     <Form.Check
@@ -248,7 +249,7 @@ export default function FindWork() {
 
               <Accordion>
                 <Accordion.Item
-                  eventKey="2"
+                  eventKey="1"
                   className="border-0 bg-transparent ">
                   <Accordion.Header className="custom-accordion-header bg-white ">
                     {" "}
@@ -273,7 +274,7 @@ export default function FindWork() {
                       defaultValue="Fixed"
                       onChange={handleChange}
                       className="text-secondary custom-accordion-checked "
-                      defaultChecked
+                      
                     />
                     <Form.Check
                       type="radio"
