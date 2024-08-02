@@ -3,26 +3,25 @@ import PageHeader from "../../components/PageHeader/PageHeader.jsx";
 import { Link, useParams } from "react-router-dom";
 import { FaBriefcase } from "react-icons/fa6";
 import { VscGitStashApply } from "react-icons/vsc";
-// import Swal from "sweetalert2";
-import { useLocation } from "react-router-dom";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 const JobDetails = () => {
-  const [jobDataf, setJobDataf] = useState([]);
-
-  const [loading, setLoading] = useState(false);
+  const [jobData, setJobData] = useState(null);
+  const [loading, setLoading] = useState(true);
   const { id } = useParams();
+
   useEffect(() => {
-    
     fetch(`/api/job/all-job/${id}`)
       .then((res) => res.json())
       .then((data) => {
-        setJobDataf(data);
+        setJobData(data);
         setLoading(false);
       });
-  }, []);
-  console.log(jobDataf);
-  console.log(id);
- 
+  }, [id]);
+
+  if (loading) {
+    return <div className="text-center mt-5">Loading...</div>;
+  }
 
   const {
     companyName,
@@ -32,7 +31,6 @@ const JobDetails = () => {
     jobLocation,
     salaryFrom,
     salaryTo,
-    companySalary,
     salaryType,
     postingDate,
     employmentType,
@@ -57,135 +55,139 @@ const JobDetails = () => {
     minPrice,
     maxPrice,
     employerId,
-  } = jobDataf;
+  } = jobData;
 
   return (
-    <div className="container-fluid">
+    <div className="container">
       <PageHeader title={"Job Details Page"} path={"Single Job"} />
-
-      <div className="mt-4 p-5">
-        <h3 className="font-weight-bold mb-2 text-light">
-          Job ID: {parseInt(id)}
-        </h3>
-
-        <div className="my-4 ">
-          <h2 className="h2 text-light">Job details</h2>
-          <p className="my-1 text-light">
-            Here is how the job details align with your job preferences. Manage
-            job preferences anytime in your profile.
-          </p>
-        </div>
-        <div className="my-4 ">
-          <h2 className="h2 text-light">Job Title</h2>
-          <p className="my-1 text-light">
-           {jobTitle}
-          </p>
-        </div>
-
-        <div className="my-4 d-flex gap-3 flex-column ">
-          <div className="d-flex align-items-center gap-2 text-light ">
-            <FaBriefcase />
-            <p className="h4 font-weight-medium ">Job type:</p>
-            <span className="h4 font-weight-medium">{employmentType}</span>
-          </div>
-          <button type="button" className="btn btn-primary rounded-5  gap-5">
-            {" "}
-            <Link className="link" to={`/apply-job/${id}`}>
-              <VscGitStashApply className="fs-4" />
-              Apply Now
-            </Link>
-          </button>
-          +
-        </div>
-
-        {/* job details */}
-        <div className="d-flex flex-column flex-md-row justify-content-between gap-3 mt-4 ">
-          <div className="col-md-4 ">
-            <h4 className="h4 font-weight-medium mb-3">Benefits</h4>
-            <p className="text-muted mb-2">
-              Pulled from the full job description
-            </p>
-            <ul className="list-unstyled text-muted mb-2">
-              <li>
-                1. ${minPrice}-{maxPrice}k
-              </li>
-              <li>2. Disability insurance</li>
-              <li>3. Employee discount</li>
-              <li>4. Flexible spending account</li>
-              <li>5. Health insurance</li>
-              <li>6. Paid time off</li>
-              <li>7. Vision insurance</li>
-              <li>8. Volunteer time off</li>
-              <li>9. Dental insurance</li>
-            </ul>
-          </div>
-
-          <div className="col-md-4">
-            <h4 className="h4 font-weight-medium mb-3">Outline</h4>
+      <div className="mt-4 p-4 bg-light rounded">
+        <h6 className="font-weight-bold mb-3">Job ID: {id}</h6>
+        <div className="row">
+          <div className="col-md-4 text-center">
+            <img
+              src={companyLogo}
+              alt={`${companyName} logo`}
+              className="img-fluid mb-3"
+            />
+            <h4 className="font-weight-bold">{companyName}</h4>
+            <p className="text-muted">{jobLocation}</p>
             <p className="text-muted">
-              Grand Canyon Education (GCE) is a rapidly growing educational
-              service company that has long been an industry leader in providing
-              educational, operational and technological support services to the
-              post-secondary education sector. We put people first, drive
-              innovation, and do good in the community that we live and work in.
-              <br /> <br />
-              This position entails joining a web design and development team
-              called Academic Web Services within Grand Canyon Education to
-              build custom web apps. Academic Web Services is a close-knit team
-              that constructs and maintains a wide variety of applications using
-              the latest web technologies.
+              Posted on:{" "}
+              {new Date(postingDate).toLocaleDateString("en-US", {
+                year: "numeric",
+                month: "long",
+                day: "numeric",
+              })}
+              <p></p>
             </p>
           </div>
-
-          <div className="col-md-4">
-            <h4 className="h4 font-weight-medium mb-3">Future Growth</h4>
-            <p className="text-muted">
-              An industry leader in providing educational, operational and
-              technological support services to the post-secondary education
-              sector. We put people first, drive innovation, and do good in the
-              community that we live and work in.
-              <br />
-              <br />
-              We’re passionate about web design and development and are focused
-              on delivering quality products to our customers in a team setting
-              driven by strong culture and a good working atmosphere. We are
-              hiring web developers at all levels of experience. Requirements
-              below reflect the minimum experience level.
+          <div className="col-md-8">
+            <h4 className="font-weight-bold">{jobTitle}</h4>
+            <p className="text-muted">{aboutCompany}</p>
+            <p>
+              <strong>Location:</strong> {location}, {province}, {country}
+            </p>
+            <p>
+              <strong>Salary: </strong>
+              {salaryType === "Fixed" ? (
+                <span>
+                  &#1547; {salaryFrom} - &#1547; {salaryTo}
+                </span>
+              ) : (
+                <span>{salaryType}</span>
+              )}
+            </p>
+            <p>
+              <strong>Employment Type:</strong> {employmentType}
+            </p>
+            <p>
+              <strong>Closing Date:</strong>{" "}
+              {new Date(closingDate).toLocaleDateString("en-US", {
+                year: "numeric",
+                month: "long",
+                day: "numeric",
+              })}
             </p>
           </div>
         </div>
 
-        <div className="text-muted my-5">
+        <div className="mt-4">
+          <h4 className="font-weight-bold">Job Summary</h4>
+          <p className="text-wrap w-100 text-break">{jobSummary}</p>
+        </div>
+
+        <div className="mt-4">
+          <h4 className="font-weight-bold">Duties and Responsibilities</h4>
+          <p className="text-wrap w-100 text-break">{dutiesResponsibilities}</p>
+        </div>
+
+        <div className="mt-4">
+          <h4 className="font-weight-bold">Job Requirements</h4>
+          <p className="text-wrap w-100 text-break">{jobRequirements}</p>
+        </div>
+
+        <div className="mt-4">
+          <h4 className="font-weight-bold">Skills</h4>
+          <ul className="list-unstyled">
+            {skills.map((skill, index) => (
+              <li key={index}>{skill.label}</li>
+            ))}
+          </ul>
+        </div>
+
+        <div className="mt-4">
+          <h4 className="font-weight-bold">Additional Information</h4>
           <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Debitis
-            tempore alias dolores. Maxime id quas, asperiores dolor illo
-            veritatis quibusdam sint possimus quod hic nulla officiis
-            necessitatibus laudantium expedita commodi?Lorem ipsum, dolor sit
-            amet consectetur adipisicing elit. Nulla, cum nostrum.
-            Exercitationem, dolores, tenetur culpa quas perspiciatis, libero
-            iste voluptate totam mollitia facere fugiat fugit veritatis
-            accusantium quae aliquam. Labore?
+            <strong>Vacancies:</strong> {vacancies}
           </p>
           <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Debitis
-            tempore alias dolores. Maxime id quas, asperiores dolor illo
-            veritatis quibusdam sint possimus quod hic nulla officiis
-            necessitatibus laudantium expedita commodi?Lorem ipsum, dolor sit
-            amet consectetur adipisicing elit. Nulla, cum nostrum.
-            Exercitationem, dolores, tenetur culpa quas perspiciatis, libero
-            iste voluptate totam mollitia facere fugiat fugit veritatis
-            accusantium quae aliquam. Labore?
+            <strong>Years of Experience:</strong> {yearsOfExperience}
           </p>
           <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Debitis
-            tempore alias dolores. Maxime id quas, asperiores dolor illo
-            veritatis quibusdam sint possimus quod hic nulla officiis
-            necessitatibus laudantium expedita commodi?Lorem ipsum, dolor sit
-            amet consectetur adipisicing elit. Nulla, cum nostrum.
-            Exercitationem, dolores, tenetur culpa quas perspiciatis, libero
-            iste voluptate totam mollitia facere fugiat fugit veritatis
-            accusantium quae aliquam. Labore?
+            <strong>Probation Period:</strong> {probationPeriod}
           </p>
+          <p>
+            <strong>Contract Duration:</strong> {contractDuration}
+          </p>
+          <p>
+            <strong>Contract Type:</strong> {contractType}
+          </p>
+          <p>
+            <strong>Contract Extensible: </strong> 
+            {contractExtensible}
+          </p>
+          <p>
+            <strong>Minimum Education:</strong> {minimumEducation}
+          </p>
+          <p>
+            <strong>Gender:</strong> {gender}
+          </p>
+          <p className="text-wrap w-100 text-break">
+            <strong>Physical Requirements:</strong>{" "}
+            {physicalRequirements === "" ? (
+              <span>Not Specify </span>
+            ) : (
+              <span> {physicalRequirements}</span>
+            )}
+          </p>
+          <p className="text-wrap w-100 text-break">
+            <strong>Working Conditions: </strong>
+
+            {workingConditions === "" ? (
+              <span>Not Specify </span>
+            ) : (
+              <span> {workingConditions}</span>
+            )}
+          </p>
+        </div>
+
+        <div className="mt-4 d-flex justify-content-center">
+          <Link
+            to={`/apply-job/${id}`}
+            className="btn btn-primary d-flex align-items-center btn btn-success border-0">
+            <VscGitStashApply className="fs-4 me-2 " />
+            Apply Now
+          </Link>
         </div>
       </div>
     </div>
