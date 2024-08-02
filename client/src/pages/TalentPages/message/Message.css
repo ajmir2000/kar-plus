@@ -3,54 +3,54 @@
   justify-content: center;
 }
 
-.message .container {
+.message .coustom-message-container {
   width: 1200px;
   margin: 50px;
 }
 
-.message .container .breadcrumbs {
+.message .coustom-message-container .breadcrumbs {
   font-weight: 300;
   font-size: 13px;
   color: #555;
 }
 
-.message .container .messages {
+.message .coustom-message-container .messages {
   margin: 30px 0px;
   padding: 50px;
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 10px;
   height: 600px;
-  overflow: scroll;
+  overflow-y: scroll;
 }
 
-.message .container .messages .item {
+.message .coustom-message-container .messages .item {
   display: flex;
   gap: 20px;
   max-width: 600px;
   font-size: 18px;
 }
 
-.message .container .messages .item.owner {
+.message .coustom-message-container .messages .item.owner {
   flex-direction: row-reverse;
   align-self: flex-end;
 }
 
-.message .container .messages .item.owner p {
+.message .coustom-message-container .messages .item.owner p {
   max-width: 500px;
   border-radius: 20px 0px 20px 20px;
   background-color: royalblue;
   color: white;
 }
 
-.message .container .messages .item img {
+.message .coustom-message-container .messages .item img {
   width: 40px;
   height: 40px;
   border-radius: 50%;
   object-fit: cover;
 }
 
-.message .container .messages .item p {
+.message .coustom-message-container .messages .item p {
   max-width: 500px;
   padding: 20px;
   background-color: rgb(244, 241, 241);
@@ -59,19 +59,19 @@
   font-weight: 300;
 }
 
-.message .container hr {
+.message .coustom-message-container hr {
   height: 0;
   border: 0.5px solid rgb(232, 230, 230);
   margin-bottom: 20px;
 }
 
-.message .container .write {
+.message .coustom-message-container .write {
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 
-.message .container .write textarea {
+.message .coustom-message-container .write textarea {
   width: 80%;
   height: 100px;
   padding: 10px;
@@ -79,7 +79,7 @@
   border-radius: 10px;
 }
 
-.message .container .write button {
+.message .coustom-message-container .write button {
   background-color: #1dbf73;
   padding: 20px;
   color: white;

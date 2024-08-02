@@ -39,9 +39,9 @@ const Message = () => {
 
   return (
     <div className="message bg-white ">
-      <div className="container">
+      <div className="coustom-message-container">
         <span className="breadcrumbs">
-          <Link to="/messages">Messages</Link>John Doe
+          <Link to="/messages">Messages</Link>
         </span>
         {isLoading ? (
           "loading"
@@ -65,7 +65,7 @@ const Message = () => {
         <hr />
         <form className="write" onSubmit={handleSubmit}>
           <textarea type="text" placeholder="write a message" />
-          <button type="submit">Send</button>
+          <button type="submit" className="ms-3">Send</button>
         </form>
       </div>
     </div>
