@@ -7,7 +7,7 @@ import moment from "moment";
 import { useSelector } from "react-redux";
 const Messages = () => {
   const { currentUser } = useSelector((state) => state.user);
-console.log(currentUser._id)
+  console.log(currentUser._id);
   const queryClient = useQueryClient();
 
   const { isLoading, error, data } = useQuery({
@@ -17,7 +17,7 @@ console.log(currentUser._id)
         return res.data;
       }),
   });
-  console.log(data)
+  console.log(data);
 
   const mutation = useMutation({
     mutationFn: (id) => {
@@ -50,7 +50,7 @@ console.log(currentUser._id)
               <th>Date</th>
               <th>Action</th>
             </tr>
-            {data.map((c) => (
+            {data?.map((c) => (
               <tr
                 className={
                   ((currentUser.isSeller && !c.readBySeller) ||

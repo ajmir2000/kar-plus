@@ -21,7 +21,7 @@ export default function TalentCategory({ props }) {
       <Link to={`/gig/${_id}`} className="text-decoration-none">
         <Card className="custom-talent-card p-2 rounded-4  ">
           <Card.Body className="d-flex flex-column justify-content-between">
-            <Card.Title className="text-light mb-4">
+            <Card.Title className="text-light">
               <h3>{title}</h3>
             </Card.Title>
             <div className="custom-icons-container d-flex justify-content-between align-items-center">

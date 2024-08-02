@@ -36,18 +36,19 @@ const GigCard = ({ item }) => {
             </div>
           )}
           <p className="card-text">{item.desc}</p>
-          <div className="star d-flex align-items-center gap-2">
-            <img src="./img/star.png" alt="" />
-            <span>
-              {!isNaN(item.totalStars / item.starNumber) &&
-                Math.round(item.totalStars / item.starNumber)}
-            </span>
-            <hr />
-            <div className="card-body d-flex align-items-center justify-content-between">
-              <img src="./img/heart.png" className="gigCard-icon" alt="" />
+          <div className="star d-flex align-items-center justify-content-between">
+            <div>
+              <img src="./img/star.png" alt="" />
+              <span>
+                {!isNaN(item.totalStars / item.starNumber) &&
+                  Math.round(item.totalStars / item.starNumber)}
+              </span>
+            </div>
+
+            <div className="card-body">
               <div className="price text-end">
                 <span className="text-muted">STARTING AT</span>
-                <h2 > {item.price} &#1547;</h2>
+                <h2> {item.price} &#1547;</h2>
               </div>
             </div>
           </div>

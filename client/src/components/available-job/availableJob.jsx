@@ -33,7 +33,7 @@ export default function AvailableJob() {
           <h2 className="custom-avaliable-jobs">Available Jobs:</h2>
           <Container>
             <Row>
-              {jobData.map((data) => (
+              {jobData.slice(0, 6).map((data) => (
                 <div
                   className="col-12 col-md-6 col-lg-4 py-lg-1 px-lg-1 p-xl-2   d-flex justify-content-center m-auto  "
                   key={data._id}>
@@ -49,7 +49,7 @@ export default function AvailableJob() {
           <h2 className="m-4 text-success py-5">Our Talents:</h2>
           <Container className="pb-5 mb-5">
             <Row>
-              {talentData.map((data) => (
+              {talentData.slice(0, 6).map((data) => (
                 <div
                   className="col-12 col-md-6 col-lg-4 py-lg-1 px-lg-1 p-xl-2   d-flex justify-content-center m-auto  my-2"
                   key={data._id}>

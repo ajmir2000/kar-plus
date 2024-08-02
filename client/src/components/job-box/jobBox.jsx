@@ -102,7 +102,7 @@ export default function JobBox({
               <div className="card-body">
                 <div className="d-flex justify-content-between">
                   <h5 className="card-title mb-1">{jobTitle}</h5>
-                  <FaBookmark className="fs-4 text-success" />
+                  {/* <FaBookmark className="fs-4 text-success" /> */}
                 </div>
                 <p className="text-muted mb-1">{jobData.companyName}</p>
                 <div className="d-flex flex-wrap gap-2 my-2">
