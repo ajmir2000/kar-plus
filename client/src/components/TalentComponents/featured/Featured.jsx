@@ -11,7 +11,7 @@ function Featured() {
   };
   return (
     <div className="featured">
-      <div className="container">
+      <div className="coustom-featured-container">
         <div className="left">
           <h1>
             Find the perfect <span>freelance</span> services for your business

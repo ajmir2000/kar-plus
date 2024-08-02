@@ -129,7 +129,7 @@ const Application = () => {
 
   return (
     <section className="application">
-      <div className="container">
+      <div className="coustom-application-container">
         <h3>Application Form</h3>
         <form onSubmit={handleSubmit}>
           <div>

@@ -6,28 +6,28 @@
   color: white;
 }
 
-.featured .container {
+.featured .coustom-featured-container {
   width: 1400px;
   display: flex;
   align-items: center;
 }
 
-.featured .container .left {
+.featured .coustom-featured-container .left {
   display: flex;
   flex-direction: column;
   gap: 30px;
 }
 
-.featured .container .left h1 {
+.featured .coustom-featured-container .left h1 {
   font-size: 50px;
 }
 
-.featured .container .left h1 span {
+.featured .coustom-featured-container .left h1 span {
   font-style: italic;
   font-weight: 300;
 }
 
-.featured .container .left .search {
+.featured .coustom-featured-container .left .search {
   background-color: white;
   border-radius: 5px;
   display: flex;
@@ -36,28 +36,28 @@
   overflow: hidden;
 }
 
-.featured .container .left .search .searchInput {
+.featured .coustom-featured-container .left .search .searchInput {
   display: flex;
   align-items: center;
   gap: 10px;
 }
 
-.featured .container .left .search .searchInput img {
+.featured .coustom-featured-container .left .search .searchInput img {
   width: 20px;
   height: 20px;
   margin: 10px;
 }
 
-.featured .container .left .search .searchInput input {
+.featured .coustom-featured-container .left .search .searchInput input {
   border: none;
   outline: none;
 }
 
-.featured .container .left .search .searchInput input::placeholder {
+.featured .coustom-featured-container .left .search .searchInput input::placeholder {
   color: gray;
 }
 
-.featured .container .left .search button {
+.featured .coustom-featured-container .left .search button {
   width: 120px;
   height: 50px;
   border: none;
@@ -67,17 +67,17 @@
   cursor: pointer;
 }
 
-.featured .container .left .popular {
+.featured .coustom-featured-container .left .popular {
   display: flex;
   align-items: center;
   gap: 10px;
 }
 
-.featured .container .left .popular span {
+.featured .coustom-featured-container .left .popular span {
   width: max-content;
 }
 
-.featured .container .left .popular button {
+.featured .coustom-featured-container .left .popular button {
   width: max-content;
   color: white;
   border: 1px solid white;
@@ -87,11 +87,11 @@
   font-size: 14px;
 }
 
-.featured .container .right {
+.featured .coustom-featured-container .right {
   height: 100%;
 }
 
-.featured .container .right img {
+.featured .coustom-featured-container .right img {
   height: 100%;
   object-fit: contain;
 }

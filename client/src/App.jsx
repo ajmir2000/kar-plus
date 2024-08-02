@@ -28,8 +28,7 @@ import MyGigs from "./pages/TalentPages/myGigs/MyGigs.jsx";
 import Orders from "./pages/TalentPages/orders/Orders.jsx";
 import Messages from "./pages/TalentPages/messages/Messages.jsx";
 import Message from "./pages/TalentPages/message/Message.jsx";
-import Success from "./pages/TalentPages/success/Success.jsx";
-import Pay from "./pages/TalentPages/pay/Pay.jsx";
+
 import CreateOrder from "./pages/CreateOrder/CreateOrder.jsx";
 import Featured from "./components/TalentComponents/featured/Featured.jsx";
 
@@ -58,9 +57,9 @@ function App() {
             <Route path="/orders" element={<Orders />} />
             <Route path="/messages" element={<Messages />} />
             <Route path="/message/:id" element={<Message />} />
-            <Route path="/success" element={<Success />} />
+
             <Route path="/create-order/:id" element={<CreateOrder />} />
-            <Route path="/pay/:id" element={<Pay />} />
+        
             <Route path="/featured" element={<Featured />} />
             
 

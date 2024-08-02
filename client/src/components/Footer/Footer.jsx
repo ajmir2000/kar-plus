@@ -10,67 +10,6 @@ export default function Footer() {
   return (
     <>
       <Container className="py-5 d-block">
-        {/* <Row className="pb-5 align-items-center">
-          <Col xs={12} md={2} className="text-center text-md-start">
-            <Link to="/" className="navbar-brand text-white">
-              <h4>Kar+</h4>
-            </Link>
-          </Col>
-          <Col xs={12} md={8} className="my-3 my-md-0 ">
-            <Nav className="justify-content-center">
-              <Nav.Item>
-                <Link to="#" className="nav-link text-light">
-                  Overview
-                </Link>
-              </Nav.Item>
-              <Nav.Item>
-                <Link to="#" className="nav-link text-light">
-                  Features
-                </Link>
-              </Nav.Item>
-              <Nav.Item>
-                <Link to="#" className="nav-link text-light">
-                  Pricing
-                </Link>
-              </Nav.Item>
-              <Nav.Item>
-                <Link to="#" className="nav-link text-light">
-                  Careers
-                </Link>
-              </Nav.Item>
-              <Nav.Item>
-                <Link to="#" className="nav-link text-light">
-                  Help
-                </Link>
-              </Nav.Item>
-              <Nav.Item>
-                <Link to="#" className="nav-link text-light">
-                  Privacy Policy
-                </Link>
-              </Nav.Item>
-            </Nav>
-          </Col>
-          <Col
-            xs={12}
-            md={2}
-            className="d-flex justify-content-center justify-content-md-end">
-            <div className="custom-social-media-icons  d-flex align-items-center ">
-              <Link to="https://www.linkedin.com/" className="ms-3 text-white">
-                <FaLinkedinIn />
-              </Link>
-              <Link to="https://www.github.com/" className="ms-3 text-white">
-                <FaGithub />
-              </Link>
-              <Link to="https://www.x.com" className="ms-3 text-white">
-                <FaXTwitter />
-              </Link>
-              <Link to="https://www.facebook.com" className="ms-3 text-white">
-                <FaFacebook />
-              </Link>
-            </div>
-          </Col>
-        </Row> */}
-
         <div className="row align-items-center">
           <div className="col-12 col-md-6 ">
             <div className="custom-mail-icon">
