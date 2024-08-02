@@ -24,9 +24,6 @@ function Gigs() {
         }),
   });
 
-  console.log(search);
-  console.log(data);
-
   const reSort = (type) => {
     setSort(type);
     setOpen(false);

@@ -5,7 +5,6 @@ import { useQuery } from "@tanstack/react-query";
 import newRequest from "../../../utils/newRequest.js";
 
 const GigCard = ({ item }) => {
-  console.log(item);
   const { isLoading, error, data } = useQuery({
     queryKey: [item.userId],
     queryFn: () =>
@@ -13,8 +12,7 @@ const GigCard = ({ item }) => {
         return res.data;
       }),
   });
-
-  console.log(data);
+  console.log(item);
 
   return (
     <Link to={`/gig/${item._id}`} className="link">
@@ -35,7 +33,8 @@ const GigCard = ({ item }) => {
               <span>{data.username}</span>
             </div>
           )}
-          <p className="card-text">{item.desc}</p>
+
+          <p className="card-text">{item.shortDesc}</p>
           <div className="star d-flex align-items-center justify-content-between">
             <div>
               <img src="./img/star.png" alt="" />
