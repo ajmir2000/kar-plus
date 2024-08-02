@@ -82,6 +82,7 @@ export default function JobBox({
   maxPrice,
   employerId,
   };
+  console.log(salaryFrom, salaryTo, salaryType)
 
   return (
     <div className="col-md-9 mb-4">
@@ -108,7 +109,7 @@ export default function JobBox({
                 <div className="d-flex flex-wrap gap-2 my-2">
                   <span className="badge bg-light text-dark d-flex align-items-center">
                     <CiLocationOn className="text-success fs-5 me-1" />{" "}
-                    {location}
+                    {province}
                   </span>
                   <span className="badge bg-light text-dark d-flex align-items-center">
                     <FaRegClock className="text-success fs-5 me-1" />{" "}
@@ -116,7 +117,7 @@ export default function JobBox({
                   </span>
                   <span className="badge bg-light text-dark d-flex align-items-center">
                     <TbCurrencyAfghani className="text-success fs-5 me-1" />{" "}
-                    {minPrice}-{maxPrice}k
+                    {salaryType}
                   </span>
                   <span className="badge bg-light text-dark d-flex align-items-center">
                     <GoDiscussionOutdated className="text-success fs-5 me-1" />{" "}

@@ -11,11 +11,11 @@ import {
   FormControl,
   Button,
 } from "react-bootstrap";
-import SearchBox from "../../components/searchBox/searchBox";
+import SearchBox from "../../components/searchBox/searchBox.jsx";
 
 export default function FindWork() {
   const [searchValue, setSearchValue] = useState("");
-  const [selectedOption, setSelectedIption] = useState(null);
+  const [selectedOption, setSelectedOption] = useState(null);
   const [jobData, setJobData] = useState([]);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -37,9 +37,9 @@ export default function FindWork() {
   };
   //-------checkbox based filtering----------
   const handleChange = (event) => {
-    setSelectedIption(event.target.value);
+    setSelectedOption(event.target.value);
   };
-
+  console.log(jobData);
   const filteredJob = jobData.filter(
     (job) =>
       job.jobTitle.toLowerCase().indexOf(searchValue.toLocaleLowerCase()) !== -1
@@ -67,7 +67,7 @@ export default function FindWork() {
   };
 
   //---main function---
-
+  console.log(selectedOption);
   const filteredData = (jobData, selectedOption, searchValue, salaryType) => {
     let filteredJobs = jobData;
 
@@ -77,16 +77,10 @@ export default function FindWork() {
 
     if (selectedOption) {
       filteredJobs = filteredJobs.filter(
-        ({
-          jobLocation,
-          category,
-          salaryRange,
-          salaryType,
-          experienceLevel,
-        }) => {
+        ({ province, category, salaryRange, salaryType, experienceLevel }) => {
           return (
-            (jobLocation &&
-              jobLocation.toLowerCase() === selectedOption.toLowerCase()) ||
+            (province &&
+              province.toLowerCase() === selectedOption.toLowerCase()) ||
             (category &&
               category.toLowerCase() === selectedOption.toLowerCase()) ||
             (salaryRange &&
@@ -106,33 +100,31 @@ export default function FindWork() {
 
   const jobsAmount = result.length;
 
- 
-
   const { startIndex, endIndex } = calculatePageRange();
   result = result.slice(startIndex, endIndex);
-  console.log(result)
+  console.log(result);
 
   return (
     <Container fluid className="bg-white ">
       <SearchBox
         placeholder="Search job..."
-        className="custom-findWork-searchBox"
         searchValue={searchValue}
         inputHandleChange={inputHandleChange}
       />
       <div className="container pt-5">
         {/* <JobTalentSwitch /> */}
         <Row className="d-flex">
-          <div className="col-3">
+          <div className="col-sm-12 col-md-3">
             <div className="mt-5  border-end pe-3">
               <Accordion>
                 <Accordion.Item
                   eventKey="0"
                   className="border-0 bg-transparent ">
-                  <Accordion.Header className="custom-accordion-header bg-white ">
+                  {/*Start category part */}
+                  {/* <Accordion.Header className="custom-accordion-header bg-white ">
                     <span className="text-secondary ">Category</span>
-                  </Accordion.Header>
-                  <Accordion.Body>
+                  </Accordion.Header> */}
+                  {/* <Accordion.Body>
                     <Form.Check
                       type="radio"
                       className="text-secondary custom-accordion-checked "
@@ -183,7 +175,8 @@ export default function FindWork() {
                       defaultValue="Product Designer"
                       onChange={handleChange}
                     />
-                  </Accordion.Body>
+                  </Accordion.Body> */}
+                  {/*End category part */}
                 </Accordion.Item>
               </Accordion>
               <Accordion>
@@ -197,50 +190,21 @@ export default function FindWork() {
                     </span>
                   </Accordion.Header>
                   <Accordion.Body>
-                    <InputGroup className="mb-3">
-                      <FormControl placeholder="Location" />
-                      <Button variant="outline-secondary">Search</Button>
-                    </InputGroup>
-
                     <Form.Check
                       type="radio"
-                      label="ALl"
+                      label="All"
                       className="text-secondary custom-accordion-checked "
                       defaultValue=""
-                      name="location"
+                      name="province"
                       onChange={handleChange}
                     />
 
                     <Form.Check
                       type="radio"
-                      label="San Francisco"
+                      label="Kabul"
                       className="text-secondary custom-accordion-checked "
-                      defaultValue="San Francisco"
-                      name="location"
-                      onChange={handleChange}
-                    />
-                    <Form.Check
-                      type="radio"
-                      label="Brussels"
-                      className="text-secondary custom-accordion-checked "
-                      defaultValue="Brussels"
-                      name="location"
-                      onChange={handleChange}
-                    />
-                    <Form.Check
-                      type="radio"
-                      label="Kapisa"
-                      className="text-secondary custom-accordion-checked "
-                      defaultValue="Kapisa"
-                      name="location"
-                      onChange={handleChange}
-                    />
-                    <Form.Check
-                      type="radio"
-                      label="Parwan"
-                      className="text-secondary custom-accordion-checked "
-                      defaultValue="Parwan"
-                      name="location"
+                      defaultValue="Kabul"
+                      name="province"
                       onChange={handleChange}
                     />
                     <Form.Check
@@ -248,59 +212,39 @@ export default function FindWork() {
                       label="Jalalabad"
                       className="text-secondary custom-accordion-checked "
                       defaultValue="Jalalabad"
-                      name="location"
+                      name="province"
+                      onChange={handleChange}
+                    />
+                    <Form.Check
+                      type="radio"
+                      label="Mazar-i-Sharif
+"
+                      className="text-secondary custom-accordion-checked "
+                      defaultValue="Mazar-i-Sharif
+"
+                      name="province"
+                      onChange={handleChange}
+                    />
+                    <Form.Check
+                      type="radio"
+                      label="Kandahar"
+                      className="text-secondary custom-accordion-checked "
+                      defaultValue="Kandahar"
+                      name="province"
+                      onChange={handleChange}
+                    />
+                    <Form.Check
+                      type="radio"
+                      label="Herat"
+                      className="text-secondary custom-accordion-checked "
+                      defaultValue="Herat"
+                      name="province"
                       onChange={handleChange}
                     />
                   </Accordion.Body>
                 </Accordion.Item>
               </Accordion>
-              <Accordion>
-                <Accordion.Item
-                  eventKey="2"
-                  className="border-0 bg-transparent ">
-                  <Accordion.Header className="custom-accordion-header bg-white ">
-                    {" "}
-                    <span className="text-secondary custom-accordion-header">
-                      Salary Range
-                    </span>{" "}
-                  </Accordion.Header>
-                  <Accordion.Body>
-                    <Form.Check
-                      type="radio"
-                      name="hourlyRate"
-                      label="Any"
-                      defaultValue=""
-                      onChange={handleChange}
-                      className="text-secondary custom-accordion-checked "
-                      defaultChecked
-                    />
-                    <Form.Check
-                      type="radio"
-                      name="hourlyRate"
-                      label="$0 - $20"
-                      defaultValue="$0-$20"
-                      className="text-secondary custom-accordion-checked "
-                      onChange={handleChange}
-                    />
-                    <Form.Check
-                      type="radio"
-                      name="hourlyRate"
-                      label="$20 - $40"
-                      defaultValue="$20 - $40"
-                      onChange={handleChange}
-                      className="text-secondary custom-accordion-checked "
-                    />
-                    <Form.Check
-                      type="radio"
-                      name="hourlyRate"
-                      label="$50 - $100"
-                      defaultValue="$50 - $100"
-                      onChange={handleChange}
-                      className="text-secondary custom-accordion-checked "
-                    />
-                  </Accordion.Body>
-                </Accordion.Item>
-              </Accordion>
+
 
               <Accordion>
                 <Accordion.Item
@@ -313,36 +257,38 @@ export default function FindWork() {
                     </span>{" "}
                   </Accordion.Header>
                   <Accordion.Body>
-                    <Form.Check
+                  <Form.Check
                       type="radio"
-                      name="SalaryType"
-                      label="Hourly"
-                      defaultValue="hourly"
+                      name="salaryType"
+                      label="All"
+                      defaultValue=""
                       onChange={handleChange}
                       className="text-secondary custom-accordion-checked "
                       defaultChecked
                     />
                     <Form.Check
                       type="radio"
-                      name="SalaryType"
-                      label="Monthly"
-                      defaultValue="monthly"
-                      className="text-secondary custom-accordion-checked "
+                      name="salaryType"
+                      label="Fixed"
+                      defaultValue="Fixed"
                       onChange={handleChange}
+                      className="text-secondary custom-accordion-checked "
+                      defaultChecked
                     />
                     <Form.Check
                       type="radio"
-                      name="SalaryType"
-                      label="Yearly"
-                      defaultValue="yearly"
-                      onChange={handleChange}
+                      name="salaryType"
+                      label="Per Company Scale"
+                      defaultValue="As per Company Scale"
                       className="text-secondary custom-accordion-checked "
+                      onChange={handleChange}
                     />
+                
                   </Accordion.Body>
                 </Accordion.Item>
               </Accordion>
 
-              <Accordion>
+              {/* <Accordion>
                 <Accordion.Item
                   eventKey="2"
                   className="border-0 bg-transparent ">
@@ -380,10 +326,10 @@ export default function FindWork() {
                     />
                   </Accordion.Body>
                 </Accordion.Item>
-              </Accordion>
+              </Accordion> */}
             </div>
           </div>
-          <div className="col-9">
+          <div className="col-sm-12 col-md-9">
             <h2 className="mx-auto mt-3">{jobsAmount} Jobs</h2>
 
             {result.length > 0 ? (

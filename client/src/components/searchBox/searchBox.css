@@ -1,8 +1,7 @@
 .custom-search-box-container{
     height: 3rem;
-    width: 33rem;
     background-color:var(--white-color);
-    border-radius: 20px;
+    
     position: absolute;
     top: 130px;
     left: 32%;

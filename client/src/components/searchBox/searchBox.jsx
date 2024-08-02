@@ -4,7 +4,7 @@ import './searchBox.css'
 
 export default function SearchBox({ placeholder, searchValue, inputHandleChange }) {
   return (
-    <div className="custom-search-box-container d-flex p-2 align-center ">
+    <div className="custom-search-box-container w-50 rounded-5 d-flex p-2 align-center ">
       <input type="text"
        placeholder={placeholder} 
        defaultValue={searchValue} 
