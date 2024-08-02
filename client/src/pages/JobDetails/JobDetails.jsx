@@ -7,14 +7,22 @@ import { VscGitStashApply } from "react-icons/vsc";
 import { useLocation } from "react-router-dom";
 
 const JobDetails = () => {
-  const { id } = useParams();
-  console.log(id);
-  const locationURL = useLocation();
-  const { jobData } = locationURL.state || {};
+  const [jobDataf, setJobDataf] = useState([]);
 
-  if (!jobData) {
-    return <div>No job data available</div>;
-  }
+  const [loading, setLoading] = useState(false);
+  const { id } = useParams();
+  useEffect(() => {
+    
+    fetch(`/api/job/all-job/${id}`)
+      .then((res) => res.json())
+      .then((data) => {
+        setJobDataf(data);
+        setLoading(false);
+      });
+  }, []);
+  console.log(jobDataf);
+  console.log(id);
+ 
 
   const {
     companyName,
@@ -49,8 +57,7 @@ const JobDetails = () => {
     minPrice,
     maxPrice,
     employerId,
-  } = jobData;
-
+  } = jobDataf;
 
   return (
     <div className="container-fluid">
@@ -66,6 +73,12 @@ const JobDetails = () => {
           <p className="my-1 text-light">
             Here is how the job details align with your job preferences. Manage
             job preferences anytime in your profile.
+          </p>
+        </div>
+        <div className="my-4 ">
+          <h2 className="h2 text-light">Job Title</h2>
+          <p className="my-1 text-light">
+           {jobTitle}
           </p>
         </div>
 
@@ -180,4 +193,3 @@ const JobDetails = () => {
 };
 
 export default JobDetails;
-

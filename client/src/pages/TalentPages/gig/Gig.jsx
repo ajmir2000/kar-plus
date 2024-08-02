@@ -317,7 +317,7 @@ function Gig() {
           <div className="right col-12 col-md-5 col-lg-3  w-75">
             <div className="price">
               <h3>{data.shortTitle}</h3>
-              <h2>&#1547;{data.price}</h2>
+              <h2 >&#1547;{data.price}</h2>
             </div>
             <div className="text-wrap w-100 text-break">
               <p>{data.shortDesc}</p>
