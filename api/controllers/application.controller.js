@@ -2,6 +2,7 @@ import { errorHandler } from "../utils/error.js";
 import Application from "../models/application.model.js";
 import acceptApplication from "../models/acceptapplication.model.js";
 import Job from "../models/job.model.js";
+import Report from "../models/report.model.js";
 import nodemailer from "nodemailer";
 import dotenv from "dotenv";
 
@@ -292,12 +293,7 @@ export const AcceptApplication = async (req, res, next) => {
 
 export const RejcetApplication = async (req, res, next) => {
   const userID = req.user.id;
-  const {
-    jobSeekerEmail,
-    jobTitle,
-    companyName,
-    applicationID,
-  } = req.body;
+  const { jobSeekerEmail, jobTitle, companyName, applicationID } = req.body;
   const data = req.body;
   // console.log(data);
 
@@ -378,7 +374,6 @@ We appreciate your interest in our company and wish you the best in your future 
 <p>The HR Team</p>
 <p>${companyName}</p>
 </b>`, // html body
-    
     };
 
     const sendMail = async (transporter, mailOptions) => {
@@ -397,3 +392,58 @@ We appreciate your interest in our company and wish you the best in your future 
   }
 };
 // End Accept Application Process
+
+// Start Report
+export const sendReport = async (req, res, next) => {
+  const { userID, report } = req.body;
+  try {
+    const createReport = await Report.create({
+      userID,
+      report,
+    });
+    res.status(200).json({
+      success: true,
+      message: "Report Submitted!",
+    });
+    // send email
+
+    // Start nodemailer
+    const transporter = nodemailer.createTransport({
+      service: "gmail",
+      host: "smtp.gmail.com",
+      // port: 587,
+      port: 456,
+      secure: true, // Use `true` for port 465, `false` for all other ports
+      auth: {
+        user: process.env.USER, // Sender gmail address
+        pass: process.env.APP_PASSWORD, // App passwoed from Gmail Account
+      },
+    });
+
+    // console.log(desc);
+    const mailOptions = {
+      from: { name: "KarPlus", address: process.env.USER }, // sender address
+      to: process.env.USER, // list of receivers
+      subject: `Report from this ID ${userID}`, // Subject line
+      text: report, // plain text body
+      html: `<b>${report}</b>`, // html body
+    };
+
+    const sendMail = async (transporter, mailOptions) => {
+      try {
+        await transporter.sendMail(mailOptions);
+      
+        console.log("Email has been sent");
+      } catch (error) {
+        console.log(error);
+        console.error(error);
+      }
+    };
+    sendMail(transporter, mailOptions);
+  } catch (error) {
+    next(error);
+    console.log(error);
+  }
+};
+
+// End Report
