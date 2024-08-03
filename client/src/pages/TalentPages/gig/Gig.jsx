@@ -21,7 +21,7 @@ function Gig() {
   });
 
   const userId = data?.userId;
-  console.log(data);
+  
 
   const {
     isLoading: isLoadingUser,
@@ -36,7 +36,6 @@ function Gig() {
     enabled: !!userId,
   });
 
-  console.log(data);
 
   return (
     <div className="gig bg-white">

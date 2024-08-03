@@ -62,7 +62,7 @@ export default function Footer() {
             onSubmit={handleSubmit}>
             <textarea
               placeholder="write your report and make a good changes"
-              className="form-control me-2 bg-transparent rounded-3 custom-placeholder my-2 px-3 me-3"
+              className="form-control text-white me-2 bg-transparent rounded-3 custom-placeholder my-2 px-3 me-3"
               aria-label="Report"
               value={report}
               onChange={(e) => setReport(e.target.value)}

@@ -12,7 +12,7 @@ const GigCard = ({ item }) => {
         return res.data;
       }),
   });
-  console.log(item);
+  // console.log(item);
 
   return (
     <Link to={`/gig/${item._id}`} className="link">

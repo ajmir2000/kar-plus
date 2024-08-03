@@ -18,11 +18,11 @@ export default function Header() {
         </div>
       </Container>
 
-      <SearchBar />
+      {/* <SearchBar /> */}
 
       {/* this is popular  component and it has custom-padding class these styles are on Header.css flie */}
 
-      <Container className="d-felx justify-content-center ">
+      {/* <Container className="d-felx justify-content-center ">
         <div className="row d-felx justify-content-center">
           <div className="col-12 col-md-1"></div>
           <div className="col-12 col-md-10 d-flex justify-content-center my-2">
@@ -49,7 +49,7 @@ export default function Header() {
             </Nav>
           </div>
         </div>
-      </Container>
+      </Container> */}
     </>
   );
 }
