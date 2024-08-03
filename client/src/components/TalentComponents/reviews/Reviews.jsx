@@ -42,6 +42,7 @@ const Reviews = ({ gigId }) => {
         <h3>Add a review</h3>
         <form action="" className="addForm" onSubmit={handleSubmit}>
           <input type="text" placeholder="write your opinion" />
+          <span className="d-flex justify-content-end me-4 text-success">star</span>
           <select name="" id="">
             <option value={1}>1</option>
             <option value={2}>2</option>
@@ -49,7 +50,7 @@ const Reviews = ({ gigId }) => {
             <option value={4}>4</option>
             <option value={5}>5</option>
           </select>
-          <button>Send</button>
+          <button className="mb-4">Send</button>
         </form>
       </div>
     </div>

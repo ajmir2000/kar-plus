@@ -3,13 +3,6 @@
   justify-content: center;
 }
 
-.coustom-gig-container {
-  width: 1400px;
-  padding: 30px 0px;
-  display: flex;
-  gap: 50px;
-}
-
 .left {
   flex: 2;
   display: flex;
@@ -171,7 +164,7 @@
   flex-direction: column;
   gap: 20px;
   height: max-content;
-  max-height: 500px;
+  max-height: 520px;
   position: sticky;
   top: 150px;
 }

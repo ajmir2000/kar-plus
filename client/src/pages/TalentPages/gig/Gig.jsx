@@ -1,5 +1,3 @@
-
-
 import React from "react";
 import "./Gig.css";
 import { Carousel } from "react-bootstrap";
@@ -21,7 +19,6 @@ function Gig() {
   });
 
   const userId = data?.userId;
-  
 
   const {
     isLoading: isLoadingUser,
@@ -36,15 +33,15 @@ function Gig() {
     enabled: !!userId,
   });
 
-
+  console.log(dataUser);
   return (
-    <div className="gig bg-white">
+    <div className="gig bg-white ">
       {isLoading ? (
         "loading"
       ) : error ? (
         "Something went wrong!"
       ) : (
-        <div className="coustom-gig-container row">
+        <div className="container row px-2 px-md-4 py-3 gx-0 px-4">
           <div className="left col-12 col-md-7 col-lg-9 w-75 ">
             <h1>{data.title}</h1>
             {isLoadingUser ? (
@@ -55,7 +52,7 @@ function Gig() {
               <div className="user">
                 <img
                   className="pp"
-                  src={dataUser.img || "/img/noavatar.jpg"}
+                  src={dataUser.avatar || "/img/noavatar.jpg"}
                   alt=""
                 />
                 <span>{dataUser.username}</span>
@@ -121,19 +118,16 @@ function Gig() {
                       <span className="title">From</span>
                       <span className="desc">{dataUser.country}</span>
                     </div>
-              
                   </div>
-      
-                 
                 </div>
               </div>
             )}
             <Reviews gigId={id} />
           </div>
-          <div className="right col-12 col-md-5 col-lg-3  w-75">
+          <div className="right col-12 col-md-5 col-lg-3  w-75  ms-md-5 ">
             <div className="price">
               <h3>{data.shortTitle}</h3>
-              <h2 >&#1547;{data.price}</h2>
+              <h2>&#1547;{data.price}</h2>
             </div>
             <div className="text-wrap w-100 text-break">
               <p>{data.shortDesc}</p>
@@ -158,7 +152,7 @@ function Gig() {
               ))}
             </div>
             <Link to={`/create-order/${id}`}>
-              <button>Continue</button>
+              <button className="mb-5">Continue</button>
             </Link>
           </div>
         </div>
