@@ -1,5 +1,6 @@
 import { errorHandler } from "../utils/error.js";
 import Conversation from "../models/conversation.model.js";
+import User from "../models/user.model.js";
 
 // export const createConversation = async (req, res, next) => {
 //   const newConversation = new Conversation({
@@ -21,21 +22,27 @@ import Conversation from "../models/conversation.model.js";
 // };
 
 export const createConversation = async (req, res, next) => {
-  console.log(req.body.showIsSellerOrBuyer === "seller");
-  const newConversation = new Conversation({
-    id:
-      req.body.showIsSellerOrBuyer === "seller"
-        ? req.user.id + req.body.to
-        : req.body.to + req.user.id,
-    sellerId:
-      req.body.showIsSellerOrBuyer === "seller" ? req.user.id : req.body.to,
-    buyerId:
-      req.body.showIsSellerOrBuyer === "seller" ? req.body.to : req.user.id,
-    readBySeller: req.user.isSeller,
-    readByBuyer: !req.user.isSeller,
-  });
+  // console.log(req.body.buyerId);
 
   try {
+    const buyerData = await User.findById(req.body.buyerId);
+
+    const sellerData = await User.findById(req.body.sellerId);
+    const newConversation = new Conversation({
+      id:
+        req.body.showIsSellerOrBuyer === "seller"
+          ? req.user.id + req.body.to
+          : req.body.to + req.user.id,
+      sellerId:
+        req.body.showIsSellerOrBuyer === "seller" ? req.user.id : req.body.to,
+      sellerName: sellerData.username,
+      buyerId:
+        req.body.showIsSellerOrBuyer === "seller" ? req.body.to : req.user.id,
+      buyerName: buyerData.username,
+      readBySeller: req.user.isSeller,
+      readByBuyer: !req.user.isSeller,
+    });
+
     const savedConversation = await newConversation.save();
     res.status(201).send(savedConversation);
   } catch (err) {

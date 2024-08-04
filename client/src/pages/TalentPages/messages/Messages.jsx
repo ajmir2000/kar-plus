@@ -7,7 +7,6 @@ import moment from "moment";
 import { useSelector } from "react-redux";
 const Messages = () => {
   const { currentUser } = useSelector((state) => state.user);
-
   const queryClient = useQueryClient();
 
   const { isLoading, error, data } = useQuery({
@@ -39,16 +38,17 @@ const Messages = () => {
       ) : error ? (
         "error"
       ) : (
-        <div className="container">
+        <div className="container p-3">
           <div className="title">
             <h1>Messages</h1>
           </div>
           <table>
             <tr>
-              <th>{currentUser.isSeller ? "Buyer" : "Seller"}</th>
+              {/* <th>{currentUser.isSeller ? "Buyer" : "Seller"}</th> */}
+              <th> Seller</th>
               <th>Last Message</th>
               <th>Date</th>
-              <th>Action</th>
+              {/* <th>Action</th> */}
             </tr>
             {data?.map((c) => (
               <tr
@@ -58,7 +58,12 @@ const Messages = () => {
                   "active"
                 }
                 key={c.id}>
-                <td>{currentUser.isSeller ? c.buyerId : c.sellerId}</td>
+                {/* <td>
+                  {currentUser._id === c.buyerId ? c.sellerName : c.buyerId}
+                </td> */}
+                <td>
+                  {c.sellerName}
+                </td>
                 <td>
                   <Link to={`/message/${c.id}`} className="link">
                     {c?.lastMessage?.substring(0, 100)}...

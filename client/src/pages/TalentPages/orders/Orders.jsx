@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "./Orders.css";
 import { useQuery } from "@tanstack/react-query";
@@ -6,7 +6,8 @@ import newRequest from "../../../utils/newRequest.js";
 import { useSelector } from "react-redux";
 const Orders = () => {
   const { currentUser } = useSelector((state) => state.user);
-
+  const [userData, setUserData] = useState(null);
+  const [errorUser, setErrorUser] = useState(null);
   const navigate = useNavigate();
   const { isLoading, error, data } = useQuery({
     queryKey: ["orders"],
@@ -16,16 +17,19 @@ const Orders = () => {
       }),
   });
 
-  console.log(data);
-  console.log(error);
+  // console.log(data.sellerId);
+
+  // console.log(error);
 
   const handleContact = async (order) => {
     const sellerId = order.sellerId;
     const buyerId = order.buyerId;
     const id = sellerId + buyerId;
-    console.log(order.sellerId);
-    console.log(order.buyerId);
-    console.log(currentUser.isSeller);
+
+    // console.log(order.sellerId);
+    // console.log(order.buyerId);
+    // console.log(currentUser.isSeller);
+    console.log(order);
     try {
       const res = await newRequest.get(`/conversations/single/${id}`);
       navigate(`/message/${res.data.id}`);
@@ -35,6 +39,7 @@ const Orders = () => {
           to: currentUser._id === sellerId ? buyerId : sellerId,
           showIsSellerOrBuyer:
             currentUser._id === sellerId ? "seller" : "buyer",
+          sellerId, buyerId
         });
         navigate(`/message/${res.data.id}`);
       }
@@ -47,12 +52,13 @@ const Orders = () => {
       ) : error ? (
         "error"
       ) : (
-        <div className="container">
+        <div className="container p-3">
           <div className="title">
             <h1>Orders</h1>
           </div>
           <table>
             <tr>
+              <th>Buyer</th>
               <th>Image</th>
               <th>Title</th>
               <th>Price</th>
@@ -60,6 +66,7 @@ const Orders = () => {
             </tr>
             {data?.map((order) => (
               <tr key={order._id}>
+                <td>{order.buyerName}</td>
                 <td>
                   <img className="image" src={order.img} alt="" />
                 </td>

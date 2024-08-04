@@ -1,11 +1,17 @@
 import { errorHandler } from "../utils/error.js";
 import Order from "../models/order.model.js";
 import Gig from "../models/gig.model.js";
+import User from "../models/user.model.js";
 // import Stripe from "stripe";
 
 export const createOrder = async (req, res, next) => {
   try {
     const gig = await Gig.findById(req.params.gigId);
+    const buyerData = await User.findById(req.user.id);
+    const sellerData = await User.findById(gig.userId);
+
+    console.log(buyerData.username);
+    console.log(sellerData.username);
 
     // I will add a condition to prevent send order more than one time
     // const orders = await Order.find(buyerId: req.user.id);
@@ -22,7 +28,9 @@ export const createOrder = async (req, res, next) => {
       img: gig.cover,
       title: gig.title,
       buyerId: req.user.id,
+      buyerName: buyerData.username,
       sellerId: gig.userId,
+      sellerName: sellerData.username,
       price: gig.price,
       payment_intent: "temporary",
       fullName: req.body.fullName,

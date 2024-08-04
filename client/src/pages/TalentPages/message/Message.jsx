@@ -54,7 +54,10 @@ const Message = () => {
                 className={m.userId === currentUser._id ? "owner item" : "item"}
                 key={m._id}>
                 <img
-                  src="https://images.pexels.com/photos/270408/pexels-photo-270408.jpeg?auto=compress&cs=tinysrgb&w=1600"
+                  src={
+                    currentUser.avatar ||
+                    "https://images.pexels.com/photos/270408/pexels-photo-270408.jpeg?auto=compress&cs=tinysrgb&w=1600"
+                  }
                   alt=""
                 />
                 <p>{m.desc}</p>
@@ -65,7 +68,9 @@ const Message = () => {
         <hr />
         <form className="write" onSubmit={handleSubmit}>
           <textarea type="text" placeholder="write a message" />
-          <button type="submit" className="ms-3">Send</button>
+          <button type="submit" className="ms-3">
+            Send
+          </button>
         </form>
       </div>
     </div>
