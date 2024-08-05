@@ -9,7 +9,7 @@
   min-height: 520px !important;
   margin-top: 70px !important;
 }
-.custom-avaliable-jobs{
+.custom-avaliable-jobs {
   margin-left: 7rem;
   margin-top: 40px;
   color: #198754;
@@ -23,3 +23,28 @@
   width: 85%;
   margin: auto;
 }
+/* search bar Start */
+.custom-available-search-box-container {
+  height: 3rem;
+  background-color: #fff;
+
+  position: absolute;
+  top: 16rem;
+  left: 25%;
+
+  margin: auto;
+
+  box-shadow: 0 10px 5px #bcbaba;
+}
+.custom-available-search-box-container input {
+  background-color: transparent;
+  width: 100%;
+  border: none !important;
+  outline: none !important;
+  margin-left: 1rem;
+}
+.custom-no-outline:focus {
+  outline: none !important;
+  box-shadow: none !important;
+}
+/* search bar End */

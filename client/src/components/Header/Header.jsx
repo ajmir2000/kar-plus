@@ -14,6 +14,7 @@ export default function Header() {
             <h3 className="text-white">
               Find your dream job, Build your network or Hire the best talents!
             </h3>
+            <div className="mb-5"></div>
           </div>
         </div>
       </Container>
