@@ -1,6 +1,6 @@
 import React from "react";
 import "./Header.css";
-import SearchBar from "../searchBar/searchBar.jsx";
+
 import { Col, Container, Nav, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
