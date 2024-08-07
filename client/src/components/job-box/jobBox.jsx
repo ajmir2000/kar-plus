@@ -44,7 +44,7 @@ export default function JobBox({
   employerId,
 
 }) {
-  const formattedPostingDate = postingDate ? postingDate.slice(0, 10) : "N/A";
+  const formattedPostingDate = closingDate ? closingDate.slice(0, 10) : "N/A";
   
 
   const jobData = {
@@ -82,7 +82,7 @@ export default function JobBox({
   maxPrice,
   employerId,
   };
-  console.log(salaryFrom, salaryTo, salaryType)
+  // console.log(salaryFrom, salaryTo, salaryType)
 
   return (
     <div className="col-md-9 mb-4">

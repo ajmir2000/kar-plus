@@ -1,16 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Container, Row } from "react-bootstrap";
-
-import JobTalentSwitch from "../../components/JobTalentSwitch/JobTalentSwitch";
 import JobBox from "../../components/job-box/jobBox";
-
-import {
-  Accordion,
-  Form,
-  InputGroup,
-  FormControl,
-  Button,
-} from "react-bootstrap";
+import { Accordion, Form } from "react-bootstrap";
 import SearchBox from "../../components/searchBox/searchBox.jsx";
 
 export default function FindWork() {
@@ -23,7 +14,6 @@ export default function FindWork() {
   const itemsPerPage = 6;
 
   useEffect(() => {
-    //fetch("job.json").then((res) => res.json());
     fetch("/api/job/all-job")
       .then((res) => res.json())
       .then((data) => {
@@ -39,7 +29,7 @@ export default function FindWork() {
   const handleChange = (event) => {
     setSelectedOption(event.target.value);
   };
-  console.log(jobData);
+  // console.log(jobData);
   const filteredJob = jobData.filter(
     (job) =>
       job.jobTitle.toLowerCase().indexOf(searchValue.toLocaleLowerCase()) !== -1
@@ -67,10 +57,18 @@ export default function FindWork() {
   };
 
   //---main function---
-  console.log(selectedOption);
+  // console.log(selectedOption);
   const filteredData = (jobData, selectedOption, searchValue, salaryType) => {
     let filteredJobs = jobData;
+    
+    // Filter out jobs with dates that have passed
+    const currentDate = new Date();
+    filteredJobs = filteredJobs.filter((job) => {
+      const jobDate = new Date(job.closingDate); // Assuming there's a 'date' field in your job data
+      return jobDate >= currentDate;
+    });
 
+    console.log(filteredJobs);
     if (searchValue) {
       filteredJobs = filteredJob;
     }
@@ -102,7 +100,7 @@ export default function FindWork() {
 
   const { startIndex, endIndex } = calculatePageRange();
   result = result.slice(startIndex, endIndex);
-  console.log(result);
+  // console.log(result);
 
   return (
     <Container fluid className="bg-white ">
@@ -112,72 +110,13 @@ export default function FindWork() {
         inputHandleChange={inputHandleChange}
       />
       <div className="container pt-5">
-        {/* <JobTalentSwitch /> */}
         <Row className="d-flex">
           <div className="col-sm-12 col-md-3">
             <div className="mt-5  border-end pe-3">
               <Accordion>
                 <Accordion.Item
                   eventKey="0"
-                  className="border-0 bg-transparent ">
-                  {/*Start category part */}
-                  {/* <Accordion.Header className="custom-accordion-header bg-white ">
-                    <span className="text-secondary ">Category</span>
-                  </Accordion.Header> */}
-                  {/* <Accordion.Body>
-                    <Form.Check
-                      type="radio"
-                      className="text-secondary custom-accordion-checked "
-                      label="All categories"
-                      defaultValue=""
-                      name="category"
-                      onChange={handleChange}
-                    />
-                    <Form.Check
-                      type="radio"
-                      className="text-secondary custom-accordion-checked "
-                      label="Accounting"
-                      defaultValue="Accounting"
-                      name="category"
-                      onChange={handleChange}
-                    />
-                    =
-                    <Form.Check
-                      type="radio"
-                      label="Banking"
-                      defaultValue="Banking"
-                      name="category"
-                      onChange={handleChange}
-                      className="text-secondary custom-accordion-checked "
-                      defaultChecked
-                    />
-                    <Form.Check
-                      type="radio"
-                      defaultValue="AI speacialist"
-                      name="category"
-                      className="text-secondary custom-accordion-checked "
-                      label="AI speacialist"
-                      onChange={handleChange}
-                    />
-                    <Form.Check
-                      type="radio"
-                      className="text-secondary custom-accordion-checked "
-                      label="Writer"
-                      defaultValue="Writer"
-                      name="category"
-                      onChange={handleChange}
-                    />
-                    <Form.Check
-                      type="radio"
-                      className="text-secondary custom-accordion-checked "
-                      label="Product Designer"
-                      name="category"
-                      defaultValue="Product Designer"
-                      onChange={handleChange}
-                    />
-                  </Accordion.Body> */}
-                  {/*End category part */}
-                </Accordion.Item>
+                  className="border-0 bg-transparent "></Accordion.Item>
               </Accordion>
               <Accordion>
                 <Accordion.Item
@@ -246,7 +185,6 @@ export default function FindWork() {
                 </Accordion.Item>
               </Accordion>
 
-
               <Accordion>
                 <Accordion.Item
                   eventKey="1"
@@ -258,7 +196,7 @@ export default function FindWork() {
                     </span>{" "}
                   </Accordion.Header>
                   <Accordion.Body>
-                  <Form.Check
+                    <Form.Check
                       type="radio"
                       name="salaryType"
                       label="All"
@@ -274,7 +212,6 @@ export default function FindWork() {
                       defaultValue="Fixed"
                       onChange={handleChange}
                       className="text-secondary custom-accordion-checked "
-                      
                     />
                     <Form.Check
                       type="radio"
@@ -284,50 +221,9 @@ export default function FindWork() {
                       className="text-secondary custom-accordion-checked "
                       onChange={handleChange}
                     />
-                
                   </Accordion.Body>
                 </Accordion.Item>
               </Accordion>
-
-              {/* <Accordion>
-                <Accordion.Item
-                  eventKey="2"
-                  className="border-0 bg-transparent ">
-                  <Accordion.Header className="custom-accordion-header bg-white ">
-                    {" "}
-                    <span className="text-secondary custom-accordion-header">
-                      Experience level
-                    </span>{" "}
-                  </Accordion.Header>
-                  <Accordion.Body>
-                    <Form.Check
-                      type="radio"
-                      name="experienceLevel"
-                      label="No experience"
-                      defaultValue="Any experience"
-                      onChange={handleChange}
-                      className="text-secondary custom-accordion-checked "
-                      defaultChecked
-                    />
-                    <Form.Check
-                      type="radio"
-                      name="experienceLevel"
-                      label="Internship"
-                      defaultValue="Internship"
-                      className="text-secondary custom-accordion-checked "
-                      onChange={handleChange}
-                    />
-                    <Form.Check
-                      type="radio"
-                      name="experienceLevel"
-                      label="Work remotely"
-                      defaultValue="Work remotely"
-                      onChange={handleChange}
-                      className="text-secondary custom-accordion-checked "
-                    />
-                  </Accordion.Body>
-                </Accordion.Item>
-              </Accordion> */}
             </div>
           </div>
           <div className="col-sm-12 col-md-9">
