@@ -320,14 +320,15 @@ const CreateJob = () => {
 
           <div className="row g-4  mt-3">
             <div className="col-lg-6">
-              <label className="form-label mb-2">Job Posting Date</label>
+              <label className="form-label mb-2">Posting Date</label>
               <input
                 className="form-control"
                 {...register("postingDate", {
                   required: "Job Posting Date is required",
                 })}
                 placeholder="Ex: 2023-11-03"
-                type="date"
+                // type="date"
+                value={new Date().toISOString().split("T")[0]}
               />
               {errors.postingDate && (
                 <div className="invalid-feedback">
@@ -335,12 +336,40 @@ const CreateJob = () => {
                 </div>
               )}
             </div>
-            <div className="col-lg-6">
-              <label className="form-label mb-2">Job Closing Date</label>
+            {/* <div className="col-lg-6">
+              <label className="form-label mb-2">Closing Date</label>
               <input
                 type="date"
                 {...register("closingDate", {
                   required: "Closing Date is required",
+                })}
+                className={`form-control ${
+                  errors.closingDate ? "is-invalid" : ""
+                }`}
+              />
+              {errors.closingDate && (
+                <div className="invalid-feedback">
+                  {errors.closingDate.message}
+                </div>
+              )}
+            </div> */}
+            <div className="col-lg-6">
+              <label className="form-label mb-2">Closing Date</label>
+              <input
+                type="date"
+                {...register("closingDate", {
+                  required: "Closing Date is required",
+                  validate: {
+                    notPastDate: (value) => {
+                      const selectedDate = new Date(value);
+                      const today = new Date();
+                      today.setHours(0, 0, 0, 0); // Set time to midnight to compare dates only
+                      return (
+                        selectedDate >= today ||
+                        "Closing Date cannot be in the past"
+                      );
+                    },
+                  },
                 })}
                 className={`form-control ${
                   errors.closingDate ? "is-invalid" : ""

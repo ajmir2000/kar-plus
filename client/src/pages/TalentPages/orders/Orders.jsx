@@ -39,7 +39,8 @@ const Orders = () => {
           to: currentUser._id === sellerId ? buyerId : sellerId,
           showIsSellerOrBuyer:
             currentUser._id === sellerId ? "seller" : "buyer",
-          sellerId, buyerId
+          sellerId,
+          buyerId,
         });
         navigate(`/message/${res.data.id}`);
       }

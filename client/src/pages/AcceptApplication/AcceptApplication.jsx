@@ -199,7 +199,7 @@ const AcceptApplication = () => {
             )}
           </div>
 
-          <button type="submit" disabled={filePerc !== 100 && file}>
+          <button type="submit" className="btn btn-success mb-5 mt-4 " disabled={filePerc !== 100 && file}>
             Send Accept Application
           </button>
         </form>

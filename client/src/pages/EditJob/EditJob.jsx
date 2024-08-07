@@ -350,14 +350,15 @@ const UpdateJob = () => {
 
           <div className="row g-4">
             <div className="col-lg-6">
-              <label className="form-label mb-2">Job Posting Date</label>
+              <label className="form-label mb-2">Posting Date</label>
               <input
                 className="form-control"
                 {...register("postingDate", {
                   required: "Job Posting Date is required",
                 })}
                 placeholder="Ex: 2023-11-03"
-                type="date"
+                // type="date"
+                value={new Date().toISOString().split("T")[0]}
               />
               {errors.postingDate && (
                 <div className="invalid-feedback">
@@ -368,14 +369,24 @@ const UpdateJob = () => {
             <div className="col-lg-6">
               <label className="form-label mb-2">Closing Date</label>
               <input
+                type="date"
                 {...register("closingDate", {
                   required: "Closing Date is required",
+                  validate: {
+                    notPastDate: (value) => {
+                      const selectedDate = new Date(value);
+                      const today = new Date();
+                      today.setHours(0, 0, 0, 0); // Set time to midnight to compare dates only
+                      return (
+                        selectedDate >= today ||
+                        "Closing Date cannot be in the past"
+                      );
+                    },
+                  },
                 })}
                 className={`form-control ${
                   errors.closingDate ? "is-invalid" : ""
                 }`}
-                placeholder="Ex: 2023-11-03"
-                type="date"
               />
               {errors.closingDate && (
                 <div className="invalid-feedback">
@@ -527,6 +538,7 @@ const UpdateJob = () => {
                 {...register("gender", { required: "Gender is required" })}
                 className="form-control">
                 <option value="">Select gender</option>
+                <option value="Any">Any</option>
                 <option value="Male">Male</option>
                 <option value="Female">Female</option>
               </select>

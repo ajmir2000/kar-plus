@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-
 import toast from "react-hot-toast";
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
@@ -94,7 +93,7 @@ const MyApplications = () => {
           <h1 className="text-white text-center mb-5 ">
             Applications From Job Seekers
           </h1>
-          <div className="row p-5">
+          <div className="row gx-0 m-5">
             {applications && applications.length <= 0 ? (
               <h4>No Applications Found</h4>
             ) : (
@@ -270,7 +269,7 @@ const EmployerCard = ({ element, openModal }) => {
   const fileType = getFileType(element.resume);
 
   return (
-    <div className="col-12 col-lg-8 col-xl-6 mx-auto mb-4">
+    <div className="col-12 col-lg-8 col-xl-6 mx-auto p-5 mb-5">
       {!element.accept && !element.reject ? (
         <div className="card shadow-sm rounded">
           <div className="card-body">
@@ -345,6 +344,37 @@ const EmployerCard = ({ element, openModal }) => {
               </div>
               <div className="col-md-4 d-flex justify-content-center align-items-start">
                 {/* Resume display logic (same as above) */}
+                <div className="col-md-4 d-flex justify-content-center align-items-start">
+                {fileType === "jpg" || fileType === "jpeg" || fileType === "png" ? (
+                  <img
+                    src={element.resume}
+                    alt="resume"
+                    className="img-thumbnail"
+                    onClick={() => openModal(element.resume)}
+                    style={{ cursor: "pointer", maxWidth: "150px" }}
+                  />
+                ) : fileType === "pdf" ? (
+                  <div
+                    onClick={() => downloadFile(element.resume)}
+                    className="d-flex flex-column align-items-center justify-content-center"
+                    style={{ cursor: "pointer", width: "100px", height: "100px" }}
+                  >
+                    <FaFilePdf size={48} color="red" />
+                    <span className="text-center">Download PDF</span>
+                  </div>
+                ) : fileType === "doc" || fileType === "docx" ? (
+                  <div
+                    onClick={() => downloadFile(element.resume)}
+                    className="d-flex flex-column align-items-center justify-content-center"
+                    style={{ cursor: "pointer", width: "100px", height: "100px" }}
+                  >
+                    <FaFileWord size={48} color="blue" />
+                    <span className="text-center">Download Word</span>
+                  </div>
+                ) : (
+                  <span>Unsupported file type</span>
+                )}
+              </div>
               </div>
             </div>
           </div>
