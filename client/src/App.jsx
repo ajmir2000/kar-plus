@@ -46,22 +46,14 @@ function App() {
             <Route path="/find-talent" element={<FindTalent />} />
             <Route path="/signin" element={<SignIn />} />
             <Route path="/signup" element={<SignUp />} />
-            <Route path="/companies" element={<Companies />} />
-            <Route path="/companies/:id" element={<CompanyDetails />} />
-            <Route path="/accept-application/:id" element={<AcceptApplication />} />
+            {/* <Route path="/companies" element={<Companies />} /> */}
+            {/* <Route path="/companies/:id" element={<CompanyDetails />} /> */}
+
             {/* Talent Part  */}
             <Route path="/gigs" element={<Gigs />} />
-            <Route path="/add-gig" element={<AddGigs />} />
             <Route path="/gig/:id" element={<Gig />} />
-            <Route path="/my-gigs" element={<MyGigs />} />
-            <Route path="/orders" element={<Orders />} />
-            <Route path="/messages" element={<Messages />} />
-            <Route path="/message/:id" element={<Message />} />
 
-            <Route path="/create-order/:id" element={<CreateOrder />} />
-        
-            <Route path="/featured" element={<Featured />} />
-            
+            {/* <Route path="/featured" element={<Featured />} /> */}
 
             <Route element={<PrivateRoute />}>
               <Route path="/profile" element={<Profile />} />
@@ -71,6 +63,17 @@ function App() {
               <Route path="/job-detail/:id" element={<JobDetails />} />
               <Route path="/apply-job/:id" element={<Application />} />
               <Route path="/my-application" element={<MyApplications />} />
+              <Route
+                path="/accept-application/:id"
+                element={<AcceptApplication />}
+              />
+              {/* Talent Part */}
+              <Route path="/orders" element={<Orders />} />
+              <Route path="/create-order/:id" element={<CreateOrder />} />
+              <Route path="/messages" element={<Messages />} />
+              <Route path="/message/:id" element={<Message />} />
+              <Route path="/add-gig" element={<AddGigs />} />
+              <Route path="/my-gigs" element={<MyGigs />} />
             </Route>
           </Routes>
         </BrowserRouter>
