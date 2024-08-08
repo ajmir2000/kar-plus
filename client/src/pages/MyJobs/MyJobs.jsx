@@ -66,7 +66,7 @@ const MyJobs = () => {
   };
 
   return (
-    <div className="container-fluid p-4">
+    <div className="container-fluid p-4 vh-100">
       <div className="row justify-content-center">
         <div className="col-12 col-md-10 col-lg-8">
           <h1 className="text-center text-white py-4">All My Jobs</h1>

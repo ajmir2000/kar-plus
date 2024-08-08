@@ -68,49 +68,51 @@ const MyApplications = () => {
   };
 
   return (
-    <section>
-      {currentUser && currentUser.role === "Job Seeker" ? (
-        <>
-          <h1 className="text-light ms-5 mb-3">My Applications</h1>
-          <div className="row">
-            {" "}
-            {applications?.length <= 0 ? (
-              <h4>No Applications Found</h4>
-            ) : (
-              applications?.map((element) => (
-                <JobSeekerCard
-                  element={element}
-                  key={element._id}
-                  deleteApplication={deleteApplication}
-                  openModal={openModal}
-                />
-              ))
-            )}
-          </div>
-        </>
-      ) : (
-        <>
-          <h1 className="text-white text-center mb-5 ">
-            Applications From Job Seekers
-          </h1>
-          <div className="row gx-0 m-5">
-            {applications && applications.length <= 0 ? (
-              <h4>No Applications Found</h4>
-            ) : (
-              applications &&
-              applications.map((element) => (
-                <EmployerCard
-                  element={element}
-                  key={element._id}
-                  openModal={openModal}
-                />
-              ))
-            )}
-          </div>
-        </>
-      )}
-      {modalOpen && <ResumeModal imageUrl={ResumeUrl} onClose={closeModal} />}
-    </section>
+    <div className="vh-100">
+      <section>
+        {currentUser && currentUser.role === "Job Seeker" ? (
+          <>
+            <h1 className="text-light ms-5 mb-3">My Applications</h1>
+            <div className="row ">
+              {" "}
+              {applications?.length <= 0 ? (
+                <h4>No Applications Found</h4>
+              ) : (
+                applications?.map((element) => (
+                  <JobSeekerCard
+                    element={element}
+                    key={element._id}
+                    deleteApplication={deleteApplication}
+                    openModal={openModal}
+                  />
+                ))
+              )}
+            </div>
+          </>
+        ) : (
+          <>
+            <h1 className="text-white text-center mb-5 ">
+              Applications From Job Seekers
+            </h1>
+            <div className="row gx-0 m-5 ">
+              {applications && applications.length <= 0 ? (
+                <h4>No Applications Found</h4>
+              ) : (
+                applications &&
+                applications.map((element) => (
+                  <EmployerCard
+                    element={element}
+                    key={element._id}
+                    openModal={openModal}
+                  />
+                ))
+              )}
+            </div>
+          </>
+        )}
+        {modalOpen && <ResumeModal imageUrl={ResumeUrl} onClose={closeModal} />}
+      </section>
+    </div>
   );
 };
 
@@ -276,17 +278,35 @@ const EmployerCard = ({ element, openModal }) => {
             <div className="row">
               <div className="col-md-8 mb-3 mb-md-0">
                 <h3 className="text-info">Job Seeker Details</h3>
-                <p><strong>Name:</strong> {element.username}</p>
-                <p><strong>Email:</strong> {element.jobSeekerID.email}</p>
+                <p>
+                  <strong>Name:</strong> {element.username}
+                </p>
+                <p>
+                  <strong>Email:</strong> {element.jobSeekerID.email}
+                </p>
                 <h3 className="text-danger">Job Details</h3>
-                <p><strong>Job Title:</strong> {element.jobTitle}</p>
-                <p><strong>Company Name:</strong> {element.companyName}</p>
-                <p><strong>Vacancies:</strong> {element.vacancies}</p>
-                <p><strong>Address:</strong> {element.country}, {element.province}, {element.location}</p>
-                <p><strong>Closing Date:</strong> {new Date(element.closingDate).toISOString().split("T")[0]}</p>
+                <p>
+                  <strong>Job Title:</strong> {element.jobTitle}
+                </p>
+                <p>
+                  <strong>Company Name:</strong> {element.companyName}
+                </p>
+                <p>
+                  <strong>Vacancies:</strong> {element.vacancies}
+                </p>
+                <p>
+                  <strong>Address:</strong> {element.country},{" "}
+                  {element.province}, {element.location}
+                </p>
+                <p>
+                  <strong>Closing Date:</strong>{" "}
+                  {new Date(element.closingDate).toISOString().split("T")[0]}
+                </p>
               </div>
               <div className="col-md-4 d-flex justify-content-center align-items-start">
-                {fileType === "jpg" || fileType === "jpeg" || fileType === "png" ? (
+                {fileType === "jpg" ||
+                fileType === "jpeg" ||
+                fileType === "png" ? (
                   <img
                     src={element.resume}
                     alt="resume"
@@ -298,8 +318,11 @@ const EmployerCard = ({ element, openModal }) => {
                   <div
                     onClick={() => downloadFile(element.resume)}
                     className="d-flex flex-column align-items-center justify-content-center"
-                    style={{ cursor: "pointer", width: "100px", height: "100px" }}
-                  >
+                    style={{
+                      cursor: "pointer",
+                      width: "100px",
+                      height: "100px",
+                    }}>
                     <FaFilePdf size={48} color="red" />
                     <span className="text-center">Download PDF</span>
                   </div>
@@ -307,8 +330,11 @@ const EmployerCard = ({ element, openModal }) => {
                   <div
                     onClick={() => downloadFile(element.resume)}
                     className="d-flex flex-column align-items-center justify-content-center"
-                    style={{ cursor: "pointer", width: "100px", height: "100px" }}
-                  >
+                    style={{
+                      cursor: "pointer",
+                      width: "100px",
+                      height: "100px",
+                    }}>
                     <FaFileWord size={48} color="blue" />
                     <span className="text-center">Download Word</span>
                   </div>
@@ -322,7 +348,9 @@ const EmployerCard = ({ element, openModal }) => {
             <Link to={`/accept-application/${element._id}`} state={{ element }}>
               <button className="btn btn-success">Accept</button>
             </Link>
-            <button className="btn btn-danger" onClick={() => rejectHandler(element)}>
+            <button
+              className="btn btn-danger"
+              onClick={() => rejectHandler(element)}>
               Reject
             </button>
           </div>
@@ -333,48 +361,72 @@ const EmployerCard = ({ element, openModal }) => {
             <div className="row">
               <div className="col-md-8 mb-3 mb-md-0">
                 <h3 className="text-info">Job Seeker Details</h3>
-                <p><strong>Name:</strong> {element.username}</p>
-                <p><strong>Email:</strong> {element.jobSeekerID.email}</p>
+                <p>
+                  <strong>Name:</strong> {element.username}
+                </p>
+                <p>
+                  <strong>Email:</strong> {element.jobSeekerID.email}
+                </p>
                 <h3 className="text-danger">Job Details</h3>
-                <p><strong>Job Title:</strong> {element.jobTitle}</p>
-                <p><strong>Company Name:</strong> {element.companyName}</p>
-                <p><strong>Vacancies:</strong> {element.vacancies}</p>
-                <p><strong>Address:</strong> {element.country}, {element.province}, {element.location}</p>
-                <p><strong>Closing Date:</strong> {new Date(element.closingDate).toISOString().split("T")[0]}</p>
+                <p>
+                  <strong>Job Title:</strong> {element.jobTitle}
+                </p>
+                <p>
+                  <strong>Company Name:</strong> {element.companyName}
+                </p>
+                <p>
+                  <strong>Vacancies:</strong> {element.vacancies}
+                </p>
+                <p>
+                  <strong>Address:</strong> {element.country},{" "}
+                  {element.province}, {element.location}
+                </p>
+                <p>
+                  <strong>Closing Date:</strong>{" "}
+                  {new Date(element.closingDate).toISOString().split("T")[0]}
+                </p>
               </div>
               <div className="col-md-4 d-flex justify-content-center align-items-start">
                 {/* Resume display logic (same as above) */}
                 <div className="col-md-4 d-flex justify-content-center align-items-start">
-                {fileType === "jpg" || fileType === "jpeg" || fileType === "png" ? (
-                  <img
-                    src={element.resume}
-                    alt="resume"
-                    className="img-thumbnail"
-                    onClick={() => openModal(element.resume)}
-                    style={{ cursor: "pointer", maxWidth: "150px" }}
-                  />
-                ) : fileType === "pdf" ? (
-                  <div
-                    onClick={() => downloadFile(element.resume)}
-                    className="d-flex flex-column align-items-center justify-content-center"
-                    style={{ cursor: "pointer", width: "100px", height: "100px" }}
-                  >
-                    <FaFilePdf size={48} color="red" />
-                    <span className="text-center">Download PDF</span>
-                  </div>
-                ) : fileType === "doc" || fileType === "docx" ? (
-                  <div
-                    onClick={() => downloadFile(element.resume)}
-                    className="d-flex flex-column align-items-center justify-content-center"
-                    style={{ cursor: "pointer", width: "100px", height: "100px" }}
-                  >
-                    <FaFileWord size={48} color="blue" />
-                    <span className="text-center">Download Word</span>
-                  </div>
-                ) : (
-                  <span>Unsupported file type</span>
-                )}
-              </div>
+                  {fileType === "jpg" ||
+                  fileType === "jpeg" ||
+                  fileType === "png" ? (
+                    <img
+                      src={element.resume}
+                      alt="resume"
+                      className="img-thumbnail"
+                      onClick={() => openModal(element.resume)}
+                      style={{ cursor: "pointer", maxWidth: "150px" }}
+                    />
+                  ) : fileType === "pdf" ? (
+                    <div
+                      onClick={() => downloadFile(element.resume)}
+                      className="d-flex flex-column align-items-center justify-content-center"
+                      style={{
+                        cursor: "pointer",
+                        width: "100px",
+                        height: "100px",
+                      }}>
+                      <FaFilePdf size={48} color="red" />
+                      <span className="text-center">Download PDF</span>
+                    </div>
+                  ) : fileType === "doc" || fileType === "docx" ? (
+                    <div
+                      onClick={() => downloadFile(element.resume)}
+                      className="d-flex flex-column align-items-center justify-content-center"
+                      style={{
+                        cursor: "pointer",
+                        width: "100px",
+                        height: "100px",
+                      }}>
+                      <FaFileWord size={48} color="blue" />
+                      <span className="text-center">Download Word</span>
+                    </div>
+                  ) : (
+                    <span>Unsupported file type</span>
+                  )}
+                </div>
               </div>
             </div>
           </div>

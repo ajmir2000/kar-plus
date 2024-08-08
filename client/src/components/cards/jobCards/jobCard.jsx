@@ -12,10 +12,17 @@ import { Link } from "react-router-dom";
 
 export default function JobCard({ props }) {
   // Image, title, person, vocanceNum
-  const { _id, companyLogo, jobTitle, vacancies, postingDate, companyName } =
-    props;
-  const formattedPostingDate = postingDate ? postingDate.slice(0, 10) : "N/A";
-  console.log(props)
+  const {
+    _id,
+    companyLogo,
+    jobTitle,
+    vacancies,
+    postingDate,
+    companyName,
+    closingDate,
+  } = props;
+  const formattedPostingDate = closingDate ? closingDate.slice(0, 10) : "N/A";
+  console.log(props);
 
   return (
     <>
